@@ -1,0 +1,7 @@
+# hunger-games
+
+Type: other
+ID: `vault-out/foam-vault/other/hunger-games.md`
+
+## Isolated
+No connections to other vault documents.

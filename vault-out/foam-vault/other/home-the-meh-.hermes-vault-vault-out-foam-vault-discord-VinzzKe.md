@@ -1,0 +1,12 @@
+# /home/the-meh/.hermes/vault/vault-out/foam-vault/discord/VinzzKece.md
+
+Type: other
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-discord-VinzzKe.md`
+
+## Connections
+
+### EXTRACTED
+- [[../other/..-other-..-other-wiki-discord-profiles-vinzzkece-14369593555295|../other/..-other-wiki-discord-profiles-vinzzkece-1436959355529592924.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/home-the-meh-.hermes-vault-discord-profiles-vinzzkece-143695935|/home/the-meh/.hermes/vault/discord/profiles/vinzzkece-1436959355529592924.md]] (heading-mention) [INFERRED]

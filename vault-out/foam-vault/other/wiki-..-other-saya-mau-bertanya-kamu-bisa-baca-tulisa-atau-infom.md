@@ -1,0 +1,9 @@
+# wiki/../other/saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infomasi-lebih-cepa.md
+
+Type: other
+ID: `vault-out/foam-vault/other/wiki-..-other-saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infom.md`
+
+## Connections
+
+### EXTRACTED
+- [[../other/..-other-wiki-..-other-concept-hermes.md|../other/wiki-..-other-concept-hermes.md]] (wiki-link) [EXTRACTED]
