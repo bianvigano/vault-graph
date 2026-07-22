@@ -1,5 +1,7 @@
 # vault-graph
 
+>  Personal project by [@bianvigano](https://github.com/bianvigano). Built for Hermes Vault knowledge graph visualization. Not an official Graphify product — inspired by its architecture.
+
 Turn any Hermes Vault into an interactive D3.js knowledge graph. Graphify-style modular pipeline.
 
 ## One-command install
