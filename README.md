@@ -14,9 +14,15 @@ cd vault-graph
 bash install.sh
 ```
 
-Installs skill into Hermes + Trae, adds `vault-graph` and `vq` CLI aliases.
+Installs:
+- CLI executable `vault-graph` (run from anywhere)
+- `vq` query shortcut
+- Skill + MCP server for Hermes and Trae
+- Always-on section in AGENTS.md / HERMES.md
 
 **Requirements:** `pip install networkx matplotlib` (Python 3.10+)
+
+> **Troubleshooting:** Kalau error `No module named 'vault_graph'`, pastikan tidak ada cache atau konflik path. Coba `hash -r` lalu `vault-graph` lagi. Jangan jalankan dari folder lama `~/.hermes/scripts/`.
 
 ---
 
