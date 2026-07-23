@@ -19,8 +19,8 @@ bash install.sh
 ```
 
 Installs:
-- `vault-graph` → `~/.local/bin/vault-graph` (run from anywhere)
-- `vq` → `~/.local/bin/vq` (query shortcut)
+- `vault-graph` → `~/.local/bin/vault-graph` (build + query + serve + watch)
+- `vq` → `~/.local/bin/vq` (legacy query shortcut, still works)
 - Skill + MCP server for Hermes and Trae
 - Auto-adds `~/.local/bin` to PATH
 
@@ -53,15 +53,17 @@ Output lands in `vault-out/`:
 ### Query CLI
 
 ```bash
-vq vault-out/graph.json query "what connects Docker to Minecraft?"
-vq vault-out/graph.json path "Docker" "LXC"
-vq vault-out/graph.json explain "nginx"
-vq vault-out/graph.json search "spark"
-vq vault-out/graph.json god              # top 15 most-connected nodes
-vq vault-out/graph.json communities      # community summary
-vq vault-out/graph.json isolated         # nodes with no connections
-vq vault-out/graph.json stats            # graph statistics
+vault-graph --query vault-out/graph.json god              # top 15 most-connected nodes
+vault-graph --query vault-out/graph.json path "Docker" "LXC"
+vault-graph --query vault-out/graph.json explain "nginx"
+vault-graph --query vault-out/graph.json search "spark"
+vault-graph --query vault-out/graph.json communities
+vault-graph --query vault-out/graph.json isolated
+vault-graph --query vault-out/graph.json stats
+vault-graph --query vault-out/graph.json query "what connects Docker to Minecraft?"
 ```
+
+Legacy: `vq vault-out/graph.json god` still works.
 
 ### Watch mode
 

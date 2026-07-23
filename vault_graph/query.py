@@ -1,4 +1,12 @@
-"""Module: query — CLI query commands for vault graph."""
+"""Module: query — CLI query commands for vault graph.
+
+Exports:
+  load_graph(path) → nx.Graph
+  run_query_cmd(G, cmd, args) → str  (prints directly, returns "")
+
+Usage (standalone):
+  python -m vault_graph.query graph.json [command] [args]
+"""
 from __future__ import annotations
 
 import json
@@ -9,34 +17,30 @@ from collections import Counter
 import networkx as nx
 
 
-def query_main():
-    """CLI entry: python -m vault_graph.query GRAPH.json [command]"""
-    if len(sys.argv) < 2:
-        _usage()
-        sys.exit(1)
+def load_graph(path: Path) -> nx.Graph:
+    """Load a graph.json into a NetworkX graph."""
+    data = json.loads(path.read_text())
+    G = nx.Graph()
+    for n in data.get("nodes", []):
+        G.add_node(n["id"], **{k: v for k, v in n.items() if k != "id"})
+    for e in data.get("edges", []):
+        G.add_edge(
+            e["source"],
+            e["target"],
+            **{k: v for k, v in e.items() if k not in ("source", "target")},
+        )
+    return G
 
-    graph_path = Path(sys.argv[1])
-    if not graph_path.exists():
-        print(f"Error: {graph_path} not found. Run vault-graph first.", file=sys.stderr)
-        sys.exit(1)
 
-    G = _load(graph_path)
-
-    if len(sys.argv) < 3:
-        # No subcommand: show stats
-        _stats(G)
-        return
-
-    cmd = sys.argv[2].lower()
-    args = sys.argv[3:]
-
+def run_query_cmd(G: nx.Graph, cmd: str, args: list[str]) -> None:
+    """Run a query command against loaded graph. Prints to stdout."""
     if cmd == "query" and args:
         _query(G, " ".join(args))
     elif cmd == "path" and len(args) >= 2:
         _path(G, args[0], " ".join(args[1:]))
     elif cmd == "explain" and args:
         _explain(G, " ".join(args))
-    elif cmd == "god" or cmd == "top":
+    elif cmd in ("god", "top"):
         _god_nodes(G)
     elif cmd == "communities":
         _communities(G)
@@ -50,35 +54,47 @@ def query_main():
         _usage()
 
 
+def query_main():
+    """Standalone CLI entry: python -m vault_graph.query GRAPH.json [cmd] [args]"""
+    if len(sys.argv) < 2:
+        _usage()
+        sys.exit(1)
+
+    graph_path = Path(sys.argv[1])
+    if not graph_path.exists():
+        print(f"Error: {graph_path} not found. Run vault-graph first.", file=sys.stderr)
+        sys.exit(1)
+
+    G = load_graph(graph_path)
+
+    if len(sys.argv) < 3:
+        _stats(G)
+        return
+
+    cmd = sys.argv[2].lower()
+    run_query_cmd(G, cmd, sys.argv[3:])
+
+
 def _usage():
-    print("vault-graph-query — CLI query tool for knowledge graphs")
+    print("vault-graph query — knowledge graph queries")
     print()
     print("Usage:")
-    print("  python -m vault_graph.query graph.json [command] [args]")
+    print("  vault-graph --query graph.json [command] [args]")
+    print("  vq graph.json [command] [args]            (legacy)")
     print()
     print("Commands:")
     print("  (no command)            Show graph stats")
-    print("  query \"question\"        Natural language query")
+    print('  query "question"        Natural language query')
     print("  path <A> <B>            Shortest path between two nodes")
     print("  explain <node>          Details about a node")
-    print("  god                     Top 10 most-connected nodes")
+    print("  god                     Top 15 most-connected nodes")
     print("  communities             Community summary")
     print("  search <term>           Search nodes by name")
     print("  isolated                List isolated nodes")
     print("  stats                   Graph statistics")
 
 
-def _load(path: Path) -> nx.Graph:
-    data = json.loads(path.read_text())
-    G = nx.Graph()
-    for n in data.get("nodes", []):
-        G.add_node(n["id"], **{k: v for k, v in n.items() if k != "id"})
-    for e in data.get("edges", []):
-        G.add_edge(e["source"], e["target"], **{k: v for k, v in e.items() if k not in ("source", "target")})
-    return G
-
-
-def _find(G, query: str):
+def _find(G: nx.Graph, query: str):
     q = query.lower()
     for n in G.nodes():
         if q == n.lower() or q == (G.nodes[n].get("label", "") or "").lower():
@@ -89,7 +105,7 @@ def _find(G, query: str):
     return None
 
 
-def _query(G, question: str):
+def _query(G: nx.Graph, question: str):
     """Simple keyword-based graph query."""
     print(f"Query: {question}\n")
     terms = [t.lower() for t in question.split() if len(t) > 2]
@@ -117,15 +133,17 @@ def _query(G, question: str):
         print("\nPaths between matches:")
         nodes = list(matches)
         for i in range(min(len(nodes), 5)):
-            for j in range(i+1, min(len(nodes), 5)):
+            for j in range(i + 1, min(len(nodes), 5)):
                 try:
                     path = nx.shortest_path(G, nodes[i], nodes[j])
-                    print(f"  {G.nodes[nodes[i]].get('label', nodes[i])[:25]} ... {G.nodes[nodes[j]].get('label', nodes[j])[:25]}: {len(path)-1} hops")
+                    a_label = G.nodes[nodes[i]].get("label", nodes[i])[:25]
+                    b_label = G.nodes[nodes[j]].get("label", nodes[j])[:25]
+                    print(f"  {a_label} ... {b_label}: {len(path) - 1} hops")
                 except nx.NetworkXNoPath:
                     pass
 
 
-def _path(G, a: str, b: str):
+def _path(G: nx.Graph, a: str, b: str):
     na = _find(G, a)
     nb = _find(G, b)
     if not na:
@@ -136,7 +154,7 @@ def _path(G, a: str, b: str):
         return
     try:
         path = nx.shortest_path(G, na, nb)
-        print(f"Path ({len(path)-1} hops):")
+        print(f"Path ({len(path) - 1} hops):")
         for n in path:
             label = G.nodes[n].get("label", n)
             ntype = G.nodes[n].get("type", "?")
@@ -145,7 +163,7 @@ def _path(G, a: str, b: str):
         print("No path found.")
 
 
-def _explain(G, query: str):
+def _explain(G: nx.Graph, query: str):
     n = _find(G, query)
     if not n:
         print(f"Not found: {query}")
@@ -161,17 +179,17 @@ def _explain(G, query: str):
     print(f"Connections ({len(neighbors)}):")
     for rel, count in by_rel.most_common():
         print(f"  {rel}: {count}")
-    print(f"Confidence:")
+    print("Confidence:")
     for conf, count in sorted(by_conf.items()):
         print(f"  {conf}: {count}")
     if neighbors:
-        print(f"\nTop connections:")
+        print("\nTop connections:")
         for nb, edge in neighbors[:15]:
             label = G.nodes[nb].get("label", nb)
             print(f"  → {label[:50]:50s} [{edge.get('confidence', '?')}]")
 
 
-def _god_nodes(G):
+def _god_nodes(G: nx.Graph):
     deg = sorted(G.degree(), key=lambda x: x[1], reverse=True)[:15]
     print("God Nodes (top 15):")
     for n, d in deg:
@@ -182,7 +200,7 @@ def _god_nodes(G):
         print(f"  deg={d:<5} [{ntype:10s}] {label[:60]}")
 
 
-def _communities(G):
+def _communities(G: nx.Graph):
     comm = nx.get_node_attributes(G, "community")
     if not comm:
         print("No community data. Run clustering first.")
@@ -196,13 +214,15 @@ def _communities(G):
         print(f"  comm {cid:<4} size={count:<5} {label[:60]}")
 
 
-def _search(G, term: str):
+def _search(G: nx.Graph, term: str):
     q = term.lower()
     found = []
     for n in G.nodes():
         label = (G.nodes[n].get("label", "") or "").lower()
         if q in label or q in n.lower():
-            found.append((n, G.nodes[n].get("label", n), G.nodes[n].get("type", "?"), G.degree(n)))
+            found.append(
+                (n, G.nodes[n].get("label", n), G.nodes[n].get("type", "?"), G.degree(n))
+            )
 
     found.sort(key=lambda x: x[3], reverse=True)
     print(f"Search: '{term}' — {len(found)} results")
@@ -210,20 +230,20 @@ def _search(G, term: str):
         print(f"  deg={deg:<5} [{ntype:10s}] {label[:60]}")
 
     if len(found) > 30:
-        print(f"  ... and {len(found)-30} more")
+        print(f"  ... and {len(found) - 30} more")
 
 
-def _isolated(G):
+def _isolated(G: nx.Graph):
     deg = list(G.degree())
     isolated = [(n, G.nodes[n].get("label", n)) for n, d in deg if d == 0]
     print(f"Isolated nodes: {len(isolated)}/{G.number_of_nodes()}")
     for nid, label in sorted(isolated)[:20]:
         print(f"  {label[:60]}")
     if len(isolated) > 20:
-        print(f"  ... and {len(isolated)-20} more")
+        print(f"  ... and {len(isolated) - 20} more")
 
 
-def _stats(G):
+def _stats(G: nx.Graph):
     n = G.number_of_nodes()
     e = G.number_of_edges()
     density = round(nx.density(G), 4) if n > 0 else 0
@@ -232,12 +252,12 @@ def _stats(G):
     print(f"Density:    {density}")
 
     types = Counter(G.nodes[n].get("type", "?") for n in G.nodes())
-    print(f"Types:")
+    print("Types:")
     for t, c in types.most_common():
         print(f"  {t:15s} {c}")
 
     ec = Counter(d.get("confidence", "?") for _, _, d in G.edges(data=True))
-    print(f"Edges:")
+    print("Edges:")
     for c, cnt in sorted(ec.items()):
         print(f"  {c:15s} {cnt}")
 

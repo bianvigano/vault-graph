@@ -36,13 +36,13 @@ VGEOF
 chmod +x "$HOME/.local/bin/vault-graph"
 echo "  [✓] vault-graph → ~/.local/bin/vault-graph"
 
-# vq wrapper (proper executable, bukan alias)
+# vq alias (backward compat)
 cat > "$HOME/.local/bin/vq" << VQEOF
 #!/bin/bash
 cd "$SCRIPT_DIR" && exec python3 -m vault_graph.query "\$@"
 VQEOF
 chmod +x "$HOME/.local/bin/vq"
-echo "  [✓] vq          → ~/.local/bin/vq"
+echo "  [✓] vq (legacy)  → ~/.local/bin/vq"
 
 # Pastikan ~/.local/bin di PATH
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
@@ -176,9 +176,11 @@ echo ""
 echo "vault-graph ready! $INSTALL_COUNT assistants registered."
 echo ""
 echo "Commands:"
-echo "  vault-graph ~/.hermes/vault       ← bikin graph dari vault"
-echo "  vq vault-out/graph.json god       ← query graph"
-echo "  vault-graph --watch               ← auto-rebuild saat file berubah"
+echo "  vault-graph ~/.hermes/vault              ← build graph"
+echo "  vault-graph --query vault-out/graph.json god  ← query graph"
+echo "  vault-graph --watch                      ← auto-rebuild"
+echo "  vault-graph --serve vault-out/graph.json ← MCP server"
+echo "  vq vault-out/graph.json god             ← query (legacy, same as --query)"
 echo ""
 echo "For new PC:"
 echo "  git clone https://github.com/bianvigano/vault-graph"

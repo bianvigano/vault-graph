@@ -6,9 +6,10 @@ Graphify-style pipeline: detect -> extract -> build -> cluster -> analyze -> rep
 Usage:
   vault-graph /path/to/vault                        # Build graph
   vault-graph /path/to/vault --out vault-out       # Custom output dir
-  vault-graph --watch                                # Watch vault-out/ for changes
+  vault-graph --query vault-out/graph.json [cmd]   # Query graph
+  vault-graph --watch                                # Watch vault for changes
   vault-graph --serve vault-out/graph.json          # Start MCP server
-  vault-graph --install                              # Register skill with assistants
+  vault-graph --install                              # Register skill
 """
 from __future__ import annotations
 
@@ -30,6 +31,8 @@ def main():
     parser.add_argument("--serve", metavar="GRAPH.json", help="Start MCP server on graph.json")
     parser.add_argument("--install", action="store_true", help="Register skill with Hermes + Trae")
     parser.add_argument("--project", action="store_true", help="Project-scoped install")
+    parser.add_argument("--query", nargs="+", metavar=("GRAPH.json", "CMD..."),
+                        help="Query graph: vault-graph --query graph.json god")
     args = parser.parse_args()
 
     vault = Path(args.vault_path) if args.vault_path else Path(".")
@@ -49,6 +52,20 @@ def main():
         from vault_graph.serve import serve
         print(f"MCP server on {graph_path}")
         serve(graph_path)
+        return
+
+    # --query
+    if args.query:
+        graph_path = Path(args.query[0])
+        if not graph_path.exists():
+            sys.exit(f"Graph not found: {graph_path}")
+        from vault_graph.query import load_graph, run_query_cmd
+        G = load_graph(graph_path)
+        if len(args.query) > 1:
+            cmd = args.query[1].lower()
+            run_query_cmd(G, cmd, args.query[2:])
+        else:
+            run_query_cmd(G, "stats", [])
         return
 
     # --watch (no vault arg needed — auto-detect from vault-out if exists)
