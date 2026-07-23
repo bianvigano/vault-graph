@@ -87,13 +87,24 @@ def _rebuild(vault: Path, out_dir: Path):
 
     files = collect_files(vault)
     cached_files, uncached_files, new_cache = split_files(files, cache, vault)
+
+    # Trae data always re-parsed (lightweight, no cache)
+    from vault_graph.trae import trae_available, collect_trae_extractions
+    trae_extractions: list[dict] = []
+    trae_count = 0
+    if trae_available():
+        trae_extractions = collect_trae_extractions()
+        trae_count = sum(len(e.get("nodes", [])) for e in trae_extractions)
     
-    if len(uncached_files) == 0 and out_dir.joinpath("graph.html").exists():
-        print(f"  (all {len(files)} files cached — unchanged)")
+    if len(uncached_files) == 0 and out_dir.joinpath("graph.html").exists() and trae_count == 0:
+        print(f"  (all {len(files)} files cached — unchanged, no Trae)")
         return
 
     skip_count = len(cached_files)
-    print(f"  detect:  {len(files)} files ({skip_count} cached, {len(uncached_files)} new)")
+    total_sources = len(files)
+    if trae_count:
+        total_sources += trae_count
+    print(f"  detect:  {len(files)} vault files ({skip_count} cached, {len(uncached_files)} new)")
 
     all_headings = _collect_all_headings(uncached_files)
     extractions = []
@@ -107,6 +118,11 @@ def _rebuild(vault: Path, out_dir: Path):
             if e["source"] == str(f):
                 e["source"] = rel
         extractions.append(result)
+
+    # Merge Trae extractions
+    if trae_count:
+        print(f"  trae:    {trae_count} nodes from ~/.trae/memory/")
+        extractions.extend(trae_extractions)
 
     node_count = sum(len(e.get("nodes", [])) for e in extractions)
     edge_count = sum(len(e.get("edges", [])) for e in extractions)

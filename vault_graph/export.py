@@ -64,6 +64,8 @@ def _export_svg(G: nx.Graph, out_dir: Path):
         type_colors = {
             "wiki": "#4ecdc4", "session": "#ff6b6b", "concept": "#ffe66d",
             "discord": "#a29bfe", "minecraft": "#fd79a8", "linux": "#00b894",
+            "trae-project": "#e17055", "trae-session": "#fab1a0",
+            "trae-profile": "#d63031",
             "other": "#55efc4",
         }
 
@@ -134,6 +136,7 @@ def _build_d3_html(nodes_json: str, edges_json: str) -> str:
   <div class="legend-item"><span class="legend-color" style="background:#ffe66d"></span> Concept</div>
   <div class="legend-item"><span class="legend-color" style="background:#a29bfe"></span> Discord</div>
   <div class="legend-item"><span class="legend-color" style="background:#fd79a8"></span> Minecraft</div>
+  <div class="legend-item"><span class="legend-color" style="background:#e17055"></span> Trae</div>
   <div class="legend-item"><span class="legend-color" style="background:#55efc4"></span> Other</div>
   <div style="margin-top:8px;font-size:10px;opacity:0.6">
     <span id="stats">Loading...</span><br>
@@ -157,6 +160,8 @@ def _build_d3_html(nodes_json: str, edges_json: str) -> str:
   const colorByType = {{
     wiki: '#4ecdc4', session: '#ff6b6b', concept: '#ffe66d',
     discord: '#a29bfe', minecraft: '#fd79a8', linux: '#00b894',
+    'trae-project': '#e17055', 'trae-session': '#fab1a0',
+    'trae-profile': '#d63031',
     other: '#55efc4'
   }};
 

@@ -4,6 +4,10 @@
 
 Turn any Vault into an interactive D3.js knowledge graph. Graphify-style modular pipeline: detect → extract → build → cluster → analyze → report → export.
 
+Auto-detects:
+- **Vault:** `.md` files with `[[wiki-links]]` and headings
+- **Trae:** `~/.trae/memory/projects/` — session summaries, project memory
+
 ---
 
 ## Quick Start
@@ -15,10 +19,10 @@ bash install.sh
 ```
 
 Installs:
-- CLI executable `vault-graph` (run from anywhere)
-- `vq` query shortcut
+- `vault-graph` → `~/.local/bin/vault-graph` (run from anywhere)
+- `vq` → `~/.local/bin/vq` (query shortcut)
 - Skill + MCP server for Hermes and Trae
-- Always-on section in AGENTS.md / HERMES.md
+- Auto-adds `~/.local/bin` to PATH
 
 **Requirements:** `pip install networkx matplotlib` (Python 3.10+)
 
@@ -90,11 +94,23 @@ Register in `.mcp.json`:
 
 ---
 
+## Sources
+
+| Source | What | How |
+|---|---|---|
+| **Vault** | `.md` files | `[[wiki-links]]` → EXTRACTED, heading mentions → INFERRED |
+| **Trae** | `~/.trae/memory/projects/` | `project_memory.md`, `session_memory_*.jsonl`, `topics.md` |
+| **Hermes** | `~/.hermes/vault/` | Same as Vault |
+
+Trae integration: auto-detected if `~/.trae/memory/` exists. Produces nodes of type `trae-project` + `trae-session`, edges to concept nodes via topic extraction.
+
+---
+
 ## Pipeline
 
 ```
-detect    → scan .md files (skip hidden, git, scripts)
-extract   → parse [[wiki-links]], headings, session topics
+detect    → scan .md files (skip hidden, git, scripts) + auto-detect Trae
+extract   → parse [[wiki-links]], headings, session topics, Trae jsonl
 build     → NetworkX graph
 cluster   → community detection (greedy modularity)
 analyze   → god nodes, isolated nodes, surprises, edge stats
@@ -108,9 +124,10 @@ export    → graph.html, graph.json, graph.svg, mermaid.html, foam-vault
 
 | Tag | Source |
 |---|---|
-| **EXTRACTED** | `[[wiki-link]]` in markdown |
+| **EXTRACTED** | `[[wiki-link]]` in markdown, Trae session → project edges |
 | **INFERRED** | Heading mention matching another file's heading |
 | **INFERRED** | Session topic detected from filename/headings |
+| **INFERRED** | Trae session → concept edges (topic extraction) |
 
 In D3 graph: solid edges = EXTRACTED, dashed edges = INFERRED.
 
@@ -122,6 +139,7 @@ In D3 graph: solid edges = EXTRACTED, dashed edges = INFERRED.
 |---|---|
 | `detect.py` | Scan .md files |
 | `extract.py` | Parse [[wiki-links]], headings |
+| `trae.py` | Scan + parse Trae memory (~/.trae/memory/) |
 | `build.py` | NetworkX graph construction |
 | `cluster.py` | Community detection |
 | `analyze.py` | God nodes, isolated, edge stats |
@@ -136,6 +154,24 @@ In D3 graph: solid edges = EXTRACTED, dashed edges = INFERRED.
 | `wiki_export.py` | Foam vault generation |
 | `install.py` | Skill installer |
 | `main.py` | Pipeline orchestrator |
+
+---
+
+## Install for new PC
+
+```bash
+git clone https://github.com/bianvigano/vault-graph
+cd vault-graph
+bash install.sh
+# Build first graph:
+vault-graph ~/.hermes/vault
+```
+
+`install.sh` auto-detects:
+- Hermes (skill + MCP at `~/.hermes/`)
+- Trae (skill + MCP at `~/.trae/`)
+- Installs `vault-graph` + `vq` to `~/.local/bin/`
+- Adds `~/.local/bin` to PATH if missing
 
 ---
 
