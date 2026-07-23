@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-vault-graph — Turn Hermes Vault (.md files) into a knowledge graph.
-Graphify-style pipeline: detect -> extract -> build -> cluster -> analyze -> report -> export.
+vault-graph — Turn Vault (.md + Trae) into a knowledge graph.
 
 Usage:
   vault-graph build [vault_path]         Build graph (default: from config)
@@ -13,6 +12,7 @@ Usage:
   vault-graph isolated                    Nodes without connections
   vault-graph stats                       Graph statistics
   vault-graph query <question>            Natural language query
+  vault-graph config [show|set|path]      View/edit config
   vault-graph watch                       Auto-rebuild on file changes
   vault-graph serve                       Start MCP server
   vault-graph install                     Register skill with assistants
@@ -48,7 +48,6 @@ def save_config(cfg: dict):
 
 
 def resolve_graph_path() -> Path:
-    """Find graph.json from config or cwd search."""
     cfg = load_config()
     vault = Path(cfg["vault"])
     out = Path(cfg["out"])
@@ -58,7 +57,6 @@ def resolve_graph_path() -> Path:
 
 
 def resolve_vault_out(vault_path: str | None = None) -> tuple[Path, Path]:
-    """Return (vault_dir, out_dir)."""
     cfg = load_config()
     vault = Path(cfg["vault"])
     if vault_path:
@@ -76,11 +74,9 @@ def main():
     )
     sub = parser.add_subparsers(dest="command", metavar="command")
 
-    # build
     p_build = sub.add_parser("build", help="Build knowledge graph")
     p_build.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
 
-    # query subcommands
     sub.add_parser("god", help="Top 15 most-connected nodes")
     sub.add_parser("communities", help="Community summary")
     sub.add_parser("isolated", help="Nodes with no connections")
@@ -99,7 +95,12 @@ def main():
     p_query = sub.add_parser("query", help="Natural language graph query")
     p_query.add_argument("question", help="Question text")
 
-    # other commands
+    # ---- config ----
+    p_cfg = sub.add_parser("config", help="View or edit config")
+    p_cfg.add_argument("action", nargs="?", default="show",
+                       choices=["show", "set", "path"],
+                       help="show (default), set key=value, path")
+
     p_watch = sub.add_parser("watch", help="Watch vault for changes, auto-rebuild")
     p_watch.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
 
@@ -111,6 +112,21 @@ def main():
     if not args.command:
         parser.print_help()
         sys.exit(1)
+
+    # ---- config ----
+    if args.command == "config":
+        if args.action == "show":
+            cfg = load_config()
+            print(f"Config: {CONFIG_PATH}")
+            for k, v in cfg.items():
+                print(f"  {k}: {v}")
+            print(f"\nGraph: {resolve_graph_path()}")
+        elif args.action == "path":
+            print(str(CONFIG_PATH))
+        elif args.action == "set":
+            print("Usage: vault-graph config show  (edit file manually)")
+            print(f"       File: {CONFIG_PATH}")
+        return
 
     if args.command == "install":
         from vault_graph.install import install
@@ -131,7 +147,6 @@ def main():
         vault, out_dir = resolve_vault_out(vault_path)
         if not vault.is_dir():
             sys.exit(f"Not a directory: {vault}")
-        # Save config for future
         cfg = load_config()
         cfg["vault"] = str(vault)
         cfg["out"] = cfg.get("out", "vault-out")
@@ -148,13 +163,10 @@ def main():
         watch(vault, out_dir)
         return
 
-    # All query commands: need graph.json
+    # Query commands: need graph.json
     graph_path = resolve_graph_path()
     if not graph_path.exists():
-        sys.exit(
-            f"Graph not found: {graph_path}\n"
-            f"Run: vault-graph build"
-        )
+        sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
 
     try:
         import networkx as nx
@@ -184,7 +196,6 @@ def main():
 
 
 def _rebuild(vault: Path, out_dir: Path):
-    """Full pipeline rebuild."""
     from vault_graph.detect import collect_files
     from vault_graph.extract import extract
     from vault_graph.cache import load_cache, save_cache, split_files
@@ -202,9 +213,9 @@ def _rebuild(vault: Path, out_dir: Path):
     if trae_available():
         trae_extractions = collect_trae_extractions()
         trae_count = sum(len(e.get("nodes", [])) for e in trae_extractions)
-    
+
     if len(uncached_files) == 0 and out_dir.joinpath("graph.html").exists() and trae_count == 0:
-        print(f"  (all {len(files)} files cached — unchanged, no Trae)")
+        print(f"  (all {len(files)} files cached — unchanged)")
         return
 
     skip_count = len(cached_files)
@@ -243,6 +254,17 @@ def _rebuild(vault: Path, out_dir: Path):
 
     from vault_graph.build import build_graph
     G = build_graph(extractions)
+
+    # Classify synthetic nodes (concept:*, trae:*)
+    for n in G.nodes():
+        if G.nodes[n].get("type", "?") == "?" or G.nodes[n].get("type") is None:
+            if str(n).startswith("concept:"):
+                G.nodes[n]["type"] = "concept"
+            elif str(n).startswith("trae:"):
+                G.nodes[n]["type"] = "trae-session"
+            elif G.nodes[n].get("type") is None:
+                G.nodes[n]["type"] = "other"
+    
     print(f"  build:   {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
     import networkx as nx

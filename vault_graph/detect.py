@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 
 MD_EXTENSIONS = {".md"}
-SKIP_DIRS = {".git", ".vscode", "_meta", "memory-archive", "scripts"}
+SKIP_DIRS = {".git", ".vscode", "_meta", "memory-archive", "scripts", "vault-out"}
 
 
 def collect_files(root: Path) -> list[Path]:

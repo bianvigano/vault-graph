@@ -9,10 +9,9 @@ CONTROL_CHAR_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 
 
 def sanitize_label(text: str) -> str:
-    """Strip control chars, cap length, HTML-escape critical chars."""
+    """Strip control chars, cap length. No HTML escaping (handled by json.dumps/D3)."""
     text = CONTROL_CHAR_RE.sub("", text)
     text = text[:MAX_LABEL_LEN]
-    text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     return text.strip()
 
 
