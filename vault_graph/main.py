@@ -4,92 +4,183 @@ vault-graph — Turn Hermes Vault (.md files) into a knowledge graph.
 Graphify-style pipeline: detect -> extract -> build -> cluster -> analyze -> report -> export.
 
 Usage:
-  vault-graph /path/to/vault                        # Build graph
-  vault-graph /path/to/vault --out vault-out       # Custom output dir
-  vault-graph --query vault-out/graph.json [cmd]   # Query graph
-  vault-graph --watch                                # Watch vault for changes
-  vault-graph --serve vault-out/graph.json          # Start MCP server
-  vault-graph --install                              # Register skill
+  vault-graph build [vault_path]         Build graph (default: from config)
+  vault-graph god                          Top 15 most-connected nodes
+  vault-graph search <term>               Search nodes
+  vault-graph explain <node>              Node details
+  vault-graph path <A> <B>                Shortest path
+  vault-graph communities                 Community summary
+  vault-graph isolated                    Nodes without connections
+  vault-graph stats                       Graph statistics
+  vault-graph query <question>            Natural language query
+  vault-graph watch                       Auto-rebuild on file changes
+  vault-graph serve                       Start MCP server
+  vault-graph install                     Register skill with assistants
 """
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
-try:
-    import networkx as nx
-except ImportError:
-    sys.exit("pip install networkx")
+CONFIG_DIR = Path.home() / ".config" / "vault-graph"
+CONFIG_PATH = CONFIG_DIR / "config.json"
+
+DEFAULT_CONFIG = {
+    "vault": str(Path.home() / ".hermes" / "vault"),
+    "out": "vault-out",
+}
+
+
+def load_config() -> dict:
+    if CONFIG_PATH.exists():
+        try:
+            return json.loads(CONFIG_PATH.read_text())
+        except Exception:
+            pass
+    return dict(DEFAULT_CONFIG)
+
+
+def save_config(cfg: dict):
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    CONFIG_PATH.write_text(json.dumps(cfg, indent=2))
+
+
+def resolve_graph_path() -> Path:
+    """Find graph.json from config or cwd search."""
+    cfg = load_config()
+    vault = Path(cfg["vault"])
+    out = Path(cfg["out"])
+    if not out.is_absolute():
+        out = vault / out
+    return out / "graph.json"
+
+
+def resolve_vault_out(vault_path: str | None = None) -> tuple[Path, Path]:
+    """Return (vault_dir, out_dir)."""
+    cfg = load_config()
+    vault = Path(cfg["vault"])
+    if vault_path:
+        vault = Path(vault_path)
+    out = Path(cfg["out"])
+    if not out.is_absolute():
+        out = vault / out
+    return vault, out
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Vault Knowledge Graph")
-    parser.add_argument("vault_path", nargs="?", default="", help="Path to vault")
-    parser.add_argument("--out", default="vault-out", help="Output directory (default: vault-out)")
-    parser.add_argument("--watch", action="store_true", help="Watch vault for changes, auto-rebuild")
-    parser.add_argument("--serve", metavar="GRAPH.json", help="Start MCP server on graph.json")
-    parser.add_argument("--install", action="store_true", help="Register skill with Hermes + Trae")
-    parser.add_argument("--project", action="store_true", help="Project-scoped install")
-    parser.add_argument("--query", nargs="+", metavar=("GRAPH.json", "CMD..."),
-                        help="Query graph: vault-graph --query graph.json god")
+    parser = argparse.ArgumentParser(
+        description="Vault Knowledge Graph",
+        usage="vault-graph <command> [args]",
+    )
+    sub = parser.add_subparsers(dest="command", metavar="command")
+
+    # build
+    p_build = sub.add_parser("build", help="Build knowledge graph")
+    p_build.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
+
+    # query subcommands
+    sub.add_parser("god", help="Top 15 most-connected nodes")
+    sub.add_parser("communities", help="Community summary")
+    sub.add_parser("isolated", help="Nodes with no connections")
+    sub.add_parser("stats", help="Graph statistics")
+
+    p_search = sub.add_parser("search", help="Search nodes by name")
+    p_search.add_argument("term", help="Search term")
+
+    p_explain = sub.add_parser("explain", help="Explain a node")
+    p_explain.add_argument("node", help="Node name or label")
+
+    p_path = sub.add_parser("path", help="Shortest path between two nodes")
+    p_path.add_argument("a", help="From node")
+    p_path.add_argument("b", help="To node")
+
+    p_query = sub.add_parser("query", help="Natural language graph query")
+    p_query.add_argument("question", help="Question text")
+
+    # other commands
+    p_watch = sub.add_parser("watch", help="Watch vault for changes, auto-rebuild")
+    p_watch.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
+
+    sub.add_parser("serve", help="Start MCP server")
+    sub.add_parser("install", help="Register skill with Hermes + Trae")
+
     args = parser.parse_args()
 
-    vault = Path(args.vault_path) if args.vault_path else Path(".")
-    out_dir = Path(args.out)
+    if not args.command:
+        parser.print_help()
+        sys.exit(1)
 
-    # --install (no vault needed)
-    if args.install:
+    if args.command == "install":
         from vault_graph.install import install
-        install(project=args.project)
+        install()
         return
 
-    # --serve
-    if args.serve:
-        graph_path = Path(args.serve)
+    if args.command == "serve":
+        graph_path = resolve_graph_path()
         if not graph_path.exists():
-            sys.exit(f"Graph not found: {graph_path}")
+            sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
         from vault_graph.serve import serve
         print(f"MCP server on {graph_path}")
         serve(graph_path)
         return
 
-    # --query
-    if args.query:
-        graph_path = Path(args.query[0])
-        if not graph_path.exists():
-            sys.exit(f"Graph not found: {graph_path}")
-        from vault_graph.query import load_graph, run_query_cmd
-        G = load_graph(graph_path)
-        if len(args.query) > 1:
-            cmd = args.query[1].lower()
-            run_query_cmd(G, cmd, args.query[2:])
-        else:
-            run_query_cmd(G, "stats", [])
+    if args.command == "build":
+        vault_path = getattr(args, "vault_path", None)
+        vault, out_dir = resolve_vault_out(vault_path)
+        if not vault.is_dir():
+            sys.exit(f"Not a directory: {vault}")
+        # Save config for future
+        cfg = load_config()
+        cfg["vault"] = str(vault)
+        cfg["out"] = cfg.get("out", "vault-out")
+        save_config(cfg)
+        print(f"config: vault={vault}")
+        _rebuild(vault, out_dir)
         return
 
-    # --watch (no vault arg needed — auto-detect from vault-out if exists)
-    if args.watch:
-        if not args.vault_path:
-            # Auto-detect: search for vault-out/ upward
-            cwd = Path.cwd()
-            candidates = [cwd, cwd.parent, cwd.parent.parent]
-            for c in candidates:
-                if (c / out_dir / "graph.json").exists():
-                    vault = c
-                    out_dir = c / out_dir
-                    break
-            else:
-                sys.exit("No vault found. Run from vault directory or pass path.")
+    if args.command == "watch":
+        vault_path = getattr(args, "vault_path", None)
+        vault, out_dir = resolve_vault_out(vault_path)
         from vault_graph.watch import watch
         _rebuild(vault, out_dir)
         watch(vault, out_dir)
         return
 
-    # Normal pipeline
-    if not vault.is_dir():
-        sys.exit(f"Not a directory: {vault}")
-    _rebuild(vault, out_dir)
+    # All query commands: need graph.json
+    graph_path = resolve_graph_path()
+    if not graph_path.exists():
+        sys.exit(
+            f"Graph not found: {graph_path}\n"
+            f"Run: vault-graph build"
+        )
+
+    try:
+        import networkx as nx
+    except ImportError:
+        sys.exit("pip install networkx")
+
+    from vault_graph.query import load_graph, run_query_cmd
+    G = load_graph(graph_path)
+
+    cmd = args.command
+    if cmd == "god":
+        run_query_cmd(G, "god", [])
+    elif cmd == "communities":
+        run_query_cmd(G, "communities", [])
+    elif cmd == "isolated":
+        run_query_cmd(G, "isolated", [])
+    elif cmd == "stats":
+        run_query_cmd(G, "stats", [])
+    elif cmd == "search":
+        run_query_cmd(G, "search", [args.term])
+    elif cmd == "explain":
+        run_query_cmd(G, "explain", [args.node])
+    elif cmd == "path":
+        run_query_cmd(G, "path", [args.a, args.b])
+    elif cmd == "query":
+        run_query_cmd(G, "query", [args.question])
 
 
 def _rebuild(vault: Path, out_dir: Path):
@@ -105,7 +196,6 @@ def _rebuild(vault: Path, out_dir: Path):
     files = collect_files(vault)
     cached_files, uncached_files, new_cache = split_files(files, cache, vault)
 
-    # Trae data always re-parsed (lightweight, no cache)
     from vault_graph.trae import trae_available, collect_trae_extractions
     trae_extractions: list[dict] = []
     trae_count = 0
@@ -118,9 +208,6 @@ def _rebuild(vault: Path, out_dir: Path):
         return
 
     skip_count = len(cached_files)
-    total_sources = len(files)
-    if trae_count:
-        total_sources += trae_count
     print(f"  detect:  {len(files)} vault files ({skip_count} cached, {len(uncached_files)} new)")
 
     all_headings = _collect_all_headings(uncached_files)
@@ -136,7 +223,6 @@ def _rebuild(vault: Path, out_dir: Path):
                 e["source"] = rel
         extractions.append(result)
 
-    # Merge Trae extractions
     if trae_count:
         print(f"  trae:    {trae_count} nodes from ~/.trae/memory/")
         extractions.extend(trae_extractions)
@@ -159,6 +245,7 @@ def _rebuild(vault: Path, out_dir: Path):
     G = build_graph(extractions)
     print(f"  build:   {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
+    import networkx as nx
     from vault_graph.cluster import cluster
     G = cluster(G)
     comms = len(set(nx.get_node_attributes(G, "community").values()))
