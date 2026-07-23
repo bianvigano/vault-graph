@@ -1,9 +1,0 @@
-# wiki/../other/spark-nyarn.md
-
-Type: other
-ID: `wiki/../other/spark-nyarn.md`
-
-## Connections
-
-### EXTRACTED
-- [[../other/spark-nyarn.md|spark-nyarn.md]] (wiki-link) [EXTRACTED]

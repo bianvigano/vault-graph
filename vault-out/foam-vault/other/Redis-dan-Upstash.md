@@ -1,7 +1,0 @@
-# Redis dan Upstash
-
-Type: other
-ID: `vault-out/foam-vault/other/Redis-dan-Upstash.md`
-
-## Isolated
-No connections to other vault documents.

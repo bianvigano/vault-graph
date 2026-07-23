@@ -1,7 +1,0 @@
-# other/home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md
-
-Type: other
-ID: `vault-out/foam-vault/other/other-home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md.md`
-
-## Isolated
-No connections to other vault documents.

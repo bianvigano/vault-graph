@@ -1,7 +1,0 @@
-# wiki/discord/profiles/whitedi-1167708641860800515.md
-
-Type: other
-ID: `vault-out/foam-vault/other/wiki-discord-profiles-whitedi-1167708641860800515.md.md`
-
-## Isolated
-No connections to other vault documents.

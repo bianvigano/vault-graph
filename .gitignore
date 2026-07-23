@@ -1,0 +1,6 @@
+# vault-graph — built output
+vault-out/
+*.egg-info/
+__pycache__/
+*.pyc
+.vault_graph_cache.json

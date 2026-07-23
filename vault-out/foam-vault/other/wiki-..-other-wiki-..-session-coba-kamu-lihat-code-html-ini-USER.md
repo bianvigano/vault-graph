@@ -1,7 +1,0 @@
-# wiki/../other/wiki-..-session-coba-kamu-lihat-code-html-ini-USER_HOME-Download.md
-
-Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-session-coba-kamu-lihat-code-html-ini-USER.md`
-
-## Isolated
-No connections to other vault documents.

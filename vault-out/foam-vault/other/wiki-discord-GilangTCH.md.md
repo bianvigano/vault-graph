@@ -1,9 +1,0 @@
-# wiki/discord/GilangTCH.md
-
-Type: other
-ID: `wiki/discord/GilangTCH.md`
-
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
