@@ -1,10 +1,7 @@
 # wiki/troubleshooting/connection-throttled.md
 
 Type: other
-ID: `wiki/troubleshooting/connection-throttled.md`
+ID: `vault-out/foam-vault/other/wiki-troubleshooting-connection-throttled.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Troubleshooting-Crash-Minecraft-Panduan-Umum|Troubleshooting Crash Minecraft — Panduan Umum]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Server-Properties-Konfigurasi-Dasar-Minecraft-Server|Server Properties — Konfigurasi Dasar Minecraft Server]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

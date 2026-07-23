@@ -1,11 +1,9 @@
 # wiki/../other/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-You-are-running-as-Hermes-background-skill-CURATOR.md`
+ID: `wiki/../other/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-..-other-concept-Hermes.md|../other/wiki-..-other-concept-Hermes.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-other-home-the-meh-.hermes-vault-concepts|wiki/../other/wiki-..-other-home-the-meh-.hermes-vault-concepts-hermes-running.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-co|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-concept-You-are.md]] (wiki-link) [EXTRACTED]
+- [[../other/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U|You are running as Hermes' background skill CURATOR. This is an UMBRELLA-BUILDING consolidation pass]] (wiki-link) [EXTRACTED]

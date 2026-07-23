@@ -1,9 +1,7 @@
 # wiki/discord/profiles/xecshin--1096624836312309780.md
 
 Type: other
-ID: `wiki/discord/profiles/xecshin--1096624836312309780.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-xecshin--1096624836312309780.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

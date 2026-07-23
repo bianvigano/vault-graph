@@ -1,9 +1,7 @@
-# /home/the-meh/.hermes/vault/vault-out/foam-vault/linux/Linux-ampampamp-DevOps.md
+# /home/the-meh/.hermes/vault/vault-out/foam-vault/linux/Linux-ampamp-DevOps.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/vault-out/foam-vault/linux/Linux-ampampamp-DevOps.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-linux-Linux-amp.md`
 
-## Connections
-
-### INFERRED
-- [[../linux/Linux-ampampampamp-DevOps-Server-Security-ampampampamp-SSH|Linux &amp;amp;amp;amp; DevOps — Server Security &amp;amp;amp;amp; SSH]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

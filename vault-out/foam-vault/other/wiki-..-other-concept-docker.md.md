@@ -1,9 +1,7 @@
 # wiki/../other/concept-docker.md
 
 Type: other
-ID: `wiki/../other/concept-docker.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-concept-docker.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-session-coba-kamu-cek-github-ini-https---g|wiki/../other/wiki-..-session-coba-kamu-cek-github-ini-https---github.com-itzg.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

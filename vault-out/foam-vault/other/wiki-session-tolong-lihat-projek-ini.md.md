@@ -1,9 +1,9 @@
 # wiki/session/tolong-lihat-projek-ini.md
 
 Type: other
-ID: `wiki/session/tolong-lihat-projek-ini.md`
+ID: `vault-out/foam-vault/other/wiki-session-tolong-lihat-projek-ini.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

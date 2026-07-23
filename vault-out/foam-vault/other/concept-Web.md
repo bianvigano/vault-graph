@@ -1,9 +1,7 @@
 # concept:Web
 
 Type: other
-ID: `concept:Web`
+ID: `vault-out/foam-vault/other/concept-Web.md`
 
-## Connections
-
-### INFERRED
-- [[../session/Senyawa-Web-X|Senyawa Web X]] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

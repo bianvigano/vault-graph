@@ -1,9 +1,7 @@
 # wiki/hermes/kode-sekarang-saya-kepikiran-bikin.md
 
 Type: other
-ID: `wiki/hermes/kode-sekarang-saya-kepikiran-bikin.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-kode-sekarang-saya-kepikiran-bikin.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

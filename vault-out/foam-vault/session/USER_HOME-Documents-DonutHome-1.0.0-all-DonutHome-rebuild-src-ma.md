@@ -3,8 +3,5 @@
 Type: session
 ID: `sessions/hermes/homethe-mehdocumentsdonuthome-100-alldonuthome-reb.md`
 
-## Connections
-
-### INFERRED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-user-home-documents|/home/the-meh/.hermes/vault/concepts/hermes/user-home-documents-donuthome.md]] (heading-mention) [INFERRED]
-- [[../other/concept-java|concept:java]] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

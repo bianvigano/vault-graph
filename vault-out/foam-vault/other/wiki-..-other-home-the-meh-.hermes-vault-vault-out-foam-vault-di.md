@@ -1,9 +1,9 @@
-# wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-discord-GilangT.md
+# wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-discord-RielVtu.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-di.md`
+ID: `wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-discord-RielVtu.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-discord-profiles-gilangtch-1417029857262571561.md|../other/wiki-discord-profiles-gilangtch-1417029857262571561.md]] (wiki-link) [EXTRACTED]
+- [[../discord/RielVtuber|RielVtuber]] (wiki-link) [EXTRACTED]

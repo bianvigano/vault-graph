@@ -1,9 +1,12 @@
 # wiki/minecraft/minecraft-coba.md
 
 Type: other
-ID: `wiki/minecraft/minecraft-coba.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-minecraft-coba.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../concept/Minecraft-Concepts|Minecraft — Concepts]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

@@ -1,5 +1,5 @@
 #!/bin/bash
-# vault-graph install — auto-detect assistants, register skill + MCP
+# vault-graph install — pip-installable, auto-detect assistants, register skill + MCP
 # Usage: bash install.sh
 set -e
 
@@ -11,57 +11,79 @@ echo "vault-graph install"
 echo "==================="
 echo "  repo: $SCRIPT_DIR"
 
-# ---- Requirements ----
-echo ""
-echo "Requirements: pip install networkx matplotlib"
-python3 -c "import networkx" 2>/dev/null && echo "  [✓] networkx" || {
-    echo "  [✗] networkx HILANG. Install: pip install networkx"
-    echo "      (graph tetap terbentuk tapi tanpa community detection)"
-}
-python3 -c "import matplotlib" 2>/dev/null && echo "  [✓] matplotlib" || {
-    echo "  [✗] matplotlib HILANG. Install: pip install matplotlib"
-    echo "      (graph.svg tidak terbentuk, graph.html tetap OK)"
-}
+# ---- Detect Python ----
+if command -v uv &>/dev/null; then
+    PIP="uv pip install --system"
+else
+    PIP="pip install --user"
+fi
+echo "  pip:  $PIP"
 echo ""
 
-# ---- 1. CLI executables (~/.local/bin) ----
-echo "--- CLI ---"
+# ---- 1. Pip install ----
+echo "--- Package ---"
+cd "$SCRIPT_DIR"
+$PIP -e "$SCRIPT_DIR" 2>&1 | grep -E "✓|Successfully|Obtaining|error" || true
+# Verify it works
+python3 -c "import vault_graph" 2>/dev/null && echo "  [✓] vault-graph import OK" || echo "  [!] import failed, but CLI may still work via fallback"
+echo ""
+
+# ---- 2. CLI wrapper (fallback kalau pip entry point gagal) ----
 mkdir -p "$HOME/.local/bin"
 
-# vault-graph wrapper
-cat > "$HOME/.local/bin/vault-graph" << VGEOF
+cat > "$HOME/.local/bin/vault-graph" << 'VGEOF'
 #!/bin/bash
-cd "$SCRIPT_DIR" && exec python3 -m vault_graph.main "\$@"
+# Auto-detect: pip-installed entry point OR repo fallback
+if python3 -m vault_graph.main --help >/dev/null 2>&1; then
+    exec python3 -m vault_graph.main "$@"
+else
+    REPO="$(cd "$(dirname "$(readlink -f "$0")" 2>/dev/null)" 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null)"
+    if [ -d "/home/the-meh/Documents/vault-graph" ]; then
+        cd "/home/the-meh/Documents/vault-graph" && exec python3 -m vault_graph.main "$@"
+    fi
+    echo "vault-graph: not found. Install: git clone https://github.com/bianvigano/vault-graph && cd vault-graph && bash install.sh"
+    exit 1
+fi
 VGEOF
 chmod +x "$HOME/.local/bin/vault-graph"
 echo "  [✓] vault-graph → ~/.local/bin/vault-graph"
-
-# vq alias (backward compat)
-cat > "$HOME/.local/bin/vq" << VQEOF
-#!/bin/bash
-cd "$SCRIPT_DIR" && exec python3 -m vault_graph.query "\$@"
-VQEOF
-chmod +x "$HOME/.local/bin/vq"
-echo "  [✓] vq (legacy)  → ~/.local/bin/vq"
 
 # Pastikan ~/.local/bin di PATH
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
     if [ -f "$HOME/.bashrc" ]; then
         if ! grep -q '.local/bin' "$HOME/.bashrc"; then
             echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-            echo "  [✓] PATH        → ~/.local/bin ditambah ke ~/.bashrc"
+            echo "  [✓] PATH        → ~/.local/bin added to ~/.bashrc"
         fi
     fi
 fi
+
+# ---- 3. Config default ----
+CFG="$HOME/.config/vault-graph/config.json"
+if [ ! -f "$CFG" ]; then
+    mkdir -p "$(dirname "$CFG")"
+    VAULT_PATH="$HOME/.hermes/vault"
+    if [ ! -d "$VAULT_PATH" ]; then
+        VAULT_PATH="$SCRIPT_DIR"
+    fi
+    cat > "$CFG" << CFGEOF
+{
+  "vault": "$VAULT_PATH",
+  "out": "vault-out"
+}
+CFGEOF
+    echo "  [✓] config:  $CFG"
+fi
+
 echo ""
 
-# ---- 2. Skill for assistants ----
+# ---- 4. Skill for assistants ----
 SKILL_MD="$SCRIPT_DIR/skill.md"
 cat > "$SKILL_MD" << 'SKILLEOF'
 ---
 name: vault-graph
-description: Turn any Vault into interactive D3.js knowledge graph. Graphify-style pipeline with confidence tiers, query CLI, MCP server.
-trigger: User says "/vault-graph", "graph vault", "visualize vault", or asks questions about vault connections.
+description: Turn any Vault into interactive D3.js knowledge graph. Query: vault-graph god, vault-graph search <term>, vault-graph explain <node>.
+trigger: User says "/vault-graph", "graph vault", "visualize vault", or asks about vault connections.
 ---
 
 # Vault Knowledge Graph
@@ -69,46 +91,26 @@ trigger: User says "/vault-graph", "graph vault", "visualize vault", or asks que
 ## Always-On Rule
 Before searching vault files, check if vault-out/graph.json exists. If yes, query it first.
 
-## Build
+## Commands
 ```bash
-vault-graph /path/to/vault
-# or
-cd /path/to/vault && python3 -m vault_graph.main . --out vault-out
+vault-graph build                    # build graph
+vault-graph god                      # top 15 nodes
+vault-graph search <term>            # search by name
+vault-graph explain <node>           # node detail + connections
+vault-graph path <A> <B>             # shortest path
+vault-graph communities              # community summary
+vault-graph isolated                 # nodes with no connections
+vault-graph stats                    # graph statistics
+vault-graph query "..."              # natural language query
+vault-graph watch                    # auto-rebuild
+vault-graph serve                    # MCP server
 ```
 
-## Query
-```bash
-vq vault-out/graph.json query "what connects Docker to Minecraft?"
-vq vault-out/graph.json path "Docker" "LXC"
-vq vault-out/graph.json explain "nginx"
-vq vault-out/graph.json search "spark"
-vq vault-out/graph.json god
-vq vault-out/graph.json communities
-vq vault-out/graph.json isolated
-vq vault-out/graph.json stats
-```
-
-## Watch
-```bash
-vault-graph /path/to/vault --watch
-```
-
-## MCP
-```bash
-vault-graph --serve vault-out/graph.json
-```
-
-## Output
-- graph.html (D3 interactive + query bar)
-- graph.json (raw data)
-- graph.svg (static fallback)
-- mermaid.html (Mermaid flowchart)
-- foam-vault/ ([[wiki-linked]] pages)
-- GRAPH_REPORT.md (analysis)
+No path needed — auto-detects graph.json from config.
 
 ## Sources
 - Vault: .md files with [[wiki-links]] + headings
-- Trae: ~/.trae/memory/projects/ (auto-detected if present)
+- Trae: ~/.trae/memory/projects/ (auto-detected)
 SKILLEOF
 
 echo "--- Skills ---"
@@ -141,7 +143,7 @@ if [ -d "$HOME/.hermes" ]; then
 MCPEOF
         echo "  [✓] MCP:     $MCP_JSON"
     else
-        echo "  [✓] MCP:     already exists ($MCP_JSON)"
+        echo "  [✓] MCP:     already exists"
     fi
 else
     echo "  [ ] Hermes:  SKIP (no ~/.hermes)"
@@ -158,14 +160,13 @@ if [ -d "$HOME/.trae" ]; then
     # ---- Trae MCP ----
     TMC="$HOME/.trae/mcps/vault-graph"
     mkdir -p "$TMC/solo_agent/vault-graph/tools"
-    cat > "$TMC/solo_agent/vault-graph/SERVER_METADATA.json" <<< '{"server_name":"vault-graph"}'
-    
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_stats.json" <<< '{"name":"graph_stats","description":"Graph statistics: node count, edge count, density, edge confidence breakdown","inputSchema":{"type":"object","properties":{}}}'
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_search.json" <<< '{"name":"graph_search","description":"Search nodes and edges by name or path","inputSchema":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}'
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_path.json" <<< '{"name":"graph_path","description":"Find shortest path between two nodes","inputSchema":{"type":"object","properties":{"from":{"type":"string"},"to":{"type":"string"}},"required":["from","to"]}}'
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_explain.json" <<< '{"name":"graph_explain","description":"Explain a node: type, connections, related nodes","inputSchema":{"type":"object","properties":{"node":{"type":"string"}},"required":["node"]}}'
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_god_nodes.json" <<< '{"name":"graph_god_nodes","description":"Top 15 most-connected nodes in the graph","inputSchema":{"type":"object","properties":{}}}'
-    cat > "$TMC/solo_agent/vault-graph/tools/graph_communities.json" <<< '{"name":"graph_communities","description":"Community detection summaries with representative nodes","inputSchema":{"type":"object","properties":{}}}'
+    echo '{"server_name":"vault-graph"}' > "$TMC/solo_agent/vault-graph/SERVER_METADATA.json"
+    echo '{"name":"graph_stats","description":"Graph statistics: node count, edge count, density, edge confidence breakdown","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_stats.json"
+    echo '{"name":"graph_search","description":"Search nodes and edges by name or path","inputSchema":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}' > "$TMC/solo_agent/vault-graph/tools/graph_search.json"
+    echo '{"name":"graph_path","description":"Find shortest path between two nodes","inputSchema":{"type":"object","properties":{"from":{"type":"string"},"to":{"type":"string"}},"required":["from","to"]}}' > "$TMC/solo_agent/vault-graph/tools/graph_path.json"
+    echo '{"name":"graph_explain","description":"Explain a node: type, connections, related nodes","inputSchema":{"type":"object","properties":{"node":{"type":"string"}},"required":["node"]}}' > "$TMC/solo_agent/vault-graph/tools/graph_explain.json"
+    echo '{"name":"graph_god_nodes","description":"Top 15 most-connected nodes in the graph","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_god_nodes.json"
+    echo '{"name":"graph_communities","description":"Community detection summaries with representative nodes","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_communities.json"
     echo "  [✓] MCP:     $TMC"
 else
     echo "  [ ] Trae:    SKIP (no ~/.trae)"
@@ -175,7 +176,7 @@ fi
 echo ""
 echo "vault-graph ready! $INSTALL_COUNT assistants registered."
 echo ""
-echo "Commands:"
+echo "Commands (run from anywhere):"
 echo "  vault-graph build                    ← build graph"
 echo "  vault-graph god                      ← top nodes"
 echo "  vault-graph search <term>            ← search"
@@ -184,8 +185,5 @@ echo "  vault-graph path <A> <B>             ← shortest path"
 echo "  vault-graph watch                    ← auto-rebuild"
 echo "  vault-graph serve                    ← MCP server"
 echo ""
-echo "For new PC:"
-echo "  git clone https://github.com/bianvigano/vault-graph"
-echo "  cd vault-graph && bash install.sh"
-echo "  vault-graph build"
+echo "First run: vault-graph build"
 echo ""

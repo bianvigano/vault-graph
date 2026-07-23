@@ -6,4 +6,4 @@ ID: `vault-out/foam-vault/other/wiki-..-other-tolong-lihat-projek-ini.md.md`
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-other-home-the-meh-.hermes-vault-concepts|wiki/../other/wiki-..-other-home-the-meh-.hermes-vault-concepts-hermes-tolong.md]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-concept-tolong-lihat-projek-ini.md|../other/wiki-..-concept-tolong-lihat-projek-ini.md]] (wiki-link) [EXTRACTED]

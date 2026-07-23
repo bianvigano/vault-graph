@@ -3,8 +3,5 @@
 Type: session
 ID: `sessions/hermes/cek-link-ini-httpssparkluckomem7ijypx8aq-dan.md`
 
-## Connections
-
-### INFERRED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md|/home/the-meh/.hermes/vault/concepts/hermes/hermes-spark.md]] (heading-mention) [INFERRED]
-- [[../other/concept-spark|concept:spark]] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,7 @@
 # wiki/hermes/sekarang-kepikiran.md
 
 Type: other
-ID: `wiki/hermes/sekarang-kepikiran.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-sekarang-kepikiran.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

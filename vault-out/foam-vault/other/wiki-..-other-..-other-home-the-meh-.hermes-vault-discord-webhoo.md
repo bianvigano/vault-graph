@@ -6,4 +6,4 @@ ID: `wiki/../other/..-other-home-the-meh-.hermes-vault-discord-webhook-webhook-b
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-linux-Linux-amp-DevOps-Server-Security-amp-SSH.md|wiki/../linux/Linux-amp-DevOps-Server-Security-amp-SSH.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-..-other-wiki-..-linux-Linux-amp-Dev|wiki/../other/wiki-..-other-..-other-wiki-..-linux-Linux-amp-DevOps-Server-Sec.md]] (wiki-link) [EXTRACTED]

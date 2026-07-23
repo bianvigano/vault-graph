@@ -5,5 +5,8 @@ ID: `vault-out/foam-vault/minecraft/Docker-Compose-Fabric-Minecraft-Server-denga
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-minecraft-server-minecraft-docker.md|/home/the-meh/.hermes/vault/minecraft/server/minecraft-docker.md]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

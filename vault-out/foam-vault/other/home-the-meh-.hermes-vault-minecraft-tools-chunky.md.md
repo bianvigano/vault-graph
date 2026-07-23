@@ -1,10 +1,12 @@
 # /home/the-meh/.hermes/vault/minecraft/tools/chunky.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/minecraft/tools/chunky.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-minecraft-tools-chunky.md.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../minecraft/Docker-Compose-Fabric-Minecraft-Server-dengan-Mods|Docker Compose Fabric — Minecraft Server dengan Mods]] (heading-mention) [INFERRED]
-- [[../other/Opsi-Hosting--Vercel-Netlify-Cloudflare-Vite-PM2|Opsi Hosting: Vercel, Netlify, Cloudflare, Vite, PM2]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

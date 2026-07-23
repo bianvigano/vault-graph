@@ -1,10 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-saya-mau-tau-status-kamu-dari-memo.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-saya-mau-tau-status-kamu-dari-memo.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-saya-mau-tau-status.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-hermes-status.md|/home/the-meh/.hermes/vault/concepts/hermes/hermes-status.md]] (wiki-link) [EXTRACTED]
-- [[../other/concept-web|concept:web]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

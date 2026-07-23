@@ -1,12 +1,14 @@
 # vault-graph
 
-> Personal project by [@bianvigano](https://github.com/bianvigano). Built for Vault knowledge graph visualization. MIT license.
+> Personal project by [@bianvigano](https://github.com/bianvigano). MIT license.
 
-Turn any Vault into an interactive D3.js knowledge graph. Auto-detects Vault `.md` files + Trae `~/.trae/memory/` data.
+Turn Vault `.md` files + Trae memory into interactive D3.js knowledge graph.
 
 ---
 
-## Quick Start
+## Install
+
+### Linux / macOS
 
 ```bash
 git clone https://github.com/bianvigano/vault-graph
@@ -15,65 +17,44 @@ bash install.sh
 vault-graph build
 ```
 
-**Requirements:** `pip install networkx matplotlib` (Python 3.10+)
+### Windows
+
+```cmd
+git clone https://github.com/bianvigano/vault-graph
+cd vault-graph
+install.bat
+vault-graph build
+```
+
+Run from anywhere. No `cd` needed after install.
+
+**Requirements:** Python 3.10+, `pip install networkx matplotlib`
 
 ---
 
 ## Usage
 
-### Build
-
 ```bash
-vault-graph build                    # uses config (~/.config/vault-graph/config.json)
-vault-graph build /path/to/vault     # custom path, auto-saves to config
-```
-
-Output in `<vault>/vault-out/`:
-
-| File | Description |
-|---|---|
-| `graph.html` | D3.js interactive graph (zoom, pan, drag, search, query bar) |
-| `graph.json` | Raw graph data |
-| `graph.svg` | Static SVG fallback |
-| `mermaid.html` | Mermaid flowchart |
-| `GRAPH_REPORT.md` | Analysis: god nodes, communities |
-
-### Query
-
-```bash
+vault-graph build                    # build knowledge graph
 vault-graph god                      # top 15 most-connected nodes
-vault-graph search nginx             # search by name
-vault-graph explain Docker           # node detail + connections
-vault-graph path "Docker" "LXC"      # shortest path
+vault-graph search <term>            # search by name
+vault-graph explain <node>           # detail + connections
+vault-graph path <A> <B>             # shortest path
 vault-graph communities              # community summary
 vault-graph isolated                 # nodes with no connections
 vault-graph stats                    # graph statistics
-vault-graph query "how does Docker connect to Minecraft?"
+vault-graph query "question"         # natural language
+vault-graph watch                    # auto-rebuild on changes
+vault-graph serve                    # MCP server (Hermes/Trae)
 ```
 
-No path needed — auto-resolves graph.json from `~/.config/vault-graph/config.json`.
-
-### Watch
-
-```bash
-vault-graph watch
-```
-
-Auto-rebuild every 30s when files change. Ctrl+C to stop.
-
-### MCP server
-
-```bash
-vault-graph serve
-```
-
-6 MCP tools for Hermes/Trae integration.
+No path arguments — auto-detects from `~/.config/vault-graph/config.json`.
 
 ---
 
 ## Config
 
-`~/.config/vault-graph/config.json` (auto-created on first `vault-graph build`):
+`~/.config/vault-graph/config.json` (auto-created):
 
 ```json
 {
@@ -82,26 +63,28 @@ vault-graph serve
 }
 ```
 
+On Windows: `%APPDATA%/vault-graph/config.json`
+
 ---
 
 ## Sources
 
-| Source | Path | How |
-|---|---|---|
-| Vault | `.md` files | `[[wiki-links]]` → EXTRACTED, headings → INFERRED |
-| Trae | `~/.trae/memory/` | `project_memory.md`, `session_memory_*.jsonl` |
+| Source | What |
+|---|---|
+| Vault `.md` | `[[wiki-links]]` → EXTRACTED, headings → INFERRED |
+| Trae `~/.trae/memory/` | `project_memory.md`, `session_memory_*.jsonl` |
 
 ---
 
-## New PC
+## Output
 
-```bash
-git clone https://github.com/bianvigano/vault-graph
-cd vault-graph && bash install.sh
-vault-graph build
-```
-
-Auto-detects Hermes + Trae, installs CLI + skills + MCP.
+| File | Description |
+|---|---|
+| `graph.html` | D3.js interactive (zoom, pan, drag, search, query bar) |
+| `graph.json` | Raw data for MCP/CLI |
+| `graph.svg` | Static SVG |
+| `mermaid.html` | Flowchart |
+| `GRAPH_REPORT.md` | Analysis |
 
 ---
 

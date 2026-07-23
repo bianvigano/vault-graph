@@ -1,10 +1,7 @@
 # wiki/webdev/index.md
 
 Type: other
-ID: `wiki/webdev/index.md`
+ID: `vault-out/foam-vault/other/wiki-webdev-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Misc-Tools-amp-References|Misc — Tools &amp; References]] (wiki-link) [EXTRACTED]
-- [[../other/Three.js-Daftar-Referensi|Three.js — Daftar Referensi]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

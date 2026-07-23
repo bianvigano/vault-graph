@@ -1,10 +1,12 @@
 # wiki/minecraft/server/set-spawn.md
 
 Type: other
-ID: `wiki/minecraft/server/set-spawn.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-server-set-spawn.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Minecraft-Daftar-Referensi|Minecraft — Daftar Referensi]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Gamerules-Daftar-dan-Penggunaan-Game-Rules-Minecraft|Gamerules — Daftar dan Penggunaan Game Rules Minecraft]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

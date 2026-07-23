@@ -1,9 +1,7 @@
 # wiki/hermes/running-hermes-background.md
 
 Type: other
-ID: `wiki/hermes/running-hermes-background.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-running-hermes-background.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

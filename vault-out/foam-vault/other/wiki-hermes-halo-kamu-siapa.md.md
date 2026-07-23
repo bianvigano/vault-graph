@@ -1,10 +1,9 @@
 # wiki/hermes/halo-kamu-siapa.md
 
 Type: other
-ID: `wiki/hermes/halo-kamu-siapa.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-halo-kamu-siapa.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Knowledge-Base-Index|Vault — Knowledge Base Index]] (wiki-link) [EXTRACTED]
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-other-Vault-Knowledge-Base-Index.md|../other/wiki-..-other-Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]

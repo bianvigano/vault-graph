@@ -1,9 +1,12 @@
 # wiki/sessions/minecraft/server/folia-performance.md
 
 Type: other
-ID: `wiki/sessions/minecraft/server/folia-performance.md`
+ID: `vault-out/foam-vault/other/wiki-sessions-minecraft-server-folia-performance.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Minecraft-Daftar-Referensi|Minecraft — Daftar Referensi]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-folia-performance.md|wiki/../other/folia-performance.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/folia-performance|folia-performance]] (heading-mention) [INFERRED]

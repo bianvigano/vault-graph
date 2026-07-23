@@ -1,9 +1,9 @@
 # wiki/session/di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-RTK---Rust-Tok.md
 
 Type: other
-ID: `wiki/session/di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-RTK---Rust-Tok.md`
+ID: `vault-out/foam-vault/other/wiki-session-di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-R.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

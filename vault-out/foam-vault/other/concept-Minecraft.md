@@ -1,11 +1,12 @@
 # concept:Minecraft
 
 Type: other
-ID: `concept:Minecraft`
+ID: `vault-out/foam-vault/other/concept-Minecraft.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../session/Minecraft-Sessions|Minecraft — Sessions]] (mentions-topic) [INFERRED]
-- [[../session/Minecraft|Minecraft]] (mentions-topic) [INFERRED]
-- [[../session/USER_HOME-Documents-MinecraftTitleGenerator-tolong-npm-i-jika-ad|'USER_HOME/Documents/MinecraftTitleGenerator' tolong npm i , jika ada error fix kan]] (mentions-topic) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

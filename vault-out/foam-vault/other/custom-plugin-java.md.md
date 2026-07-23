@@ -1,10 +1,12 @@
 # custom-plugin-java.md
 
 Type: other
-ID: `custom-plugin-java.md`
+ID: `vault-out/foam-vault/other/custom-plugin-java.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/custom-plugin-java|custom-plugin-java]] (wiki-link) [EXTRACTED]
-- [[../other/hunger-games|hunger-games]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-custom-plugin-java.md|wiki/../other/custom-plugin-java.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/custom-plugin-java|custom-plugin-java]] (heading-mention) [INFERRED]

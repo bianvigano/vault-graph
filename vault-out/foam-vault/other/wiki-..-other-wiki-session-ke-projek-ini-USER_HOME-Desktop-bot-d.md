@@ -1,9 +1,7 @@
 # wiki/../other/wiki-session-ke-projek-ini-USER_HOME-Desktop-bot-discord-ai-chat.md
 
 Type: other
-ID: `wiki/../other/wiki-session-ke-projek-ini-USER_HOME-Desktop-bot-discord-ai-chat.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-session-ke-projek-ini-USER_HOME-Desktop-bot-d.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

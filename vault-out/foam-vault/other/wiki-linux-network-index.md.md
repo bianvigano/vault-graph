@@ -1,9 +1,7 @@
 # wiki/linux/network/index.md
 
 Type: other
-ID: `wiki/linux/network/index.md`
+ID: `vault-out/foam-vault/other/wiki-linux-network-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../linux/Linux-amp-DevOps-Server-Security-amp-SSH|Linux &amp; DevOps — Server Security &amp; SSH]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

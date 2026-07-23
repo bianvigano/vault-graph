@@ -1,10 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-saya-mau-bertanya-kamu-bisa-baca-t.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-saya-mau-bertanya-kamu-bisa-baca-t.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-saya-mau-bertanya-ka.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/concept-hermes|concept:hermes]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-hermes-bertanya.md|/home/the-meh/.hermes/vault/concepts/hermes/hermes-bertanya.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

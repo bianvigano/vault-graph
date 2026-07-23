@@ -1,9 +1,7 @@
 # wiki/../other/wiki-session-USER_HOME-Documents-DonutHome-1.0.0-all-DonutHome-r.md
 
 Type: other
-ID: `wiki/../other/wiki-session-USER_HOME-Documents-DonutHome-1.0.0-all-DonutHome-r.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-session-USER_HOME-Documents-DonutHome-1.0.0-a.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

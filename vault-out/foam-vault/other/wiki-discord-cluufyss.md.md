@@ -1,9 +1,12 @@
 # wiki/discord/cluufyss.md
 
 Type: other
-ID: `wiki/discord/cluufyss.md`
+ID: `vault-out/foam-vault/other/wiki-discord-cluufyss.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../discord/cluufyss|cluufyss]] (heading-mention) [INFERRED]

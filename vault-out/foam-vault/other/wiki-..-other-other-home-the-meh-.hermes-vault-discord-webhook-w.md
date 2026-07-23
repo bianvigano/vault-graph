@@ -1,9 +1,7 @@
 # wiki/../other/other-home-the-meh-.hermes-vault-discord-webhook-webhook-basics..md
 
 Type: other
-ID: `wiki/../other/other-home-the-meh-.hermes-vault-discord-webhook-webhook-basics..md`
+ID: `vault-out/foam-vault/other/wiki-..-other-other-home-the-meh-.hermes-vault-discord-webhook-w.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

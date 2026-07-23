@@ -1,14 +1,9 @@
 # wiki/../other/https---spark.lucko.me-6hu1VNXFuZ-apakah-kamu-bisa-periksa-link.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-https---spark.lucko.me-6hu1VNXFuZ-apakah-kamu-bisa.md`
+ID: `wiki/../other/https---spark.lucko.me-6hu1VNXFuZ-apakah-kamu-bisa-periksa-link.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-other-home-the-meh-.hermes-vault-concepts|wiki/../other/wiki-..-other-home-the-meh-.hermes-vault-concepts-minecraft-spar.md]] (wiki-link) [EXTRACTED]
-- [[../other/..-other-wiki-..-other-concept-Spark.md|../other/wiki-..-other-concept-Spark.md]] (wiki-link) [EXTRACTED]
-- [[../other/..-other-wiki-..-other-concept-spark.md|../other/wiki-..-other-concept-spark.md]] (wiki-link) [EXTRACTED]
-- [[../other/..-other-wiki-..-other-concept-minecraft.md|../other/wiki-..-other-concept-minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/..-other-wiki-..-other-concept-plugin.md|../other/wiki-..-other-concept-plugin.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-co|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-concept-https.md]] (wiki-link) [EXTRACTED]
+- [[../other/https---spark.lucko.me-6hu1VNXFuZ-apakah-kamu-bisa-periksa-link|https://spark.lucko.me/6hu1VNXFuZ apakah kamu bisa periksa link ini menggunkan semaca tools untuk me]] (wiki-link) [EXTRACTED]

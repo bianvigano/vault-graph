@@ -1,9 +1,7 @@
 # wiki/hermes/hermes-lihat.md
 
 Type: other
-ID: `wiki/hermes/hermes-lihat.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-hermes-lihat.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,9 @@
 # wiki/concept/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md
 
 Type: other
-ID: `wiki/concept/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md`
+ID: `vault-out/foam-vault/other/wiki-concept-You-are-running-as-Hermes-background-skill-CURATOR..md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

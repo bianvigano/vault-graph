@@ -1,10 +1,7 @@
 # /home/the-meh/.hermes/vault/concepts/hermes/running-hermes-background.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/concepts/hermes/running-hermes-background.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-concepts-hermes-running-hermes-backg.md`
 
-## Connections
-
-### INFERRED
-- [[../session/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U|You are running as Hermes' background skill CURATOR. This is an UMBRELLA-BUILDING consolidation pass]] (heading-mention) [INFERRED]
-- [[../other/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U|You are running as Hermes' background skill CURATOR. This is an UMBRELLA-BUILDING consolidation pass]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

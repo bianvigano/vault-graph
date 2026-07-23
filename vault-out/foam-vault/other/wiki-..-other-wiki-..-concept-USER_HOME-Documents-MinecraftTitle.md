@@ -1,9 +1,12 @@
 # wiki/../other/wiki-..-concept-USER_HOME-Documents-MinecraftTitleGenerator-tolo.md
 
 Type: other
-ID: `wiki/../other/wiki-..-concept-USER_HOME-Documents-MinecraftTitleGenerator-tolo.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-concept-USER_HOME-Documents-MinecraftTitle.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

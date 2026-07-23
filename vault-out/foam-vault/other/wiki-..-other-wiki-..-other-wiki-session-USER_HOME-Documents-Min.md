@@ -1,9 +1,12 @@
 # wiki/../other/wiki-..-other-wiki-session-USER_HOME-Documents-MinecraftTitleGen.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-session-USER_HOME-Documents-MinecraftTitleGen.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-session-USER_HOME-Documents-Min.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

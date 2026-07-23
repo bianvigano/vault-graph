@@ -1,10 +1,12 @@
 # wiki/minecraft/troubleshooting/connection-throttled.md
 
 Type: other
-ID: `wiki/minecraft/troubleshooting/connection-throttled.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-troubleshooting-connection-throttled.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Minecraft-Daftar-Referensi|Minecraft — Daftar Referensi]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Purpur-Config-Konfigurasi-dan-Kustomisasi-Pesan-Purpur-Server|Purpur Config — Konfigurasi dan Kustomisasi Pesan Purpur Server]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

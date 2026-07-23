@@ -1,9 +1,9 @@
-# wiki/other/..-other-home-the-meh-.hermes-vault-concepts-hermes-hermes-statu.md
+# wiki/other/..-other-home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-other-..-other-home-the-meh-.hermes-vault-concepts-hermes-h.md`
+ID: `wiki/other/..-other-home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]

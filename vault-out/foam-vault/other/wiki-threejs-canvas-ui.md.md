@@ -1,9 +1,7 @@
 # wiki/threejs/canvas-ui.md
 
 Type: other
-ID: `wiki/threejs/canvas-ui.md`
+ID: `vault-out/foam-vault/other/wiki-threejs-canvas-ui.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Three.js-3D-Graphics-Library|Three.js — 3D Graphics Library]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,7 @@
 # wiki/hermes/hermes-spark.md
 
 Type: other
-ID: `wiki/hermes/hermes-spark.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-hermes-spark.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

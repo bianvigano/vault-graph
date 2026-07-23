@@ -6,7 +6,7 @@ ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-..-other-wiki-discord-profiles-lumoship-136829446563837|../other/..-other-wiki-discord-profiles-lumoship-1368294465638371341.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-Lumoship.md|wiki/../discord/Lumoship.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-discord-profiles-lumoship-1368294465|/home/the-meh/.hermes/vault/discord/profiles/lumoship-1368294465638371341.md]] (heading-mention) [INFERRED]
+- [[../discord/Lumoship|Lumoship]] (heading-mention) [INFERRED]

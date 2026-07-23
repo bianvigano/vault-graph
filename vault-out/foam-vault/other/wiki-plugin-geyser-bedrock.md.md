@@ -1,9 +1,7 @@
 # wiki/plugin/geyser-bedrock.md
 
 Type: other
-ID: `wiki/plugin/geyser-bedrock.md`
+ID: `vault-out/foam-vault/other/wiki-plugin-geyser-bedrock.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Geyser-Velocity-Crossplay-Java-Bedrock|Geyser + Velocity — Crossplay Java-Bedrock]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

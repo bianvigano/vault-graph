@@ -1,9 +1,7 @@
 # wiki/plugin/regen-regions.md
 
 Type: other
-ID: `wiki/plugin/regen-regions.md`
+ID: `vault-out/foam-vault/other/wiki-plugin-regen-regions.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Denizen-Scripting-Dasar-If-Waktu-dan-Worldborder|Denizen Scripting — Dasar If, Waktu, dan Worldborder]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,11 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-ke-projek-ini-USER_HOME-Desktop-bo.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-ke-projek-ini-USER_HOME-Desktop-bo.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-ke-projek-ini-USER_H.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-projek-user-home-des|/home/the-meh/.hermes/vault/concepts/hermes/projek-user-home-desktop.md]] (wiki-link) [EXTRACTED]
-- [[../other/concept-bot|concept:bot]] (wiki-link) [EXTRACTED]
-- [[../other/concept-discord|concept:discord]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

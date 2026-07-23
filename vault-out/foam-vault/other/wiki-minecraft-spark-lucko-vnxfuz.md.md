@@ -1,9 +1,12 @@
 # wiki/minecraft/spark-lucko-vnxfuz.md
 
 Type: other
-ID: `wiki/minecraft/spark-lucko-vnxfuz.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-spark-lucko-vnxfuz.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../concept/Minecraft-Concepts|Minecraft — Concepts]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

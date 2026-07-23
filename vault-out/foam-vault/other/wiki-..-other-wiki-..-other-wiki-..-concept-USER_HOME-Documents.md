@@ -1,9 +1,12 @@
 # wiki/../other/wiki-..-other-wiki-..-concept-USER_HOME-Documents-MinecraftTitle.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-concept-USER_HOME-Documents-MinecraftTitle.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-concept-USER_HOME-Documents.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-sessions-minecraft-README.md|/home/the-meh/.hermes/vault/sessions/minecraft/README.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

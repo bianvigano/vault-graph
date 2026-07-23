@@ -1,9 +1,12 @@
 # wiki/discord/profiles/lumoship-1368294465638371341.md
 
 Type: other
-ID: `wiki/discord/profiles/lumoship-1368294465638371341.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-lumoship-1368294465638371341.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-Lumoship.md|wiki/../discord/Lumoship.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../discord/Lumoship|Lumoship]] (heading-mention) [INFERRED]

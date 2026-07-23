@@ -6,5 +6,4 @@ ID: `wiki/../other/..-other-home-the-meh-.hermes-vault-minecraft-tools-custom-se
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-Minecra|/home/the-meh/.hermes/vault/vault-out/foam-vault/session/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Daylight-Cycle-Cara-Set-Siang-Terus.md|wiki/../minecraft/Daylight-Cycle-Cara-Set-Siang-Terus.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-..-other-wiki-..-minecraft-Daylight|wiki/../other/wiki-..-other-..-other-wiki-..-minecraft-Daylight-Cycle-Cara-Set.md]] (wiki-link) [EXTRACTED]

@@ -6,5 +6,4 @@ ID: `wiki/../other/..-other-home-the-meh-.hermes-vault-minecraft-gameplay-daylig
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-Minecra|/home/the-meh/.hermes/vault/vault-out/foam-vault/session/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Denizen-Scripting-Dasar-If-Waktu-dan-Worldbord|wiki/../minecraft/Denizen-Scripting-Dasar-If-Waktu-dan-Worldborder.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Deni|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Denizen-Scripting.md]] (wiki-link) [EXTRACTED]

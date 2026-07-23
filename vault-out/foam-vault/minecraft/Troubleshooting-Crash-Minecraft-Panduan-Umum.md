@@ -5,5 +5,8 @@ ID: `vault-out/foam-vault/minecraft/Troubleshooting-Crash-Minecraft-Panduan-Umum
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-minecraft-index.md|/home/the-meh/.hermes/vault/minecraft/index.md]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

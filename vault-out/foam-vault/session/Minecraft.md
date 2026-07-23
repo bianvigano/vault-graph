@@ -3,7 +3,5 @@
 Type: session
 ID: `sessions/minecraft/README.md`
 
-## Connections
-
-### INFERRED
-- [[../other/concept-Minecraft|concept:Minecraft]] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

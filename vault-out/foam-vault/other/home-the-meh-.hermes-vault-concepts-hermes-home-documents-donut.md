@@ -1,9 +1,7 @@
 # /home/the-meh/.hermes/vault/concepts/hermes/home-documents-donuthome.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/concepts/hermes/home-documents-donuthome.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-concepts-hermes-home-documents-donut.md`
 
-## Connections
-
-### INFERRED
-- [[../concept/USER_HOME-Documents-DonutHome-1.0.0-all-DonutHome-rebuild-src-ma|USER_HOME/Documents/DonutHome-1.0.0-all/DonutHome-rebuild/src/main/java/a tolong]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

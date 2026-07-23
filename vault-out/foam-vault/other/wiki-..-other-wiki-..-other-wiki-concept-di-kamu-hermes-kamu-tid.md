@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-concept-di-kamu-hermes-kamu-tidak-bisa-bikin.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-concept-di-kamu-hermes-kamu-tidak-bisa-bikin.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-concept-di-kamu-hermes-kamu-tid.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

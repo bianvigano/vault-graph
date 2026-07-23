@@ -1,10 +1,7 @@
 # wiki/linux/docker/index.md
 
 Type: other
-ID: `wiki/linux/docker/index.md`
+ID: `vault-out/foam-vault/other/wiki-linux-docker-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../linux/Linux-amp-DevOps|Linux &amp; DevOps]] (wiki-link) [EXTRACTED]
-- [[../linux/Linux-amp-DevOps-Server-Security-amp-SSH|Linux &amp; DevOps — Server Security &amp; SSH]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,7 @@
 # /home/the-meh/.hermes/vault/concepts/hermes/hermes-siapa.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/concepts/hermes/hermes-siapa.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-concepts-hermes-hermes-siapa.md.md`
 
-## Connections
-
-### INFERRED
-- [[../session/halo-kamu-siapa|halo kamu siapa?]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

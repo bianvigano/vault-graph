@@ -1,9 +1,7 @@
 # /home/the-meh/.hermes/vault/concepts/hermes/tolong-lihat-projek.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/concepts/hermes/tolong-lihat-projek.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-concepts-hermes-tolong-lihat-projek..md`
 
-## Connections
-
-### INFERRED
-- [[../session/tolong-lihat-projek-ini|tolong lihat projek ini]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

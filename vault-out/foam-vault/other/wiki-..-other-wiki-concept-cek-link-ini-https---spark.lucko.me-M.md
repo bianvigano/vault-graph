@@ -1,9 +1,7 @@
 # wiki/../other/wiki-concept-cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-dan.md
 
 Type: other
-ID: `wiki/../other/wiki-concept-cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-dan.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-concept-cek-link-ini-https---spark.lucko.me-M.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

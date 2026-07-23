@@ -3,5 +3,10 @@
 Type: other
 ID: `vault-out/foam-vault/other/hunger-games.md`
 
-## Isolated
-No connections to other vault documents.
+## Connections
+
+### EXTRACTED
+- [[../other/..-other-hunger-games.md|../other/hunger-games.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/hunger-games.md|hunger-games.md]] (heading-mention) [INFERRED]

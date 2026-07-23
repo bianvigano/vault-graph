@@ -1,9 +1,7 @@
 # wiki/hermes/projek-home.md
 
 Type: other
-ID: `wiki/hermes/projek-home.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-projek-home.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,7 @@
 # wiki/hermes/baca-semuah.md
 
 Type: other
-ID: `wiki/hermes/baca-semuah.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-baca-semuah.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

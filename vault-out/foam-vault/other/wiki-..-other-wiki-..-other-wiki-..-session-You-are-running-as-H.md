@@ -1,10 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-You-are-running-as-Hermes-backgrou.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-You-are-running-as-Hermes-backgrou.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-You-are-running-as-H.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/concept-Hermes|concept:Hermes]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-running-hermes-backg|/home/the-meh/.hermes/vault/concepts/hermes/running-hermes-background.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

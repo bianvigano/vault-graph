@@ -1,10 +1,7 @@
 # wiki/sessions/other/index.md
 
 Type: other
-ID: `wiki/sessions/other/index.md`
+ID: `vault-out/foam-vault/other/wiki-sessions-other-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../linux/Linux-amp-DevOps|Linux &amp; DevOps]] (wiki-link) [EXTRACTED]
-- [[../discord/Discord-Daftar-Referensi|Discord — Daftar Referensi]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

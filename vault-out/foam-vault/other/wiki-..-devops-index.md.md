@@ -1,9 +1,7 @@
 # wiki/../devops/index.md
 
 Type: other
-ID: `wiki/../devops/index.md`
+ID: `vault-out/foam-vault/other/wiki-..-devops-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Backend-WebDev|Backend WebDev]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

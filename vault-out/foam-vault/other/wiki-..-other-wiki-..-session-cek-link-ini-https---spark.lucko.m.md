@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-session-cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-d.md
 
 Type: other
-ID: `wiki/../other/wiki-..-session-cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-d.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-session-cek-link-ini-https---spark.lucko.m.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-concept-spark.md|wiki/../other/concept-spark.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

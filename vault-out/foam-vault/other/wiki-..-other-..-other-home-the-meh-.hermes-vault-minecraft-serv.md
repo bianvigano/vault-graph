@@ -6,5 +6,4 @@ ID: `wiki/../other/..-other-home-the-meh-.hermes-vault-minecraft-server-server-t
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-Minecra|/home/the-meh/.hermes/vault/vault-out/foam-vault/session/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Cardboard-Error-Fix-Version-Mismatch-di-Modrin|wiki/../minecraft/Cardboard-Error-Fix-Version-Mismatch-di-Modrinth.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Card|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Cardboard-Error-Fi.md]] (wiki-link) [EXTRACTED]

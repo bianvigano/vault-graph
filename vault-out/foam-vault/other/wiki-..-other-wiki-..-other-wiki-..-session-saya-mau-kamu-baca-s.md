@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-saya-mau-kamu-baca-semuah-isi-dari.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-saya-mau-kamu-baca-semuah-isi-dari.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-saya-mau-kamu-baca-s.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-baca-semuah.md|/home/the-meh/.hermes/vault/concepts/hermes/baca-semuah.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

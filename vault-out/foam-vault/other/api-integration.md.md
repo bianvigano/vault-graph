@@ -1,11 +1,14 @@
 # api-integration.md
 
 Type: other
-ID: `api-integration.md`
+ID: `vault-out/foam-vault/other/api-integration.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Pola-Node.js-Backend|Pola Node.js Backend]] (wiki-link) [EXTRACTED]
-- [[../other/Backend-WebDev|Backend WebDev]] (wiki-link) [EXTRACTED]
-- [[../other/Pola-Scraper-Manga-Komikcast-XBato|Pola Scraper (Manga, Komikcast, XBato)]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-other-..-other-api-integration.md|../other/other-..-other-api-integration.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-ot|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-api-integ.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/other-..-other-api-integration.md|other/..-other-api-integration.md]] (heading-mention) [INFERRED]
+- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-api-integ|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/api-integration.md.md]] (heading-mention) [INFERRED]

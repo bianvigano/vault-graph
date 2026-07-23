@@ -1,9 +1,7 @@
 # wiki/../other/wiki-concept-saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infoma.md
 
 Type: other
-ID: `wiki/../other/wiki-concept-saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infoma.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-concept-saya-mau-bertanya-kamu-bisa-baca-tuli.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

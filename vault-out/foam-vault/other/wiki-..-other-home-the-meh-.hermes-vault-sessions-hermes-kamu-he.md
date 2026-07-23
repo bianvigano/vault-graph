@@ -6,4 +6,4 @@ ID: `vault-out/foam-vault/other/wiki-..-other-home-the-meh-.hermes-vault-session
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-..-minecraft-Spawn-Commands-Set-Spawn-Dunia-dan-Pl|../other/wiki-..-minecraft-Spawn-Commands-Set-Spawn-Dunia-dan-Player.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-..-other-wiki-..-minec|wiki/../other/wiki-..-other-wiki-..-other-..-other-wiki-..-minecraft-Spawn-Com.md]] (wiki-link) [EXTRACTED]

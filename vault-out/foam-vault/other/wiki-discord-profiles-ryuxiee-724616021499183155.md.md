@@ -1,9 +1,7 @@
 # wiki/discord/profiles/ryuxiee-724616021499183155.md
 
 Type: other
-ID: `wiki/discord/profiles/ryuxiee-724616021499183155.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-ryuxiee-724616021499183155.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

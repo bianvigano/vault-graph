@@ -1,9 +1,12 @@
 # wiki/../other/..-other-wiki-minecraft-Health-System-Menambah-Heart-HP-di-Minec.md
 
 Type: other
-ID: `wiki/../other/..-other-wiki-minecraft-Health-System-Menambah-Heart-HP-di-Minec.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-..-other-wiki-minecraft-Health-System-Menambah-Hea.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

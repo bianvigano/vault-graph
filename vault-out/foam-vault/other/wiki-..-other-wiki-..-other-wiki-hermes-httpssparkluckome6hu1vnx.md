@@ -1,11 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-hermes-httpssparkluckome6hu1vnxfuz-apakah-kam.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-hermes-httpssparkluckome6hu1vnxfuz-apakah-kam.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-hermes-httpssparkluckome6hu1vnx.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-session-Hermes-Sessions.md|wiki/../session/Hermes-Sessions.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-Hermes-Sessions.md|wiki/../other/Hermes-Sessions.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-Vault-Knowledge-Base-Index.md|wiki/../other/Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

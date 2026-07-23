@@ -1,9 +1,7 @@
 # wiki/tools/fawe-troubleshooting.md
 
 Type: other
-ID: `wiki/tools/fawe-troubleshooting.md`
+ID: `vault-out/foam-vault/other/wiki-tools-fawe-troubleshooting.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Regen-Regions-Plugin-Blok-Regenerasi-Otomatis|Regen Regions Plugin — Blok Regenerasi Otomatis]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

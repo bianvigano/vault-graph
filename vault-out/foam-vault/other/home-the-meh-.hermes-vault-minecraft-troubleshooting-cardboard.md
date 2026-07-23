@@ -1,10 +1,12 @@
 # /home/the-meh/.hermes/vault/minecraft/troubleshooting/cardboard-error.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/minecraft/troubleshooting/cardboard-error.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-minecraft-troubleshooting-cardboard.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../minecraft/FAWE-Troubleshooting-FastAsyncWorldEdit-Error|FAWE Troubleshooting — FastAsyncWorldEdit Error]] (heading-mention) [INFERRED]
-- [[../other/Pola-CSS--Gradien-SVG-Layout-Clip-path|Pola CSS: Gradien, SVG, Layout, Clip-path]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

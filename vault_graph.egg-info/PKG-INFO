@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: vault-graph
+Version: 0.5.0
+Summary: Turn Vault .md files into an interactive D3.js knowledge graph — with Trae memory integration.
+Author: Bian Vigano
+License: MIT
+Keywords: knowledge-graph,vault,markdown,d3,wiki-links
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: networkx>=3.0
+Requires-Dist: matplotlib>=3.6
+Dynamic: license-file
+Dynamic: requires-python

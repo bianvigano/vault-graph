@@ -3,7 +3,5 @@
 Type: session
 ID: `sessions/senyawa/README.md`
 
-## Connections
-
-### INFERRED
-- [[../other/concept-Web|concept:Web]] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

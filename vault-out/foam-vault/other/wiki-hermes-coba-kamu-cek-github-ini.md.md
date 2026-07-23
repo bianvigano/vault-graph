@@ -1,9 +1,7 @@
 # wiki/hermes/coba-kamu-cek-github-ini.md
 
 Type: other
-ID: `wiki/hermes/coba-kamu-cek-github-ini.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-coba-kamu-cek-github-ini.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

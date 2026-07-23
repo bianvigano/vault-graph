@@ -3,7 +3,5 @@
 Type: session
 ID: `sessions/hermes/saya-mau-kamu-baca-semuah.md`
 
-## Connections
-
-### INFERRED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-baca-semuah.md|/home/the-meh/.hermes/vault/concepts/hermes/baca-semuah.md]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

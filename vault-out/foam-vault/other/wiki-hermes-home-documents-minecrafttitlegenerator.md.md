@@ -1,9 +1,12 @@
 # wiki/hermes/home-documents-minecrafttitlegenerator.md
 
 Type: other
-ID: `wiki/hermes/home-documents-minecrafttitlegenerator.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-home-documents-minecrafttitlegenerator.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../concept/Hermes-Concepts|Hermes — Concepts]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

@@ -1,9 +1,7 @@
 # wiki/discord/memory.md
 
 Type: other
-ID: `wiki/discord/memory.md`
+ID: `vault-out/foam-vault/other/wiki-discord-memory.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/Discord-Bot-Knowledge-Base|Discord Bot Knowledge Base]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

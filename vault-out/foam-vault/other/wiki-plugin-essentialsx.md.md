@@ -1,9 +1,7 @@
 # wiki/plugin/essentialsx.md
 
 Type: other
-ID: `wiki/plugin/essentialsx.md`
+ID: `vault-out/foam-vault/other/wiki-plugin-essentialsx.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/LuckPerms-Admin-ke-Default-Group|LuckPerms — Admin ke Default Group]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

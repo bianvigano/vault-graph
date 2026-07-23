@@ -1,12 +1,12 @@
 # /home/the-meh/.hermes/vault/vault-out/foam-vault/other/custom-plugin-java.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/vault-out/foam-vault/other/custom-plugin-java.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-custom-pl.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-custom-plugin-java.md|wiki/../other/custom-plugin-java.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/wiki-..-other-custom-plugin-java.md|wiki/../other/custom-plugin-java.md]] (heading-mention) [INFERRED]
-- [[../other/other-..-other-custom-plugin-java.md|other/..-other-custom-plugin-java.md]] (heading-mention) [INFERRED]
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-custom-pl|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/custom-plugin-java.md]] (heading-mention) [INFERRED]
-- [[../other/custom-plugin-java.md|custom-plugin-java.md]] (heading-mention) [INFERRED]
+- [[../other/custom-plugin-java|custom-plugin-java]] (heading-mention) [INFERRED]

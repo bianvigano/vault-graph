@@ -1,9 +1,7 @@
 # wiki/discord/profiles/kyoenki-1470814309679497379.md
 
 Type: other
-ID: `wiki/discord/profiles/kyoenki-1470814309679497379.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-kyoenki-1470814309679497379.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

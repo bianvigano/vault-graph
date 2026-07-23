@@ -1,12 +1,12 @@
 # supabase.md
 
 Type: other
-ID: `supabase.md`
+ID: `vault-out/foam-vault/other/supabase.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Redis-dan-Upstash|Redis dan Upstash]] (wiki-link) [EXTRACTED]
-- [[../other/Database---WebDev-Vault|Database - WebDev Vault]] (wiki-link) [EXTRACTED]
-- [[../other/Database---WebDev-Vault|Database - WebDev Vault]] (wiki-link) [EXTRACTED]
-- [[../other/MongoDB-Setup-dan-Operasi-Dasar|MongoDB Setup dan Operasi Dasar]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Supabase.md|wiki/../other/Supabase.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Supabase|Supabase]] (heading-mention) [INFERRED]

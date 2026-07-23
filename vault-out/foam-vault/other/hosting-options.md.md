@@ -1,11 +1,14 @@
 # hosting-options.md
 
 Type: other
-ID: `hosting-options.md`
+ID: `vault-out/foam-vault/other/hosting-options.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/HTML-Canvas--Game-Countdown-Bubble-Glow|HTML Canvas: Game, Countdown, Bubble Glow]] (wiki-link) [EXTRACTED]
-- [[../other/Pola-CSS--Gradien-SVG-Layout-Clip-path|Pola CSS: Gradien, SVG, Layout, Clip-path]] (wiki-link) [EXTRACTED]
-- [[../other/Deploy-WebDev-Vault|Deploy — WebDev Vault]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-home-the-meh-.hermes-vault-webdev-deploy-hosting-option|../other/home-the-meh-.hermes-vault-webdev-deploy-hosting-options.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-ot|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-hosting-o.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/home-the-meh-.hermes-vault-webdev-deploy-hosting-options.md|/home/the-meh/.hermes/vault/webdev/deploy/hosting-options.md]] (heading-mention) [INFERRED]
+- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-hosting-o|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/hosting-options.md.md]] (heading-mention) [INFERRED]

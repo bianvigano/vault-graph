@@ -1,7 +1,7 @@
-# wiki/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-amp-End.md
+# wiki/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-ampampampampam.md
 
 Type: other
-ID: `wiki/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-amp-End.md`
+ID: `wiki/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-ampampampampam.md`
 
 ## Connections
 

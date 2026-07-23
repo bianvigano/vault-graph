@@ -6,7 +6,8 @@ ID: `vault-out/foam-vault/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-N
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-ot|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-sessions-minecraft-README.md|/home/the-meh/.hermes/vault/sessions/minecraft/README.md]] (heading-mention) [INFERRED]
+- [[../other/Vault-Knowledge-Graph-Report|Vault Knowledge Graph Report]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

@@ -1,138 +1,124 @@
 # Vault Knowledge Graph Report
 
-Generated: 2026-07-22 08:22:18
+Generated: 2026-07-22 22:07:35
 
 ## Summary
 
 | Metric | Value |
 |---|---|
-| Nodes | 2284 |
-| Edges | 2930 |
-| Density | 0.0011 |
-| Communities | 342 |
-| Isolated nodes | 244 |
+| Nodes | 1759 |
+| Edges | 1562 |
+| Density | 0.001 |
+| Communities | 692 |
+| Isolated nodes | 576 |
 
 ## Edge Confidence
 | Confidence | Count |
 |---|---|
-| EXTRACTED | 2494 |
-| INFERRED | 436 |
+| EXTRACTED | 1117 |
+| INFERRED | 445 |
 
 ## God Nodes (Top 10)
 | Node | Type | Degree |
 |---|---|---|
-|  | other | 210 |
-| /home/the-meh/.hermes/vault/vault-out/foam-vault/o | other | 150 |
-|  | other | 141 |
-| Vault Graph Index | other | 104 |
-| wiki/../other/Vault-Graph-Index.md | other | 100 |
-| Vault Graph Index | other | 90 |
-| /home/the-meh/.hermes/vault/vault-out/foam-vault/s | other | 78 |
-|  | other | 78 |
-| wiki/../other/home-the-meh-.hermes-vault-vault-out | other | 58 |
-|  | other | 56 |
+| Minecraft | other | 297 |
+|  | other | 263 |
+|  | other | 105 |
+| Vault Graph Index | other | 70 |
+| wiki/../other/Vault-Graph-Index.md | other | 65 |
+|  | other | 63 |
+|  | other | 30 |
+|  | other | 19 |
+| spark-debug | other | 16 |
+| Dillzzzboot | discord | 14 |
 
 ## Communities
 | Community | Size | Representative |
 |---|---|---|
-| 0 | 277 | /home/the-meh/.hermes/vault/sessions/minecraft/REA |
-| 1 | 217 | /home/the-meh/.hermes/vault/vault-out/foam-vault/o |
-| 2 | 142 | wiki/../other/Vault-Graph-Index.md |
-| 3 | 141 | wiki/../other/wiki-..-other-home-the-meh-.hermes-v |
-| 4 | 104 | Vault Graph Index |
-| 5 | 100 | wiki/../other/Vault-Graph-Index.md |
-| 6 | 90 | Vault Graph Index |
-| 7 | 86 | ../other/..-other-wiki-..-discord-User-Profiles.md |
-| 8 | 72 | Hermes — Sessions |
-| 9 | 67 | wiki/server/server-properties.md |
+| 0 | 271 | Minecraft |
+| 1 | 98 | wiki/../other/wiki-..-other-home-the-meh-.hermes-v |
+| 2 | 92 | wiki/../other/Vault-Graph-Index.md |
+| 3 | 70 | Vault Graph Index |
+| 4 | 69 | wiki/../other/Vault-Graph-Index.md |
+| 5 | 63 | ../other/wiki-..-other-Vault-Graph-Index.md |
+| 6 | 23 | spark-debug |
+| 7 | 18 | Dillzzzboot |
+| 8 | 16 | Vault Knowledge Graph |
+| 9 | 14 | RielVtuber |
 
-## Isolated Nodes (244)
+## Isolated Nodes (576)
 
 Files with no connections. Candidate for cross-linking.
 
-**concept** (17):
-- `concepts/general/index.md`
-- `concepts/hermes/baca-semuah.md`
-- `concepts/hermes/coba-lihat-html.md`
-- `concepts/hermes/hermes-bertanya.md`
-- `concepts/hermes/hermes-hermes.md`
-- `concepts/hermes/hermes-lihat.md`
-- `concepts/hermes/hermes-sebuah.md`
-- `concepts/hermes/hermes-siapa.md`
-- `concepts/hermes/home-documents-donuthome.md`
-- `concepts/hermes/projek-home.md`
-- ... and 7 more
-**discord** (114):
-- `discord/guild-summary.md`
-- `discord/memory.md`
-- `discord/profiles/---925641282171338763.md`
-- `discord/profiles/---992097980062629911.md`
-- `discord/profiles/ahza-1366356373532708917.md`
-- `discord/profiles/akagim-1269448872556761129.md`
-- `discord/profiles/auwfa-727783689433382912.md`
-- `discord/profiles/azamch-1175062130312105987.md`
-- `discord/profiles/captainxd-775669022016536587.md`
-- `discord/profiles/cluufyss-979260942716133381.md`
-- ... and 104 more
+**discord** (55):
+- `vault-out/foam-vault/discord/Ahza.md`
+- `vault-out/foam-vault/discord/Akagim.md`
+- `vault-out/foam-vault/discord/AzamCH.md`
+- `vault-out/foam-vault/discord/Discord-Bot-Knowledge-Base.md`
+- `vault-out/foam-vault/discord/Discord-Bot-Memory.md`
+- `vault-out/foam-vault/discord/Discord-Daftar-Referensi.md`
+- `vault-out/foam-vault/discord/Discord-Server-amp-Permissions.md`
+- `vault-out/foam-vault/discord/Discord-Server-ampamp-Permissions.md`
+- `vault-out/foam-vault/discord/Discord-Server-ampampamp-Permissions.md`
+- `vault-out/foam-vault/discord/Discord-Server-ampampampamp-Permissions.md`
+- ... and 45 more
 **linux** (2):
+- `vault-out/foam-vault/linux/Linux-amp-DevOps-Server-Security-amp-SSH.md`
 - `vault-out/foam-vault/linux/Linux-amp-DevOps.md`
-- `vault-out/foam-vault/linux/Linux-ampamp-DevOps.md`
-**minecraft** (9):
+**minecraft** (13):
+- `vault-out/foam-vault/minecraft/Cardboard-Error-Fix-Version-Mismatch-di-Modrinth.md`
 - `vault-out/foam-vault/minecraft/Daylight-Cycle-Cara-Set-Siang-Terus.md`
+- `vault-out/foam-vault/minecraft/Denizen-Scripting-Dasar-If-Waktu-dan-Worldborder.md`
+- `vault-out/foam-vault/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-amp-End.md`
+- `vault-out/foam-vault/minecraft/FAWE-Troubleshooting-FastAsyncWorldEdit-Error.md`
 - `vault-out/foam-vault/minecraft/Ganti-Pesan-Purpur-Spigot-Custom-Server-Messages.md`
 - `vault-out/foam-vault/minecraft/Geyser-Velocity-Crossplay-Java-Bedrock.md`
 - `vault-out/foam-vault/minecraft/LuckPerms-Admin-ke-Default-Group.md`
 - `vault-out/foam-vault/minecraft/LuckPerms-Permission-Management.md`
 - `vault-out/foam-vault/minecraft/Purpur-Config-Konfigurasi-dan-Kustomisasi-Pesan-Purpur-Server.md`
-- `vault-out/foam-vault/minecraft/Regen-Regions-Plugin-Blok-Regenerasi-Otomatis.md`
-- `vault-out/foam-vault/minecraft/Scoreboard-Membuat-dan-Menyembunyikan-Angka-di-Sidebar.md`
-- `vault-out/foam-vault/minecraft/Server-Types-Plugin-vs-Mod-vs-Hybrid.md`
-**other** (99):
-- `README.md`
+- ... and 3 more
+**other** (506):
+- `skill.md`
 - `vault-out/foam-vault/concept/General-Concepts.md`
 - `vault-out/foam-vault/concept/Hermes-Concepts.md`
+- `vault-out/foam-vault/concept/Minecraft-Concepts.md`
 - `vault-out/foam-vault/concept/USER_HOME-Documents-DonutHome-1.0.0-all-DonutHome-rebuild-src-ma.md`
+- `vault-out/foam-vault/concept/USER_HOME-Documents-MinecraftTitleGenerator-tolong-npm-i-jika-ad.md`
 - `vault-out/foam-vault/concept/USER_HOME-Downloads-serverconl-lihat-ini.md`
 - `vault-out/foam-vault/concept/Webdev-Concepts.md`
 - `vault-out/foam-vault/concept/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md`
 - `vault-out/foam-vault/concept/cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-dan-berikan-solus.md`
-- `vault-out/foam-vault/concept/coba-kamu-lihat-code-html-ini-USER_HOME-Downloads-xx-xxc-m.html.md`
-- `vault-out/foam-vault/concept/di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-RTK---Rust-Tok.md`
-- ... and 89 more
-**session** (3):
-- `sessions/other/README.md`
-- `sessions/other/index.md`
-- `sessions/senyawa/index.md`
+- ... and 496 more
 
-## Surprising Connections (402)
+## Surprising Connections (445)
 
 Inferred relationships from heading mentions:
-- **Files &amp; Tools Archive** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Minecraft Server Optimization** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Minecraft — Daftar Referensi** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Minecraft — Knowledge Base** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Troubleshooting Crash Minecraft — Panduan Umum** → **/home/the-meh/.hermes/vault/minecraft/index.md** (heading-mention)
-- **Ganti Pesan Purpur/Spigot — Custom Server Messages** → **/home/the-meh/.hermes/vault/MEMORY_ARCHIVED_Minecraft-Server-Optimization.md** (heading-mention)
-- **Cardboard Error — Fix Version Mismatch di Modrinth** → **/home/the-meh/.hermes/vault/minecraft/server/server-types.md** (heading-mention)
-- **Cardboard Error — Fix Version Mismatch di Modrinth** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **FAWE Troubleshooting — FastAsyncWorldEdit Error** → **/home/the-meh/.hermes/vault/minecraft/index.md** (heading-mention)
-- **FAWE Troubleshooting — FastAsyncWorldEdit Error** → **/home/the-meh/.hermes/vault/minecraft/troubleshooting/cardboard-error.md** (heading-mention)
-- **Custom Seed — Mengatur Seed Kustom di Minecraft Server** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Custom Seed — Mengatur Seed Kustom di Minecraft Server** → **/home/the-meh/.hermes/vault/MEMORY_ARCHIVED_Minecraft-Server-Optimization.md** (heading-mention)
-- **Chunky — Minecraft Chunk Pre-Generator** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Chunky — Minecraft Chunk Pre-Generator** → **/home/the-meh/.hermes/vault/minecraft/gameplay/denizen-basics.md** (heading-mention)
-- **Minecraft Commands — Heart, Attribute, Totem Effects** → **/home/the-meh/.hermes/vault/sessions/minecraft/README.md** (heading-mention)
-- **Spawn Commands — Set Spawn Dunia dan Player** → **/home/the-meh/.hermes/vault/sessions/hermes/kamu-hermes-kamu-tidak-bisa.md** (heading-mention)
-- **Spawn Commands — Set Spawn Dunia dan Player** → **/home/the-meh/.hermes/vault/minecraft/gameplay/hunger-settings.md** (heading-mention)
-- **Docker Compose Fabric — Minecraft Server dengan Mods** → **/home/the-meh/.hermes/vault/minecraft/server/minecraft-docker.md** (heading-mention)
-- **Docker Compose Fabric — Minecraft Server dengan Mods** → **/home/the-meh/.hermes/vault/minecraft/tools/chunky.md** (heading-mention)
-- **Docker Compose Fabric — Minecraft Server dengan Mods** → **/home/the-meh/.hermes/vault/README.md** (heading-mention)
+- **vault-graph** → **wiki/../other/Vault-Graph-Index.md** (heading-mention)
+- **Vault Knowledge Graph Report** → **Vault Knowledge Graph** (heading-mention)
+- **Vault Knowledge Graph Report** → **Server Types — Plugin vs Mod vs Hybrid** (heading-mention)
+- **Vault Knowledge Graph Report** → **Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp; End** (heading-mention)
+- **Vault Graph Index** → **Minecraft** (heading-mention)
+- **Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp; End** → **Minecraft** (heading-mention)
+- **Minecraft Commands — Heart, Attribute, Totem Effects** → **Minecraft** (heading-mention)
+- **Minecraft — Knowledge Base** → **Minecraft** (heading-mention)
+- **Gamerules — Daftar dan Penggunaan Game Rules Minecraft** → **Minecraft** (heading-mention)
+- **Minecraft — Daftar Referensi** → **Minecraft** (heading-mention)
+- **Hunger Settings — Konfigurasi Sistem Lapar di Minecraft** → **Minecraft** (heading-mention)
+- **Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp;amp;amp;amp; End** → **Minecraft** (heading-mention)
+- **Chunky — Minecraft Chunk Pre-Generator** → **Minecraft** (heading-mention)
+- **Minecraft Docker Server — itzg/minecraft-server** → **Minecraft** (heading-mention)
+- **Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp;amp;amp; End** → **Minecraft** (heading-mention)
+- **Health System — Menambah Heart/HP di Minecraft** → **Minecraft** (heading-mention)
+- **Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp;amp; End** → **Minecraft** (heading-mention)
+- **Denizen — Minecraft Scripting Engine** → **Minecraft** (heading-mention)
+- **Custom Seed — Mengatur Seed Kustom di Minecraft Server** → **Minecraft** (heading-mention)
+- **Set Spawn — Mengatur Titik Spawn Server Minecraft** → **Minecraft** (heading-mention)
 
 ## Suggested Questions
 
 Try asking about these:
+- "How does `Minecraft` connect to other concepts?"
 - "How does `` connect to other concepts?"
-- "How does `/home/the-meh/.hermes/vault/va` connect to other concepts?"
 - "How does `` connect to other concepts?"
 - "How does `Vault Graph Index` connect to other concepts?"
 - "How does `wiki/../other/Vault-Graph-Inde` connect to other concepts?"

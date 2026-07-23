@@ -1,12 +1,12 @@
 # wiki/../other/..-other-wiki-..-minecraft-Server-Types-Plugin-vs-Mod-vs-Hybrid..md
 
 Type: other
-ID: `wiki/../other/..-other-wiki-..-minecraft-Server-Types-Plugin-vs-Mod-vs-Hybrid..md`
+ID: `vault-out/foam-vault/other/wiki-..-other-..-other-wiki-..-minecraft-Server-Types-Plugin-vs.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-server-minecraft-docker.md|wiki/server/minecraft-docker.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-modding-fabric-mods.md|wiki/modding/fabric-mods.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-troubleshooting-cardboard-error.md|wiki/troubleshooting/cardboard-error.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-server-velocity-proxy.md|wiki/server/velocity-proxy.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

@@ -1,9 +1,7 @@
 # wiki/discord/webhook/webhook-storage.md
 
 Type: other
-ID: `wiki/discord/webhook/webhook-storage.md`
+ID: `vault-out/foam-vault/other/wiki-discord-webhook-webhook-storage.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/Discord.js-Bot-Development|Discord.js — Bot Development]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

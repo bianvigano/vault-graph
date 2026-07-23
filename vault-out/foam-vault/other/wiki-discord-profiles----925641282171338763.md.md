@@ -1,9 +1,7 @@
 # wiki/discord/profiles/---925641282171338763.md
 
 Type: other
-ID: `wiki/discord/profiles/---925641282171338763.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles----925641282171338763.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

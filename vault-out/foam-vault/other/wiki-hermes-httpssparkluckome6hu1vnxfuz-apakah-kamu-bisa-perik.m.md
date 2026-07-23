@@ -1,10 +1,9 @@
 # wiki/hermes/httpssparkluckome6hu1vnxfuz-apakah-kamu-bisa-perik.md
 
 Type: other
-ID: `wiki/hermes/httpssparkluckome6hu1vnxfuz-apakah-kamu-bisa-perik.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-httpssparkluckome6hu1vnxfuz-apakah-kamu-bisa-perik.m.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Knowledge-Base-Index|Vault — Knowledge Base Index]] (wiki-link) [EXTRACTED]
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-other-Vault-Knowledge-Base-Index.md|../other/wiki-..-other-Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]

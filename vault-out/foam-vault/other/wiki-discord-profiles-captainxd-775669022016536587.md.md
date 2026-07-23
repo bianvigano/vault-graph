@@ -1,9 +1,12 @@
 # wiki/discord/profiles/captainxd-775669022016536587.md
 
 Type: other
-ID: `wiki/discord/profiles/captainxd-775669022016536587.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-captainxd-775669022016536587.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-CaptainXD.md|wiki/../discord/CaptainXD.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../discord/CaptainXD|CaptainXD]] (heading-mention) [INFERRED]

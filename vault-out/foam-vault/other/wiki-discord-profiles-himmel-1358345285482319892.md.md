@@ -1,9 +1,7 @@
 # wiki/discord/profiles/himmel-1358345285482319892.md
 
 Type: other
-ID: `wiki/discord/profiles/himmel-1358345285482319892.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-himmel-1358345285482319892.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-other-home-the-meh-.hermes-vault-concepts-min.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-other-home-the-meh-.hermes-vault-concepts-min.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-other-home-the-meh-.hermes-vaul.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -6,4 +6,4 @@ ID: `wiki/../other/..-other-home-the-meh-.hermes-vault-concepts-hermes-hermes-be
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-session-saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-inf|wiki/../session/saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infomasi-lebih-cepa.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-session-saya-m|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-session-saya-mau-bertanya-ka.md]] (wiki-link) [EXTRACTED]

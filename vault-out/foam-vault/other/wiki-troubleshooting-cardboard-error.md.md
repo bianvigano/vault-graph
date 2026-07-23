@@ -1,9 +1,7 @@
 # wiki/troubleshooting/cardboard-error.md
 
 Type: other
-ID: `wiki/troubleshooting/cardboard-error.md`
+ID: `vault-out/foam-vault/other/wiki-troubleshooting-cardboard-error.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Server-Types-Plugin-vs-Mod-vs-Hybrid|Server Types — Plugin vs Mod vs Hybrid]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

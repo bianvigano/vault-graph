@@ -1,9 +1,7 @@
 # wiki/../other/Hermes-Concepts.md
 
 Type: other
-ID: `wiki/../other/Hermes-Concepts.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-Hermes-Concepts.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-other-wiki-hermes-user-home-documents-mine|wiki/../other/wiki-..-other-wiki-hermes-user-home-documents-minecrafttitlegene.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

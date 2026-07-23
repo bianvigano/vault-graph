@@ -1,9 +1,7 @@
 # wiki/discord/index.md
 
 Type: other
-ID: `wiki/discord/index.md`
+ID: `vault-out/foam-vault/other/wiki-discord-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Misc-Tools-amp-References|Misc — Tools &amp; References]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

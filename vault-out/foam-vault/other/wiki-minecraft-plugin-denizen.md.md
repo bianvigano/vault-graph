@@ -1,9 +1,12 @@
 # wiki/minecraft/plugin/denizen.md
 
 Type: other
-ID: `wiki/minecraft/plugin/denizen.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-plugin-denizen.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Minecraft-Docker-Server-itzg-minecraft-server|Minecraft Docker Server — itzg/minecraft-server]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

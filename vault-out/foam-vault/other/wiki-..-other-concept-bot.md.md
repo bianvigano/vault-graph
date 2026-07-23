@@ -1,9 +1,7 @@
 # wiki/../other/concept-bot.md
 
 Type: other
-ID: `wiki/../other/concept-bot.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-concept-bot.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-session-ke-projek-ini-USER_HOME-Desktop-bo|wiki/../other/wiki-..-session-ke-projek-ini-USER_HOME-Desktop-bot-discord-ai-c.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

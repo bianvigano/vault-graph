@@ -1,9 +1,12 @@
 # /home/the-meh/.hermes/vault/vault-out/foam-vault/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-ampamp-End.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/vault-out/foam-vault/minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-ampamp-End.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-minecraft-Docke.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/Vault-Knowledge-Graph-Report|Vault Knowledge Graph Report]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

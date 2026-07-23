@@ -1,10 +1,12 @@
 # wiki/minecraft-servers.md
 
 Type: other
-ID: `wiki/minecraft-servers.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-servers.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Minecraft-Daftar-Referensi|Minecraft — Daftar Referensi]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Server-Properties-Konfigurasi-Dasar-Minecraft-Server|Server Properties — Konfigurasi Dasar Minecraft Server]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

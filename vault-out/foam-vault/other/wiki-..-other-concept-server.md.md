@@ -1,11 +1,7 @@
 # wiki/../other/concept-server.md
 
 Type: other
-ID: `wiki/../other/concept-server.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-concept-server.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-session-kode-sekarang-saya-kepikiran-bikin|wiki/../other/wiki-..-session-kode-sekarang-saya-kepikiran-bikin-sebuah-ssytem.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-coba-kamu-cek-github-ini-https---g|wiki/../other/wiki-..-session-coba-kamu-cek-github-ini-https---github.com-itzg.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-kamu-lihat-di-web-ini-https---modr|wiki/../other/wiki-..-session-kamu-lihat-di-web-ini-https---modrinth.com-datap.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

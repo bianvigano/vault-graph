@@ -1,9 +1,7 @@
 # wiki/hermes/kamu-hermes-kamu-tidak-bisa.md
 
 Type: other
-ID: `wiki/hermes/kamu-hermes-kamu-tidak-bisa.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-kamu-hermes-kamu-tidak-bisa.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

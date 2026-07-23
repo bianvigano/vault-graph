@@ -1,9 +1,7 @@
 # wiki/modding/forge-mods.md
 
 Type: other
-ID: `wiki/modding/forge-mods.md`
+ID: `vault-out/foam-vault/other/wiki-modding-forge-mods.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Troubleshooting-Crash-Minecraft-Panduan-Umum|Troubleshooting Crash Minecraft — Panduan Umum]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

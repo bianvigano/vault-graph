@@ -1,9 +1,12 @@
 # wiki/minecraft/server/worldborder-chunky.md
 
 Type: other
-ID: `wiki/minecraft/server/worldborder-chunky.md`
+ID: `vault-out/foam-vault/other/wiki-minecraft-server-worldborder-chunky.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Chunky-Minecraft-Chunk-Pre-Generator|Chunky — Minecraft Chunk Pre-Generator]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

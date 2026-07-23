@@ -1,9 +1,7 @@
 # wiki/server/server-types.md
 
 Type: other
-ID: `wiki/server/server-types.md`
+ID: `vault-out/foam-vault/other/wiki-server-server-types.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Geyser-Velocity-Crossplay-Java-Bedrock|Geyser + Velocity — Crossplay Java-Bedrock]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

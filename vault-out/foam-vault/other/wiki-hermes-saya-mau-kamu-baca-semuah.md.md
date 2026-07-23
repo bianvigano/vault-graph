@@ -1,10 +1,9 @@
 # wiki/hermes/saya-mau-kamu-baca-semuah.md
 
 Type: other
-ID: `wiki/hermes/saya-mau-kamu-baca-semuah.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-saya-mau-kamu-baca-semuah.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Knowledge-Base-Index|Vault — Knowledge Base Index]] (wiki-link) [EXTRACTED]
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-other-Vault-Knowledge-Base-Index.md|../other/wiki-..-other-Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]

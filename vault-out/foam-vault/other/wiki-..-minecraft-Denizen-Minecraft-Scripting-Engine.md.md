@@ -1,9 +1,12 @@
 # wiki/../minecraft/Denizen-Minecraft-Scripting-Engine.md
 
 Type: other
-ID: `wiki/../minecraft/Denizen-Minecraft-Scripting-Engine.md`
+ID: `vault-out/foam-vault/other/wiki-..-minecraft-Denizen-Minecraft-Scripting-Engine.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

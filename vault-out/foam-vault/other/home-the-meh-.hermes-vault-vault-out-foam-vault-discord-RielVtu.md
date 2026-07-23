@@ -6,7 +6,7 @@ ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-..-other-wiki-discord-profiles-rielvtuber-1225116764065|../other/..-other-wiki-discord-profiles-rielvtuber-1225116764065632310.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-RielVtuber.md|wiki/../discord/RielVtuber.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-discord-profiles-rielvtuber-12251167|/home/the-meh/.hermes/vault/discord/profiles/rielvtuber-1225116764065632310.md]] (heading-mention) [INFERRED]
+- [[../discord/RielVtuber|RielVtuber]] (heading-mention) [INFERRED]

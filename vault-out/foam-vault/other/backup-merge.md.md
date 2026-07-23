@@ -1,9 +1,12 @@
 # backup-merge.md
 
 Type: other
-ID: `backup-merge.md`
+ID: `vault-out/foam-vault/other/backup-merge.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/folia-lag|folia-lag]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-backup-merge.md|wiki/../other/backup-merge.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/backup-merge|backup-merge]] (heading-mention) [INFERRED]

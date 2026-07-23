@@ -1,9 +1,12 @@
 # wiki/../other/wiki-..-minecraft-Scoreboard-Membuat-dan-Menyembunyikan-Angka-di.md
 
 Type: other
-ID: `wiki/../other/wiki-..-minecraft-Scoreboard-Membuat-dan-Menyembunyikan-Angka-di.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-minecraft-Scoreboard-Membuat-dan-Menyembun.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

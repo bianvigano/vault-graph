@@ -1,9 +1,7 @@
 # concept:bot
 
 Type: other
-ID: `concept:bot`
+ID: `vault-out/foam-vault/other/concept-bot.md`
 
-## Connections
-
-### INFERRED
-- [[../session/ke-projek-ini-USER_HOME-Desktop-bot-discord-ai-chat|ke projek ini 'USER_HOME/Desktop/bot-discord-ai-chat']] (mentions-topic) [INFERRED]
+## Isolated
+No connections to other vault documents.

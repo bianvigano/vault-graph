@@ -1,13 +1,12 @@
 # spark-debug.md
 
 Type: other
-ID: `spark-debug.md`
+ID: `vault-out/foam-vault/other/spark-debug.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/spark-debug|spark-debug]] (wiki-link) [EXTRACTED]
-- [[../other/spark-plugin-code|spark-plugin-code]] (wiki-link) [EXTRACTED]
-- [[../other/custom-plugin-java|custom-plugin-java]] (wiki-link) [EXTRACTED]
-- [[../other/hunger-games|hunger-games]] (wiki-link) [EXTRACTED]
-- [[../other/spark-nyarn|spark-nyarn]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-spark-debug.md|wiki/../other/spark-debug.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/spark-debug|spark-debug]] (heading-mention) [INFERRED]

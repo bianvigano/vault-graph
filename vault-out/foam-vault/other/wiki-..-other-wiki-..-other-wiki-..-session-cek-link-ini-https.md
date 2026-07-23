@@ -1,10 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-..-session-cek-link-ini-https---spark.lucko.m.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-..-session-cek-link-ini-https---spark.lucko.m.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-..-session-cek-link-ini-https.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/concept-spark|concept:spark]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md|/home/the-meh/.hermes/vault/concepts/hermes/hermes-spark.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

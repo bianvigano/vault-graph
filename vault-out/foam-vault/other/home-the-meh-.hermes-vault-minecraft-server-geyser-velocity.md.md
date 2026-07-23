@@ -1,11 +1,12 @@
 # /home/the-meh/.hermes/vault/minecraft/server/geyser-velocity.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/minecraft/server/geyser-velocity.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-minecraft-server-geyser-velocity.md.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/Pola-Node.js-Backend|Pola Node.js Backend]] (heading-mention) [INFERRED]
-- [[../other/Pola-Scraper-Manga-Komikcast-XBato|Pola Scraper (Manga, Komikcast, XBato)]] (heading-mention) [INFERRED]
-- [[../other/Supabase|Supabase]] (heading-mention) [INFERRED]
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

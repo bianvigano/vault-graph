@@ -1,10 +1,7 @@
 # /home/the-meh/.hermes/vault/discord/index.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/discord/index.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-discord-index.md.md`
 
-## Connections
-
-### INFERRED
-- [[../discord/Discord.js-Bot-Development|Discord.js — Bot Development]] (heading-mention) [INFERRED]
-- [[../discord/Discord.js-Bot-Development|Discord.js — Bot Development]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

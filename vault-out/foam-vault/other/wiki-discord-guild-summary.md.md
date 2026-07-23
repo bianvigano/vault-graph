@@ -1,9 +1,7 @@
 # wiki/discord/guild-summary.md
 
 Type: other
-ID: `wiki/discord/guild-summary.md`
+ID: `vault-out/foam-vault/other/wiki-discord-guild-summary.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/Discord-Bot-Knowledge-Base|Discord Bot Knowledge Base]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

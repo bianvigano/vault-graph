@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-concept-kode-sekarang-saya-kepikiran-bikin-se.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-concept-kode-sekarang-saya-kepikiran-bikin-se.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-concept-kode-sekarang-saya-kepi.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

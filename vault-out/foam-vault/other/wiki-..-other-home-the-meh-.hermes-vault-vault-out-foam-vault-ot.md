@@ -1,10 +1,9 @@
-# wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-nodejs-ap.md
+# wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-hosting-o.md
 
 Type: other
-ID: `wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-nodejs-ap.md`
+ID: `wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-hosting-o.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-nodejs-ap|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/nodejs-api.md.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-webdev-backend-nodejs-api.md|wiki/webdev/backend/nodejs-api.md]] (wiki-link) [EXTRACTED]
+- [[../other/hosting-options.md|hosting-options.md]] (wiki-link) [EXTRACTED]

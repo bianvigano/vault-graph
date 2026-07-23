@@ -1,9 +1,9 @@
 # wiki/session/Hermes-Sessions.md
 
 Type: other
-ID: `wiki/session/Hermes-Sessions.md`
+ID: `vault-out/foam-vault/other/wiki-session-Hermes-Sessions.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

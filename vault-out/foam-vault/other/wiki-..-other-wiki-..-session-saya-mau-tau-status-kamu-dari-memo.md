@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-session-saya-mau-tau-status-kamu-dari-memoery-dan-sudah.md
 
 Type: other
-ID: `wiki/../other/wiki-..-session-saya-mau-tau-status-kamu-dari-memoery-dan-sudah.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-session-saya-mau-tau-status-kamu-dari-memo.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-concept-web.md|wiki/../other/concept-web.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

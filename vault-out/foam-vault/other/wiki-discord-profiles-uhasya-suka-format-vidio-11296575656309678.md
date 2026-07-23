@@ -1,9 +1,7 @@
 # wiki/discord/profiles/uhasya-suka-format-vidio-1129657565630967879.md
 
 Type: other
-ID: `wiki/discord/profiles/uhasya-suka-format-vidio-1129657565630967879.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-uhasya-suka-format-vidio-11296575656309678.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

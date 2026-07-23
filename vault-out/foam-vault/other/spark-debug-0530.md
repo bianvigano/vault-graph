@@ -5,5 +5,8 @@ ID: `vault-out/foam-vault/other/spark-debug-0530.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/wiki-..-other-spark-debug.md|wiki/../other/spark-debug.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-spark-deb|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/spark-debug.md]] (heading-mention) [INFERRED]
+- [[../other/spark-debug|spark-debug]] (heading-mention) [INFERRED]

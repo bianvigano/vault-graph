@@ -1,9 +1,7 @@
 # wiki/discord/profiles/README.md
 
 Type: other
-ID: `wiki/discord/profiles/README.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-README.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/Discord-Bot-Knowledge-Base|Discord Bot Knowledge Base]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

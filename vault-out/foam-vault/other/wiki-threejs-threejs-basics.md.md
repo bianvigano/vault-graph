@@ -1,9 +1,7 @@
 # wiki/threejs/threejs-basics.md
 
 Type: other
-ID: `wiki/threejs/threejs-basics.md`
+ID: `vault-out/foam-vault/other/wiki-threejs-threejs-basics.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Three.js-Daftar-Referensi|Three.js — Daftar Referensi]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

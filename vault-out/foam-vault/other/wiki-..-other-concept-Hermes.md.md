@@ -1,10 +1,7 @@
 # wiki/../other/concept-Hermes.md
 
 Type: other
-ID: `wiki/../other/concept-Hermes.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-concept-Hermes.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-wiki-..-session-kode-sekarang-saya-kepikiran-bikin|wiki/../other/wiki-..-session-kode-sekarang-saya-kepikiran-bikin-sebuah-ssytem.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-You-are-running-as-Hermes-backgrou|wiki/../other/wiki-..-session-You-are-running-as-Hermes-background-skill-CURAT.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

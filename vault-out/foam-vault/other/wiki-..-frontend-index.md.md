@@ -1,9 +1,7 @@
 # wiki/../frontend/index.md
 
 Type: other
-ID: `wiki/../frontend/index.md`
+ID: `vault-out/foam-vault/other/wiki-..-frontend-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Backend-WebDev|Backend WebDev]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

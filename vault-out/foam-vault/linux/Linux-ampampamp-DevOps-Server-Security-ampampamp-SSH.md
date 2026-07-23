@@ -6,7 +6,7 @@ ID: `vault-out/foam-vault/linux/Linux-ampamp-DevOps-Server-Security-ampamp-SSH.m
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-li|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-linux-Linux-amp.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-linux-Linux-ampamp-DevOps.md|wiki/../linux/Linux-ampamp-DevOps.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-linux-Linux-amp|/home/the-meh/.hermes/vault/vault-out/foam-vault/linux/Linux-ampamp-DevOps.md]] (heading-mention) [INFERRED]
+- [[../linux/Linux-ampampamp-DevOps|Linux &amp;amp;amp; DevOps]] (heading-mention) [INFERRED]

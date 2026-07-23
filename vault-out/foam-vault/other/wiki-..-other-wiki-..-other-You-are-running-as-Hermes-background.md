@@ -6,4 +6,4 @@ ID: `wiki/../other/wiki-..-other-You-are-running-as-Hermes-background-skill-CURA
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-concept-You-are|/home/the-meh/.hermes/vault/vault-out/foam-vault/concept/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-concept-You-are-running-as-Hermes-background-skill-CURAT|wiki/../concept/You-are-running-as-Hermes-background-skill-CURATOR.-This-is-an-U.md]] (wiki-link) [EXTRACTED]

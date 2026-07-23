@@ -1,10 +1,7 @@
 # /home/the-meh/.hermes/vault/concepts/hermes/hermes-spark.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/concepts/hermes/hermes-spark.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-concepts-hermes-hermes-spark.md.md`
 
-## Connections
-
-### INFERRED
-- [[../session/cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-dan-berikan-solus|cek link ini https://spark.lucko.me/M7IJYPX8aQ dan berikan solusinya supaya tps nya normal 20]] (heading-mention) [INFERRED]
-- [[../other/cek-link-ini-https---spark.lucko.me-M7IJYPX8aQ-dan-berikan-solus|cek link ini https://spark.lucko.me/M7IJYPX8aQ dan berikan solusinya supaya tps nya normal 20]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

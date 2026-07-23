@@ -1,10 +1,12 @@
 # wiki/../other/..-other-..-other-home-the-meh-.hermes-vault-sessions-minecraft.md
 
 Type: other
-ID: `wiki/../other/..-other-..-other-home-the-meh-.hermes-vault-sessions-minecraft.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-..-other-..-other-home-the-meh-.hermes-vault-sessi.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Docker-Compose-8GB-Minecraft-Server-dengan-Nether-ampampampamp-E|Docker Compose 8GB — Minecraft Server dengan Nether &amp;amp;amp;amp; End]] (wiki-link) [EXTRACTED]
-- [[../other/Files-ampampampamp-Tools-Archive|Files &amp;amp;amp;amp; Tools Archive]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

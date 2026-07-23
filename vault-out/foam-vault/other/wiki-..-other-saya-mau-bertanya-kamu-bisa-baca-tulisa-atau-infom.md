@@ -1,9 +1,9 @@
 # wiki/../other/saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infomasi-lebih-cepa.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infom.md`
+ID: `wiki/../other/saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infomasi-lebih-cepa.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-..-other-concept-hermes.md|../other/wiki-..-other-concept-hermes.md]] (wiki-link) [EXTRACTED]
+- [[../other/saya-mau-bertanya-kamu-bisa-baca-tulisa-atau-infomasi-lebih-cepa|saya mau bertanya kamu bisa baca tulisa atau infomasi lebih cepat pake format json atau md ?]] (wiki-link) [EXTRACTED]

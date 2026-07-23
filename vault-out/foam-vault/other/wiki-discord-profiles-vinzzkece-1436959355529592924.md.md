@@ -1,9 +1,12 @@
 # wiki/discord/profiles/vinzzkece-1436959355529592924.md
 
 Type: other
-ID: `wiki/discord/profiles/vinzzkece-1436959355529592924.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-vinzzkece-1436959355529592924.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-VinzzKece.md|wiki/../discord/VinzzKece.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../discord/VinzzKece|VinzzKece]] (heading-mention) [INFERRED]

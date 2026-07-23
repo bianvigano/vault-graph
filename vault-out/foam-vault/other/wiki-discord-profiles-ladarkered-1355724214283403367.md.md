@@ -1,9 +1,12 @@
 # wiki/discord/profiles/ladarkered-1355724214283403367.md
 
 Type: other
-ID: `wiki/discord/profiles/ladarkered-1355724214283403367.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-ladarkered-1355724214283403367.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-discord-LAdarkered.md|wiki/../discord/LAdarkered.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../discord/LAdarkered|LAdarkered]] (heading-mention) [INFERRED]

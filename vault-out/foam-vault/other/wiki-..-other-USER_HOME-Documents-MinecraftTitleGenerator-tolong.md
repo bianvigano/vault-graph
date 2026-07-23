@@ -1,9 +1,12 @@
 # wiki/../other/USER_HOME-Documents-MinecraftTitleGenerator-tolong-npm-i-jika-ad.md
 
 Type: other
-ID: `wiki/../other/USER_HOME-Documents-MinecraftTitleGenerator-tolong-npm-i-jika-ad.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-USER_HOME-Documents-MinecraftTitleGenerator-tolong.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

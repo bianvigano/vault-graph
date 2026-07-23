@@ -1,9 +1,7 @@
 # wiki/misc/python-tools.md
 
 Type: other
-ID: `wiki/misc/python-tools.md`
+ID: `vault-out/foam-vault/other/wiki-misc-python-tools.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Misc-Tools-amp-References|Misc — Tools &amp; References]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

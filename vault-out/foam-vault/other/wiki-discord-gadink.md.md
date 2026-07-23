@@ -1,9 +1,9 @@
 # wiki/discord/gadink.md
 
 Type: other
-ID: `wiki/discord/gadink.md`
+ID: `vault-out/foam-vault/other/wiki-discord-gadink.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

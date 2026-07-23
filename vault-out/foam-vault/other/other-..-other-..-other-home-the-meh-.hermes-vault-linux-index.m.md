@@ -1,9 +1,7 @@
 # other/..-other-..-other-home-the-meh-.hermes-vault-linux-index.md
 
 Type: other
-ID: `other/..-other-..-other-home-the-meh-.hermes-vault-linux-index.md`
+ID: `vault-out/foam-vault/other/other-..-other-..-other-home-the-meh-.hermes-vault-linux-index.m.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

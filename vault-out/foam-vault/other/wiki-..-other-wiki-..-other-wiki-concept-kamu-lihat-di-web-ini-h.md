@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-concept-kamu-lihat-di-web-ini-https---modrint.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-concept-kamu-lihat-di-web-ini-https---modrint.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-concept-kamu-lihat-di-web-ini-h.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

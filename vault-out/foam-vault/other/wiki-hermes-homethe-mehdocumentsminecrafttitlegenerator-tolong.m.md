@@ -1,9 +1,12 @@
 # wiki/hermes/homethe-mehdocumentsminecrafttitlegenerator-tolong.md
 
 Type: other
-ID: `wiki/hermes/homethe-mehdocumentsminecrafttitlegenerator-tolong.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-homethe-mehdocumentsminecrafttitlegenerator-tolong.m.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

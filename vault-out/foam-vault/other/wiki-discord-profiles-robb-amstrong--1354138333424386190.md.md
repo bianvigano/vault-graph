@@ -1,9 +1,7 @@
 # wiki/discord/profiles/robb-amstrong--1354138333424386190.md
 
 Type: other
-ID: `wiki/discord/profiles/robb-amstrong--1354138333424386190.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-robb-amstrong--1354138333424386190.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

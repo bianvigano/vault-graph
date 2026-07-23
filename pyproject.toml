@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vault-graph"
+version = "0.5.0"
+description = "Turn Vault .md files into an interactive D3.js knowledge graph — with Trae memory integration."
+requires-python = ">=3.10"
+dependencies = [
+    "networkx>=3.0",
+    "matplotlib>=3.6",
+]
+license = {text = "MIT"}
+authors = [{name = "Bian Vigano"}]
+keywords = ["knowledge-graph", "vault", "markdown", "d3", "wiki-links"]
+
+[project.scripts]
+vault-graph = "vault_graph.main:main"
+
+[tool.setuptools.packages.find]
+include = ["vault_graph*"]

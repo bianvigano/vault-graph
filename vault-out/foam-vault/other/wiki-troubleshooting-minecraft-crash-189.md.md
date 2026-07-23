@@ -1,9 +1,12 @@
 # wiki/troubleshooting/minecraft-crash-189.md
 
 Type: other
-ID: `wiki/troubleshooting/minecraft-crash-189.md`
+ID: `vault-out/foam-vault/other/wiki-troubleshooting-minecraft-crash-189.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/Ganti-Pesan-Purpur-Spigot-Custom-Server-Messages|Ganti Pesan Purpur/Spigot — Custom Server Messages]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

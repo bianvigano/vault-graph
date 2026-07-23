@@ -6,7 +6,7 @@ ID: `vault-out/foam-vault/other/other-..-other-api-integration.md.md`
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-api-integration.md|../other/api-integration.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-api-integ|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/api-integration.md.md]] (heading-mention) [INFERRED]
+- [[../other/api-integration.md|api-integration.md]] (heading-mention) [INFERRED]

@@ -3,7 +3,5 @@
 Type: session
 ID: `sessions/hermes/coba-kamu-lihat-code-html.md`
 
-## Connections
-
-### INFERRED
-- [[../other/home-the-meh-.hermes-vault-concepts-hermes-coba-lihat-html.md|/home/the-meh/.hermes/vault/concepts/hermes/coba-lihat-html.md]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

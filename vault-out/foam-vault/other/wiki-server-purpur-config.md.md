@@ -1,9 +1,7 @@
 # wiki/server/purpur-config.md
 
 Type: other
-ID: `wiki/server/purpur-config.md`
+ID: `vault-out/foam-vault/other/wiki-server-purpur-config.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Ganti-Pesan-Purpur-Spigot-Custom-Server-Messages|Ganti Pesan Purpur/Spigot — Custom Server Messages]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

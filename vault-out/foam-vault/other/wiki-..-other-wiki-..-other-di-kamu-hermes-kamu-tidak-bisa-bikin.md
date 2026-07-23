@@ -6,4 +6,4 @@ ID: `wiki/../other/wiki-..-other-di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-unt
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-concept-di-kamu|/home/the-meh/.hermes/vault/vault-out/foam-vault/concept/di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-RTK---Rust-Tok.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-concept-di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untu|wiki/../concept/di-kamu-hermes-kamu-tidak-bisa-bikin-RTK.md-untuk-RTK---Rust-Tok.md]] (wiki-link) [EXTRACTED]

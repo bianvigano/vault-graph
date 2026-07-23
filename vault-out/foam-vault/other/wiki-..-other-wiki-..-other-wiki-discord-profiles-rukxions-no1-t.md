@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-discord-profiles-rukxions-no1-topglobal-glaze.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-discord-profiles-rukxions-no1-topglobal-glaze.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-discord-profiles-rukxions-no1-t.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-discord-User-Profiles.md|wiki/../discord/User-Profiles.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

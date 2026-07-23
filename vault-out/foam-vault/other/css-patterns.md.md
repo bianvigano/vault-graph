@@ -1,11 +1,14 @@
 # css-patterns.md
 
 Type: other
-ID: `css-patterns.md`
+ID: `vault-out/foam-vault/other/css-patterns.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Frontend-WebDev-Vault|Frontend — WebDev Vault]] (wiki-link) [EXTRACTED]
-- [[../other/HTML-Canvas--Game-Countdown-Bubble-Glow|HTML Canvas: Game, Countdown, Bubble Glow]] (wiki-link) [EXTRACTED]
-- [[../other/Opsi-Hosting--Vercel-Netlify-Cloudflare-Vite-PM2|Opsi Hosting: Vercel, Netlify, Cloudflare, Vite, PM2]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-ot|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-css-patte.md]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-other-..-other-css-patterns.md|../other/other-..-other-css-patterns.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-css-patte|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/css-patterns.md.md]] (heading-mention) [INFERRED]
+- [[../other/other-..-other-css-patterns.md|other/..-other-css-patterns.md]] (heading-mention) [INFERRED]

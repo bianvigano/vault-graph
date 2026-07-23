@@ -1,9 +1,7 @@
 # wiki/discord/mod-logs.md
 
 Type: other
-ID: `wiki/discord/mod-logs.md`
+ID: `vault-out/foam-vault/other/wiki-discord-mod-logs.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/Discord-Bot-Knowledge-Base|Discord Bot Knowledge Base]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

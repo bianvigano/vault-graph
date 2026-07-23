@@ -1,12 +1,17 @@
 # spark-nyarn.md
 
 Type: other
-ID: `spark-nyarn.md`
+ID: `vault-out/foam-vault/other/spark-nyarn.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/spark-debug|spark-debug]] (wiki-link) [EXTRACTED]
-- [[../other/spark-plugin-code|spark-plugin-code]] (wiki-link) [EXTRACTED]
-- [[../other/spark-debug-0530|spark-debug-0530]] (wiki-link) [EXTRACTED]
-- [[../other/spark-profiler-0530|spark-profiler-0530]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-spark-nyarn.md|wiki/../other/spark-nyarn.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-ot|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-spark-nya.md]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-other-spark-nyarn.md|../other/wiki-..-other-spark-nyarn.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/spark-nyarn|spark-nyarn]] (heading-mention) [INFERRED]
+- [[../other/wiki-other-spark-nyarn.md|wiki/other/spark-nyarn.md]] (heading-mention) [INFERRED]
+- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-spark-nya|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/spark-nyarn.md.md]] (heading-mention) [INFERRED]
+- [[../other/wiki-..-other-spark-nyarn.md|wiki/../other/spark-nyarn.md]] (heading-mention) [INFERRED]

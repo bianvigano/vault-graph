@@ -1,9 +1,7 @@
 # wiki/webdev/frontend/index.md
 
 Type: other
-ID: `wiki/webdev/frontend/index.md`
+ID: `vault-out/foam-vault/other/wiki-webdev-frontend-index.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Three.js-3D-Graphics-Library|Three.js — 3D Graphics Library]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

@@ -1,13 +1,12 @@
 # wiki/../other/concept-minecraft.md
 
 Type: other
-ID: `wiki/../other/concept-minecraft.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-concept-minecraft.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-se|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-Minecra.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-kode-sekarang-saya-kepikiran-bikin|wiki/../other/wiki-..-session-kode-sekarang-saya-kepikiran-bikin-sebuah-ssytem.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-https---spark.lucko.me-6hu1VNXFuZ|wiki/../other/wiki-..-session-https---spark.lucko.me-6hu1VNXFuZ-apakah-kamu-bi.md]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-session-coba-kamu-cek-github-ini-https---g|wiki/../other/wiki-..-session-coba-kamu-cek-github-ini-https---github.com-itzg.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

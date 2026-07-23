@@ -1,9 +1,7 @@
 # wiki/modding/lithium-optimization.md
 
 Type: other
-ID: `wiki/modding/lithium-optimization.md`
+ID: `vault-out/foam-vault/other/wiki-modding-lithium-optimization.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Docker-Compose-Fabric-Minecraft-Server-dengan-Mods|Docker Compose Fabric — Minecraft Server dengan Mods]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

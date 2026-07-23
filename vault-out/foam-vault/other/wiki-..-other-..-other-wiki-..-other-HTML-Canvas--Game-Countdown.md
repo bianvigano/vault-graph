@@ -1,10 +1,7 @@
 # wiki/../other/..-other-wiki-..-other-HTML-Canvas--Game-Countdown-Bubble-Glow.m.md
 
 Type: other
-ID: `wiki/../other/..-other-wiki-..-other-HTML-Canvas--Game-Countdown-Bubble-Glow.m.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-..-other-wiki-..-other-HTML-Canvas--Game-Countdown.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/css-patterns.md|css-patterns.md]] (wiki-link) [EXTRACTED]
-- [[../other/hosting-options.md|hosting-options.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

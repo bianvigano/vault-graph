@@ -1,9 +1,7 @@
 # /home/the-meh/.hermes/vault/linux/index.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/linux/index.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-linux-index.md.md`
 
-## Connections
-
-### INFERRED
-- [[../linux/Linux-amp-DevOps-Server-Security-amp-SSH|Linux &amp; DevOps — Server Security &amp; SSH]] (heading-mention) [INFERRED]
+## Isolated
+No connections to other vault documents.

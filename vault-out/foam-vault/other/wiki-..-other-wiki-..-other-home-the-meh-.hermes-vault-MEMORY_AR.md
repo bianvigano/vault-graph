@@ -6,9 +6,7 @@ ID: `wiki/../other/wiki-..-other-home-the-meh-.hermes-vault-MEMORY_ARCHIVED_Mine
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-minecraft-Custom-Seed-Mengatur-Seed-Kustom-di-Minecraft|wiki/../minecraft/Custom-Seed-Mengatur-Seed-Kustom-di-Minecraft-Server.md]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-Minecra|/home/the-meh/.hermes/vault/vault-out/foam-vault/session/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Ganti-Pesan-Purpur-Spigot-Custom-Server-Messag|wiki/../minecraft/Ganti-Pesan-Purpur-Spigot-Custom-Server-Messages.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Purpur-Config-Konfigurasi-dan-Kustomisasi-Pesa|wiki/../minecraft/Purpur-Config-Konfigurasi-dan-Kustomisasi-Pesan-Purpur-Server.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-minecraft-Set-Spawn-Mengatur-Titik-Spawn-Server-Minecraf|wiki/../minecraft/Set-Spawn-Mengatur-Titik-Spawn-Server-Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Set|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Set-Spawn-Mengatur.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Cust|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Custom-Seed-Mengat.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Purp|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Purpur-Config-Konf.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-wiki-..-other-wiki-..-other-wiki-..-minecraft-Gant|wiki/../other/wiki-..-other-wiki-..-other-wiki-..-minecraft-Ganti-Pesan-Purpur.md]] (wiki-link) [EXTRACTED]

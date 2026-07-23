@@ -1,10 +1,7 @@
 # wiki/server/spawn-commands.md
 
 Type: other
-ID: `wiki/server/spawn-commands.md`
+ID: `vault-out/foam-vault/other/wiki-server-spawn-commands.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Server-Properties-Konfigurasi-Dasar-Minecraft-Server|Server Properties — Konfigurasi Dasar Minecraft Server]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Daylight-Cycle-Cara-Set-Siang-Terus|Daylight Cycle — Cara Set Siang Terus]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

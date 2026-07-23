@@ -1,9 +1,7 @@
 # wiki/discord/profiles/senyawit-sups-677863328533577757.md
 
 Type: other
-ID: `wiki/discord/profiles/senyawit-sups-677863328533577757.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-senyawit-sups-677863328533577757.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

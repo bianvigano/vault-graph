@@ -1,9 +1,12 @@
 # wiki/../other/wiki-..-minecraft-Denizen-Scripting-Dasar-If-Waktu-dan-Worldbord.md
 
 Type: other
-ID: `wiki/../other/wiki-..-minecraft-Denizen-Scripting-Dasar-If-Waktu-dan-Worldbord.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-minecraft-Denizen-Scripting-Dasar-If-Waktu.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

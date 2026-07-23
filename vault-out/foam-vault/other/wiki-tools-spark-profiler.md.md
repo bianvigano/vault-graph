@@ -1,10 +1,7 @@
 # wiki/tools/spark-profiler.md
 
 Type: other
-ID: `wiki/tools/spark-profiler.md`
+ID: `vault-out/foam-vault/other/wiki-tools-spark-profiler.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../minecraft/Troubleshooting-Crash-Minecraft-Panduan-Umum|Troubleshooting Crash Minecraft — Panduan Umum]] (wiki-link) [EXTRACTED]
-- [[../minecraft/Docker-Compose-Fabric-Minecraft-Server-dengan-Mods|Docker Compose Fabric — Minecraft Server dengan Mods]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

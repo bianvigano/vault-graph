@@ -1,9 +1,7 @@
 # projek-ini-homethe-mehdesktopbot-discord-ai-chat.md
 
 Type: other
-ID: `projek-ini-homethe-mehdesktopbot-discord-ai-chat.md`
+ID: `vault-out/foam-vault/other/projek-ini-homethe-mehdesktopbot-discord-ai-chat.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

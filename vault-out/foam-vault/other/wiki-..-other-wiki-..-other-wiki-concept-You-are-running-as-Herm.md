@@ -1,9 +1,7 @@
 # wiki/../other/wiki-..-other-wiki-concept-You-are-running-as-Hermes-background.md
 
 Type: other
-ID: `wiki/../other/wiki-..-other-wiki-concept-You-are-running-as-Hermes-background.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-..-other-wiki-concept-You-are-running-as-Herm.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

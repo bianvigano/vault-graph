@@ -6,7 +6,7 @@ ID: `vault-out/foam-vault/other/other-..-other-github-clone.md.md`
 ## Connections
 
 ### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-github-clone.md|../other/github-clone.md]] (wiki-link) [EXTRACTED]
 
 ### INFERRED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-github-cl|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/github-clone.md.md]] (heading-mention) [INFERRED]
+- [[../other/github-clone.md|github-clone.md]] (heading-mention) [INFERRED]

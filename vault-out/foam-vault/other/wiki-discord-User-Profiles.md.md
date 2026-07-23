@@ -1,9 +1,9 @@
 # wiki/discord/User-Profiles.md
 
 Type: other
-ID: `wiki/discord/User-Profiles.md`
+ID: `vault-out/foam-vault/other/wiki-discord-User-Profiles.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Graph-Index|Vault Graph Index]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]

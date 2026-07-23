@@ -1,13 +1,12 @@
 # wiki/../other/Supabase.md
 
 Type: other
-ID: `vault-out/foam-vault/other/wiki-..-other-Supabase.md.md`
+ID: `wiki/../other/Supabase.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-..-other-Vault-Knowledge-Base-Index.md|../other/wiki-..-other-Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-wiki-..-other-home-the-meh-.hermes-vault-minecraft|wiki/../other/wiki-..-other-home-the-meh-.hermes-vault-minecraft-server-minecr.md]] (wiki-link) [EXTRACTED]
-
-### INFERRED
-- [[../other/home-the-meh-.hermes-vault-webdev-database-supabase.md|/home/the-meh/.hermes/vault/webdev/database/supabase.md]] (heading-mention) [INFERRED]
+- [[../other/supabase.md|supabase.md]] (wiki-link) [EXTRACTED]
+- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Supabase.|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Supabase.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Supabase.md|wiki/../other/Supabase.md]] (wiki-link) [EXTRACTED]
+- [[../other/home-the-meh-.hermes-vault-webdev-database-supabase.md|/home/the-meh/.hermes/vault/webdev/database/supabase.md]] (wiki-link) [EXTRACTED]

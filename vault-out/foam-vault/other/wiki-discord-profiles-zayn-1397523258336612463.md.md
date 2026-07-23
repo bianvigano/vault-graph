@@ -1,9 +1,7 @@
 # wiki/discord/profiles/zayn-1397523258336612463.md
 
 Type: other
-ID: `wiki/discord/profiles/zayn-1397523258336612463.md`
+ID: `vault-out/foam-vault/other/wiki-discord-profiles-zayn-1397523258336612463.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../discord/User-Profiles|User Profiles]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

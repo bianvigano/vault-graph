@@ -1,10 +1,12 @@
 # /home/the-meh/.hermes/vault/vault-out/foam-vault/other/spark-debug-0601.md.md
 
 Type: other
-ID: `/home/the-meh/.hermes/vault/vault-out/foam-vault/other/spark-debug-0601.md.md`
+ID: `vault-out/foam-vault/other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-spark-deb.md`
 
 ## Connections
 
+### EXTRACTED
+- [[../other/..-other-spark-debug-0601.md|../other/spark-debug-0601.md]] (wiki-link) [EXTRACTED]
+
 ### INFERRED
-- [[../other/wiki-..-other-spark-debug-0601.md|wiki/../other/spark-debug-0601.md]] (heading-mention) [INFERRED]
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-spark-deb|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/spark-debug-0601.md.md]] (heading-mention) [INFERRED]
+- [[../other/spark-debug-0601.md|spark-debug-0601.md]] (heading-mention) [INFERRED]

@@ -1,10 +1,9 @@
 # wiki/hermes/cek-link-ini-httpssparkluckomem7ijypx8aq-dan.md
 
 Type: other
-ID: `wiki/hermes/cek-link-ini-httpssparkluckomem7ijypx8aq-dan.md`
+ID: `vault-out/foam-vault/other/wiki-hermes-cek-link-ini-httpssparkluckomem7ijypx8aq-dan.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/Vault-Knowledge-Base-Index|Vault — Knowledge Base Index]] (wiki-link) [EXTRACTED]
-- [[../session/Hermes-Sessions|Hermes — Sessions]] (wiki-link) [EXTRACTED]
+- [[../other/..-other-wiki-..-other-Vault-Knowledge-Base-Index.md|../other/wiki-..-other-Vault-Knowledge-Base-Index.md]] (wiki-link) [EXTRACTED]

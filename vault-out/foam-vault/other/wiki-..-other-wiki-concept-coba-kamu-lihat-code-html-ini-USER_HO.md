@@ -1,9 +1,7 @@
 # wiki/../other/wiki-concept-coba-kamu-lihat-code-html-ini-USER_HOME-Downloads-x.md
 
 Type: other
-ID: `wiki/../other/wiki-concept-coba-kamu-lihat-code-html-ini-USER_HOME-Downloads-x.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-concept-coba-kamu-lihat-code-html-ini-USER_HO.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

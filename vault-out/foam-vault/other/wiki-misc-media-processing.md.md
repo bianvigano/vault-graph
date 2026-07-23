@@ -1,10 +1,7 @@
 # wiki/misc/media-processing.md
 
 Type: other
-ID: `wiki/misc/media-processing.md`
+ID: `vault-out/foam-vault/other/wiki-misc-media-processing.md.md`
 
-## Connections
-
-### EXTRACTED
-- [[../other/Python-Tools-amp-Scripts|Python — Tools &amp; Scripts]] (wiki-link) [EXTRACTED]
-- [[../other/Misc-Tools-amp-References|Misc — Tools &amp; References]] (wiki-link) [EXTRACTED]
+## Isolated
+No connections to other vault documents.

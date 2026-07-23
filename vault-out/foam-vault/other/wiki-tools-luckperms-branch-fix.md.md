@@ -1,9 +1,12 @@
 # wiki/tools/luckperms-branch-fix.md
 
 Type: other
-ID: `wiki/tools/luckperms-branch-fix.md`
+ID: `vault-out/foam-vault/other/wiki-tools-luckperms-branch-fix.md.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../minecraft/LuckPerms-Admin-ke-Default-Group|LuckPerms — Admin ke Default Group]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-luckperms-branch-fix.md|wiki/../other/luckperms-branch-fix.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/luckperms-branch-fix|luckperms-branch-fix]] (heading-mention) [INFERRED]

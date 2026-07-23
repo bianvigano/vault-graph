@@ -1,10 +1,12 @@
 # wiki/../other/wiki-minecraft-Hunger-Settings-Konfigurasi-Sistem-Lapar-di-Minec.md
 
 Type: other
-ID: `wiki/../other/wiki-minecraft-Hunger-Settings-Konfigurasi-Sistem-Lapar-di-Minec.md`
+ID: `vault-out/foam-vault/other/wiki-..-other-wiki-minecraft-Hunger-Settings-Konfigurasi-Sistem.md`
 
 ## Connections
 
 ### EXTRACTED
-- [[../other/home-the-meh-.hermes-vault-vault-out-foam-vault-other-Minecraft|/home/the-meh/.hermes/vault/vault-out/foam-vault/other/Minecraft.md]] (wiki-link) [EXTRACTED]
-- [[../other/wiki-..-other-Vault-Graph-Index.md|wiki/../other/Vault-Graph-Index.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-Minecraft.md|wiki/../other/Minecraft.md]] (wiki-link) [EXTRACTED]
+
+### INFERRED
+- [[../other/Minecraft|Minecraft]] (heading-mention) [INFERRED]

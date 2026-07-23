@@ -6,4 +6,4 @@ ID: `vault-out/foam-vault/other/wiki-..-session-saya-mau-kamu-cek-sebuah-isi-cod
 ## Connections
 
 ### EXTRACTED
-- [[../other/..-other-wiki-..-other-concept-hermes.md|../other/wiki-..-other-concept-hermes.md]] (wiki-link) [EXTRACTED]
+- [[../other/wiki-..-other-home-the-meh-.hermes-vault-vault-out-foam-vault-se|wiki/../other/home-the-meh-.hermes-vault-vault-out-foam-vault-session-saya-ma.md]] (wiki-link) [EXTRACTED]
