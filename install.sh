@@ -1,5 +1,5 @@
 #!/bin/bash
-# vault-graph install — pip-installable, auto-detect assistants, register skill + MCP
+# vault-graph install — CLI wrapper, skills, MCP. No pip needed.
 # Usage: bash install.sh
 set -e
 
@@ -10,40 +10,16 @@ INSTALL_COUNT=0
 echo "vault-graph install"
 echo "==================="
 echo "  repo: $SCRIPT_DIR"
-
-# ---- Detect Python ----
-if command -v uv &>/dev/null; then
-    PIP="uv pip install --system"
-else
-    PIP="pip install --user"
-fi
-echo "  pip:  $PIP"
 echo ""
 
-# ---- 1. Pip install ----
-echo "--- Package ---"
-cd "$SCRIPT_DIR"
-$PIP -e "$SCRIPT_DIR" 2>&1 | grep -E "✓|Successfully|Obtaining|error" || true
-# Verify it works
-python3 -c "import vault_graph" 2>/dev/null && echo "  [✓] vault-graph import OK" || echo "  [!] import failed, but CLI may still work via fallback"
-echo ""
-
-# ---- 2. CLI wrapper (fallback kalau pip entry point gagal) ----
+# ---- 1. CLI wrapper (~/.local/bin) ----
+echo "--- CLI ---"
 mkdir -p "$HOME/.local/bin"
 
-cat > "$HOME/.local/bin/vault-graph" << 'VGEOF'
+cat > "$HOME/.local/bin/vault-graph" << VGEOF
 #!/bin/bash
-# Auto-detect: pip-installed entry point OR repo fallback
-if python3 -m vault_graph.main --help >/dev/null 2>&1; then
-    exec python3 -m vault_graph.main "$@"
-else
-    REPO="$(cd "$(dirname "$(readlink -f "$0")" 2>/dev/null)" 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null)"
-    if [ -d "/home/the-meh/Documents/vault-graph" ]; then
-        cd "/home/the-meh/Documents/vault-graph" && exec python3 -m vault_graph.main "$@"
-    fi
-    echo "vault-graph: not found. Install: git clone https://github.com/bianvigano/vault-graph && cd vault-graph && bash install.sh"
-    exit 1
-fi
+export PYTHONPATH="$SCRIPT_DIR:\${PYTHONPATH}"
+exec python3 -m vault_graph.main "\$@"
 VGEOF
 chmod +x "$HOME/.local/bin/vault-graph"
 echo "  [✓] vault-graph → ~/.local/bin/vault-graph"
@@ -58,13 +34,13 @@ if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
     fi
 fi
 
-# ---- 3. Config default ----
+# ---- 2. Config default ----
 CFG="$HOME/.config/vault-graph/config.json"
 if [ ! -f "$CFG" ]; then
     mkdir -p "$(dirname "$CFG")"
     VAULT_PATH="$HOME/.hermes/vault"
     if [ ! -d "$VAULT_PATH" ]; then
-        VAULT_PATH="$SCRIPT_DIR"
+        VAULT_PATH="."
     fi
     cat > "$CFG" << CFGEOF
 {
@@ -74,10 +50,9 @@ if [ ! -f "$CFG" ]; then
 CFGEOF
     echo "  [✓] config:  $CFG"
 fi
-
 echo ""
 
-# ---- 4. Skill for assistants ----
+# ---- 3. Skill for assistants ----
 SKILL_MD="$SCRIPT_DIR/skill.md"
 cat > "$SKILL_MD" << 'SKILLEOF'
 ---
@@ -126,17 +101,17 @@ if [ -d "$HOME/.hermes" ]; then
     # ---- Hermes MCP ----
     MCP_JSON="$HOME/.hermes/mcp.json"
     if [ ! -f "$MCP_JSON" ]; then
+        PYTHONPATH_LINE="export PYTHONPATH=\"$SCRIPT_DIR:\$PYTHONPATH\" &&"
         cat > "$MCP_JSON" << MCPEOF
 {
   "mcpServers": {
     "vault-graph": {
-      "command": "python3",
+      "command": "bash",
       "args": [
-        "-m",
-        "vault_graph.serve",
-        "${GRAPH_JSON_DEFAULT}"
+        "-c",
+        "$PYTHONPATH_LINE exec python3 -m vault_graph.serve $GRAPH_JSON_DEFAULT"
       ],
-      "cwd": "${SCRIPT_DIR}"
+      "cwd": "$SCRIPT_DIR"
     }
   }
 }
