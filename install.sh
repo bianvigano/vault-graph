@@ -4,7 +4,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-GRAPH_JSON_DEFAULT="$HOME/.hermes/vault/vault-out/graph.json"
+GRAPH_JSON_DEFAULT="$HOME/vault/vault-out/graph.json"
 INSTALL_COUNT=0
 
 echo "vault-graph install"
@@ -38,7 +38,7 @@ fi
 CFG="$HOME/.config/vault-graph/config.json"
 if [ ! -f "$CFG" ]; then
     mkdir -p "$(dirname "$CFG")"
-    VAULT_PATH="$HOME/.hermes/vault"
+    VAULT_PATH="$HOME/vault"
     if [ ! -d "$VAULT_PATH" ]; then
         VAULT_PATH="."
     fi
