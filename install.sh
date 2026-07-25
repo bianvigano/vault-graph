@@ -57,35 +57,42 @@ SKILL_MD="$SCRIPT_DIR/skill.md"
 cat > "$SKILL_MD" << 'SKILLEOF'
 ---
 name: vault-graph
-description: Turn any Vault into interactive D3.js knowledge graph. Query: vault-graph god, vault-graph search <term>, vault-graph explain <node>.
-trigger: User says "/vault-graph", "graph vault", "visualize vault", or asks about vault connections.
+description: Knowledge graph for Vault + Trae memory. Always check graph before searching files.
+trigger: User says "/vault-graph", "graph vault", "visualize vault", asks about vault connections, or searches vault/wiki knowledge.
+always-on: true
 ---
 
 # Vault Knowledge Graph
 
-## Always-On Rule
-Before searching vault files, check if vault-out/graph.json exists. If yes, query it first.
+## ALWAYS-ON RULE
+When user asks about vault/wiki content or connections between topics:
+1. **FIRST** query the graph: `vault-graph search <term>`, `vault-graph explain <node>`, or `vault-graph query "question"`
+2. **THEN** fall back to file search only if graph returns nothing
 
-## Commands
+## Commands (run from anywhere)
 ```bash
-vault-graph build                    # build graph
-vault-graph god                      # top 15 nodes
-vault-graph search <term>            # search by name
-vault-graph explain <node>           # node detail + connections
-vault-graph path <A> <B>             # shortest path
-vault-graph communities              # community summary
-vault-graph isolated                 # nodes with no connections
-vault-graph stats                    # graph statistics
-vault-graph query "..."              # natural language query
-vault-graph watch                    # auto-rebuild
-vault-graph serve                    # MCP server
+vault-graph build               # Rebuild graph from vault + Trae memory
+vault-graph god                 # Top 15 most-connected nodes
+vault-graph search <term>       # Search nodes/edges by name
+vault-graph explain <node>      # Node detail + all connections
+vault-graph path <A> <B>        # Shortest path between two nodes
+vault-graph communities         # Community detection summaries
+vault-graph isolated            # Nodes with zero connections
+vault-graph stats               # Graph statistics (nodes, edges, types)
+vault-graph query "question"    # Natural language question
+vault-graph watch               # Auto-rebuild on file changes
+vault-graph serve               # MCP server (Hermes only)
 ```
 
 No path needed — auto-detects graph.json from config.
 
 ## Sources
-- Vault: .md files with [[wiki-links]] + headings
-- Trae: ~/.trae/memory/projects/ (auto-detected)
+- `~/.hermes/vault/` — .md files with [[wiki-links]] + headings
+- `~/.trae/memory/projects/` — project_memory.md, topics.md
+
+## Note: Trae MCP Limitation
+Trae IDE v1.0.24 doesn't support external command-based MCP servers.
+The agent uses terminal commands instead. MCP works on Hermes via `~/.hermes/mcp.json`.
 SKILLEOF
 
 echo "--- Skills ---"
