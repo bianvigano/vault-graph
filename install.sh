@@ -149,9 +149,74 @@ if [ -d "$HOME/.trae" ]; then
     echo '{"name":"graph_explain","description":"Explain a node: type, connections, related nodes","inputSchema":{"type":"object","properties":{"node":{"type":"string"}},"required":["node"]}}' > "$TMC/solo_agent/vault-graph/tools/graph_explain.json"
     echo '{"name":"graph_god_nodes","description":"Top 15 most-connected nodes in the graph","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_god_nodes.json"
     echo '{"name":"graph_communities","description":"Community detection summaries with representative nodes","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_communities.json"
-    echo "  [✓] MCP:     $TMC"
+    echo "  [✓] Trae MCP: $TMC (NOTE: external MCP not supported on Trae v1.0.24 — agent uses CLI only)"
 else
     echo "  [ ] Trae:    SKIP (no ~/.trae)"
+fi
+
+# ---- Claude Code ----
+if [ -d "$HOME/.claude" ]; then
+    DST="$HOME/.claude/skills/vault-graph/SKILL.md"
+    mkdir -p "$(dirname "$DST")"
+    cp "$SKILL_MD" "$DST"
+    # Append to CLAUDE.md context
+    touch "$HOME/.claude/CLAUDE.md"
+    if ! grep -q "vault-graph" "$HOME/.claude/CLAUDE.md" 2>/dev/null; then
+        echo "" >> "$HOME/.claude/CLAUDE.md"
+        echo "## Vault Knowledge Graph" >> "$HOME/.claude/CLAUDE.md"
+        echo "Always check vault-graph before searching vault/wiki files: \`vault-graph search/explain/query\`" >> "$HOME/.claude/CLAUDE.md"
+        echo "Graph: ~/.hermes/vault/vault-out/graph.json" >> "$HOME/.claude/CLAUDE.md"
+    fi
+    echo "  [✓] Claude:  $DST + ~/.claude/CLAUDE.md"
+    INSTALL_COUNT=$((INSTALL_COUNT + 1))
+else
+    echo "  [ ] Claude:  SKIP (no ~/.claude)"
+fi
+
+# ---- Codex ----
+if [ -d "$HOME/.codex" ]; then
+    DST="$HOME/.codex/skills/vault-graph/SKILL.md"
+    mkdir -p "$(dirname "$DST")"
+    cp "$SKILL_MD" "$DST"
+    # Append to AGENTS.md
+    touch "$HOME/.codex/AGENTS.md"
+    if ! grep -q "vault-graph" "$HOME/.codex/AGENTS.md" 2>/dev/null; then
+        echo "" >> "$HOME/.codex/AGENTS.md"
+        echo "## Vault Knowledge Graph" >> "$HOME/.codex/AGENTS.md"
+        echo "Always check vault-graph before searching vault/wiki files: \`vault-graph search/explain/query\`" >> "$HOME/.codex/AGENTS.md"
+        echo "Graph: ~/.hermes/vault/vault-out/graph.json" >> "$HOME/.codex/AGENTS.md"
+    fi
+    echo "  [✓] Codex:   $DST + ~/.codex/AGENTS.md"
+    INSTALL_COUNT=$((INSTALL_COUNT + 1))
+else
+    echo "  [ ] Codex:   SKIP (no ~/.codex)"
+fi
+
+# ---- Continue ----
+if [ -d "$HOME/.continue" ]; then
+    DST="$HOME/.continue/rules/vault-graph.md"
+    mkdir -p "$(dirname "$DST")"
+    cp "$SKILL_MD" "$DST"
+    echo "  [✓] Continue: $DST"
+    INSTALL_COUNT=$((INSTALL_COUNT + 1))
+else
+    echo "  [ ] Continue: SKIP (no ~/.continue)"
+fi
+
+# ---- Codeium ----
+if [ -d "$HOME/.codeium" ]; then
+    DST="$HOME/.codeium/memories/global_rules.md"
+    mkdir -p "$(dirname "$DST")"
+    if ! grep -q "vault-graph" "$DST" 2>/dev/null; then
+        echo "" >> "$DST"
+        echo "## Vault Knowledge Graph" >> "$DST"
+        echo "Always check vault-graph before searching vault/wiki files: \`vault-graph search/explain/query\`" >> "$DST"
+        echo "Graph: ~/.hermes/vault/vault-out/graph.json" >> "$DST"
+    fi
+    echo "  [✓] Codeium: $DST"
+    INSTALL_COUNT=$((INSTALL_COUNT + 1))
+else
+    echo "  [ ] Codeium: SKIP (no ~/.codeium)"
 fi
 
 # ---- Done ----
