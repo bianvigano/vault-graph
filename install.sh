@@ -149,7 +149,27 @@ if [ -d "$HOME/.trae" ]; then
     echo '{"name":"graph_explain","description":"Explain a node: type, connections, related nodes","inputSchema":{"type":"object","properties":{"node":{"type":"string"}},"required":["node"]}}' > "$TMC/solo_agent/vault-graph/tools/graph_explain.json"
     echo '{"name":"graph_god_nodes","description":"Top 15 most-connected nodes in the graph","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_god_nodes.json"
     echo '{"name":"graph_communities","description":"Community detection summaries with representative nodes","inputSchema":{"type":"object","properties":{}}}' > "$TMC/solo_agent/vault-graph/tools/graph_communities.json"
-    echo "  [✓] Trae MCP: $TMC (NOTE: external MCP not supported on Trae v1.0.24 — agent uses CLI only)"
+    echo "  [✓] Trae MCP: $TMC + ~/.trae/mcp.json"
+
+    # ---- Trae mcp.json ----
+    MCP_JSON="$HOME/.trae/mcp.json"
+    if [ ! -f "$MCP_JSON" ] || ! grep -q "vault-graph" "$MCP_JSON" 2>/dev/null; then
+        cat > "$MCP_JSON" << TMCPEOF
+{
+  "mcpServers": {
+    "vault-graph": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "export PYTHONPATH=\\"$SCRIPT_DIR:\\$PYTHONPATH\\" && exec python3 -m vault_graph.serve $GRAPH_JSON_DEFAULT"
+      ],
+      "cwd": "$SCRIPT_DIR"
+    }
+  }
+}
+TMCPEOF
+        echo "  [✓] Trae MCP: ~/.trae/mcp.json"
+    fi
 else
     echo "  [ ] Trae:    SKIP (no ~/.trae)"
 fi
