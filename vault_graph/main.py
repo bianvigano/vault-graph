@@ -28,7 +28,7 @@ CONFIG_DIR = Path.home() / ".config" / "vault-graph"
 CONFIG_PATH = CONFIG_DIR / "config.json"
 
 DEFAULT_CONFIG = {
-    "vault": str(Path.home() / ".hermes" / "vault"),
+    "vault": str(Path.home() / "vault"),
     "out": "vault-out",
 }
 
