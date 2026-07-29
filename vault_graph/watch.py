@@ -34,8 +34,8 @@ def watch(root: Path, out_dir: Path, interval: float = 30.0):
                 print(f"[{time.strftime('%H:%M:%S')}] {n} file(s) changed — rebuilding graph...")
                 
                 # Run rebuild
-                from vault_graph.main import rebuild
-                rebuild(root, out_dir)
+                from vault_graph.main import _rebuild
+                _rebuild(root, out_dir)
                 
                 state = new_state
                 print(f"  Done. {out_dir / 'graph.html'}")
