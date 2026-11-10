@@ -19,6 +19,9 @@ import networkx as nx
 
 def load_graph(path: Path) -> nx.Graph:
     """Load a graph.json into a NetworkX graph."""
+    if path.suffix == ".db":
+        from vault_graph.storage import load_graph as load_sqlite
+        return load_sqlite(path)
     data = json.loads(path.read_text())
     G = nx.Graph()
     for n in data.get("nodes", []):

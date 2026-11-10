@@ -47,13 +47,24 @@ def save_config(cfg: dict):
     CONFIG_PATH.write_text(json.dumps(cfg, indent=2))
 
 
-def resolve_graph_path() -> Path:
+def resolve_output_dir() -> Path:
     cfg = load_config()
     vault = Path(cfg["vault"])
     out = Path(cfg["out"])
-    if not out.is_absolute():
-        out = vault / out
-    return out / "graph.json"
+    return out if out.is_absolute() else vault / out
+
+
+def resolve_graph_path() -> Path:
+    out = resolve_output_dir()
+    database = out / "graph.db"
+    if database.exists():
+        return database
+    legacy = out / "graph.json"
+    if legacy.exists():
+        from vault_graph.query import load_graph
+        from vault_graph.storage import save_graph
+        save_graph(load_graph(legacy), database)
+    return database
 
 
 def resolve_vault_out(vault_path: str | None = None) -> tuple[Path, Path]:
@@ -199,6 +210,7 @@ def _rebuild(vault: Path, out_dir: Path):
     from vault_graph.detect import collect_files
     from vault_graph.extract import extract
     from vault_graph.cache import load_cache, save_cache, split_files
+    from vault_graph.storage import save_graph
     from vault_graph.security import sanitize_label
 
     cache_path = out_dir / ".vault_graph_cache.json"
@@ -214,14 +226,13 @@ def _rebuild(vault: Path, out_dir: Path):
         trae_extractions = collect_trae_extractions()
         trae_count = sum(len(e.get("nodes", [])) for e in trae_extractions)
 
-    if len(uncached_files) == 0 and out_dir.joinpath("graph.html").exists() and trae_count == 0:
-        print(f"  (all {len(files)} files cached — unchanged)")
-        return
-
-    skip_count = len(cached_files)
-    print(f"  detect:  {len(files)} vault files ({skip_count} cached, {len(uncached_files)} new)")
-
-    all_headings = _collect_all_headings(uncached_files)
+    # ponytail: ekstrak ulang agar penghapusan file dan relasi lintas-file selalu benar.
+    # Tambahkan cache per-extraction hanya jika profiling membuktikan rebuild terlalu lambat.
+    skip_count = 0
+    cached_files = []
+    uncached_files = files
+    print(f"  detect:  {len(files)} vault files")
+    all_headings = _collect_all_headings(files)
     extractions = []
     for f in uncached_files:
         rel = str(f.relative_to(vault))
