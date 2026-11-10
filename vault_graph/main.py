@@ -234,7 +234,28 @@ def main():
         run_query_cmd(G, "stats", [])
     elif cmd == "search":
         from vault_graph.query import _search
-        _search(G, args.term, args.page, args.page_size, args.all)
+        if args.page < 1 or not 1 <= args.page_size <= 100:
+            parser.error('Halaman minimal 1; ukuran halaman harus 1–100')
+        page, pages = _search(G, args.term, args.page, args.page_size, args.all)
+        if args.interactive and not args.all:
+            while True:
+                try:
+                    command = input('Halaman: n=berikutnya, p=sebelumnya, nomor, q=keluar > ').strip().lower()
+                except (EOFError, KeyboardInterrupt):
+                    print()
+                    break
+                if command == 'q':
+                    break
+                if command == 'n':
+                    page = min(page + 1, pages)
+                elif command == 'p':
+                    page = max(1, page - 1)
+                elif command.isdigit() and 1 <= int(command) <= pages:
+                    page = int(command)
+                else:
+                    print('Masukkan n, p, nomor halaman yang tersedia, atau q.')
+                    continue
+                page, pages = _search(G, args.term, page, args.page_size, False)
     elif cmd == "explain":
         run_query_cmd(G, "explain", [args.node])
     elif cmd == "path":

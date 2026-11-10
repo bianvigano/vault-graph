@@ -1,6 +1,7 @@
 """Multilingual semantic retrieval with resource-aware model selection and chunks."""
 from __future__ import annotations
-import json, sqlite3
+import json, sqlite3, time
+from functools import lru_cache
 from pathlib import Path
 
 MODELS = {'small': 'intfloat/multilingual-e5-small', 'base': 'intfloat/multilingual-e5-base', 'large': 'intfloat/multilingual-e5-large'}
@@ -35,6 +36,7 @@ def choose_model(database: Path, requested: str | None = None) -> tuple[str, str
         return 'base', f'RAM {ram:.1f} GB; {count} dokumen; CPU'
     return 'small', f'RAM {ram:.1f} GB; {count} dokumen; mode hemat'
 
+@lru_cache(maxsize=1)
 def _model(name: str):
     from sentence_transformers import SentenceTransformer
     import torch
@@ -62,6 +64,15 @@ def index_embeddings(database: Path, requested: str | None = None) -> dict:
         if not chunks:
             return {'documents': len(docs), 'chunks': 0, 'model': selected, 'reason': reason}
         encoder = _model(selected)
+        started = time.perf_counter()
+        encoder.encode(['passage: ' + item[2] for item in chunks[:4]], batch_size=4, normalize_embeddings=True)
+        seconds_per_chunk = (time.perf_counter() - started) / min(4, len(chunks))
+        estimate = seconds_per_chunk * len(chunks)
+        if requested is None and estimate > 600 and selected != 'small':
+            selected = 'base' if selected == 'large' else 'small'
+            reason += f'; estimasi {estimate:.0f} detik melewati 600 detik, turun ke {selected}'
+            encoder = _model(selected)
+        print(f'Model {selected}: {reason}; sampel {seconds_per_chunk:.3f} detik/chunk', flush=True)
         for start in range(0, len(chunks), 16):
             ids = db.execute('SELECT id FROM document_chunks ORDER BY id LIMIT ? OFFSET ?', (len(chunks[start:start+16]), start)).fetchall()
             vectors = encoder.encode(['passage: ' + text for _, _, text in chunks[start:start+16]], batch_size=4, normalize_embeddings=True)
