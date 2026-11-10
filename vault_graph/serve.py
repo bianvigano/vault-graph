@@ -31,13 +31,15 @@ def serve(graph_path: Path):
                 "capabilities": {"tools": {}},
                 "serverInfo": {"name": "vault-graph-mcp", "version": "2.0.0"},
             })
-            _send({"jsonrpc": "2.0", "result": None})
+
 
         elif method == "notifications/initialized":
             pass  # Client sent init confirmation — silently ack
 
         elif method == "tools/list":
             _respond(req_id, {"tools": [
+                {"name": "graph_retrieve_context", "description": "Retrieve ranked knowledge excerpts with source citations", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 10}}, "required": ["query"]}},
+                {"name": "graph_semantic_context", "description": "Retrieve semantically related knowledge excerpts", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 10}}, "required": ["query"]}},
                 {"name": "graph_path", "description": "Find shortest path between two nodes", "inputSchema": {"type": "object", "properties": {"from": {"type": "string"}, "to": {"type": "string"}}, "required": ["from", "to"]}},
                 {"name": "graph_explain", "description": "Explain a node and its connections", "inputSchema": {"type": "object", "properties": {"node": {"type": "string"}}, "required": ["node"]}},
                 {"name": "graph_god_nodes", "description": "List most-connected nodes", "inputSchema": {"type": "object", "properties": {}}},
@@ -52,7 +54,13 @@ def serve(graph_path: Path):
             args = params.get("arguments", {})
 
             try:
-                if tool_name == "graph_path":
+                if tool_name == "graph_semantic_context":
+                    from vault_graph.semantic import retrieve_semantic
+                    result = retrieve_semantic(graph_path, args["query"], args.get("limit", 5))
+                elif tool_name == "graph_retrieve_context":
+                    from vault_graph.retrieval import retrieve
+                    result = retrieve(graph_path, args["query"], args.get("limit", 5))
+                elif tool_name == "graph_path":
                     result = _path(G, args["from"], args["to"])
                 elif tool_name == "graph_explain":
                     result = _explain(G, args["node"])
@@ -73,13 +81,8 @@ def serve(graph_path: Path):
 
 
 def _load_graph(path: Path) -> nx.Graph:
-    data = json.loads(path.read_text())
-    G = nx.Graph()
-    for n in data.get("nodes", []):
-        G.add_node(n["id"], **{k: v for k, v in n.items() if k != "id"})
-    for e in data.get("edges", []):
-        G.add_edge(e["source"], e["target"], **{k: v for k, v in e.items() if k not in ("source", "target")})
-    return G
+    from vault_graph.query import load_graph
+    return load_graph(path)
 
 
 def _path(G, from_label, to_label):

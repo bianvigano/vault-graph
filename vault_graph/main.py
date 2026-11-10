@@ -92,6 +92,10 @@ def main():
     sub.add_parser("communities", help="Community summary")
     sub.add_parser("isolated", help="Nodes with no connections")
     sub.add_parser("stats", help="Graph statistics")
+    p_retrieve = sub.add_parser("retrieve", help="Cari konteks knowledge dari SQLite")
+    p_retrieve.add_argument("question")
+    p_retrieve.add_argument("--semantic", action="store_true", help="Gunakan embedding lokal")
+    p_retrieve.add_argument("--model", choices=("small", "base", "large"), help="Pilih model embedding")
 
     p_search = sub.add_parser("search", help="Search nodes by name")
     p_search.add_argument("term", help="Search term")
@@ -155,6 +159,16 @@ def main():
         serve_preview(out_dir, port=args.port, open_browser=not args.no_open)
         return
 
+    if args.command == "retrieve":
+        if args.semantic:
+            from vault_graph.semantic import retrieve_semantic
+            result = retrieve_semantic(resolve_graph_path(), args.question)
+        else:
+            from vault_graph.retrieval import retrieve
+            result = retrieve(resolve_graph_path(), args.question)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+
     if args.command == "install":
         from vault_graph.install import install
         install()
@@ -165,7 +179,7 @@ def main():
         if not graph_path.exists():
             sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
         from vault_graph.serve import serve
-        print(f"MCP server on {graph_path}")
+        print(f"MCP server on {graph_path}", file=sys.stderr)
         serve(graph_path)
         return
 
@@ -310,6 +324,13 @@ def _rebuild(vault: Path, out_dir: Path):
 
     from vault_graph.export import export
     export(G, analysis, out_dir, report_text)
+    from vault_graph.retrieval import index_documents
+    indexed = index_documents(out_dir / "graph.db", vault, files)
+    print(f"  documents: {indexed} Markdown files indexed")
+    from vault_graph.semantic import index_embeddings
+    print(f"  embeddings: {index_embeddings(out_dir / 'graph.db')} documents indexed")
+
+    # ponytail: fastembed model stays local; switch to a remote provider only when semantic quality needs tuning.
 
     from vault_graph.wiki_export import export_wiki
     export_wiki(G, out_dir, vault)
