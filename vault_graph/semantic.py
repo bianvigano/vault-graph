@@ -43,14 +43,17 @@ def _model(name: str):
     torch.set_num_threads(min(4, torch.get_num_threads()))
     return SentenceTransformer(MODELS[name], device='cuda' if has_cuda() else 'cpu')
 
-def _chunks(text: str):
-    text = text.strip()
-    for start in range(0, max(1, len(text)), CHUNK_SIZE - CHUNK_OVERLAP):
-        part = text[start:start + CHUNK_SIZE].strip()
+def _chunks(text: str, tokenizer):
+    encoded = tokenizer(text, add_special_tokens=False, truncation=False)['input_ids']
+    size, overlap = 440, 64
+    for start in range(0, len(encoded), size - overlap):
+        ids = encoded[start:start + size]
+        part = tokenizer.decode(ids, skip_special_tokens=True).strip()
         if part:
             yield part
-        if start + CHUNK_SIZE >= len(text):
+        if start + size >= len(encoded):
             break
+
 
 def index_embeddings(database: Path, requested: str | None = None) -> dict:
     selected, reason = choose_model(database, requested)
@@ -59,11 +62,13 @@ def index_embeddings(database: Path, requested: str | None = None) -> dict:
         db.execute('CREATE TABLE IF NOT EXISTS chunk_embeddings (chunk_id INTEGER PRIMARY KEY, vector TEXT NOT NULL, model TEXT NOT NULL)')
         db.execute('DELETE FROM document_chunks'); db.execute('DELETE FROM chunk_embeddings')
         docs = db.execute('SELECT path,title,content FROM documents').fetchall()
-        chunks = [(path, title, part) for path, title, content in docs for part in _chunks(content)]
+        if not docs:
+            return {'documents': 0, 'chunks': 0, 'model': selected, 'reason': reason}
+        encoder = _model(selected)
+        chunks = [(path, title, part) for path, title, content in docs for part in _chunks(content, encoder.tokenizer)]
         db.executemany('INSERT INTO document_chunks(path,title,content) VALUES (?,?,?)', chunks)
         if not chunks:
             return {'documents': len(docs), 'chunks': 0, 'model': selected, 'reason': reason}
-        encoder = _model(selected)
         started = time.perf_counter()
         encoder.encode(['passage: ' + item[2] for item in chunks[:4]], batch_size=4, normalize_embeddings=True)
         seconds_per_chunk = (time.perf_counter() - started) / min(4, len(chunks))
