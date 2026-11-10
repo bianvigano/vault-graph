@@ -1264,6 +1264,9 @@
         animation: none !important;
       }
     }
+    .main-orbit { transform-box: fill-box; transform-origin: center; animation: main-spin 18s linear infinite; pointer-events: none; }
+    @keyframes main-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .main-orbit { animation: none; } }
   </style>
 </head>
 <body>
@@ -1719,7 +1722,7 @@
           indexDepth: level,
           tierClass: level === 1 ? 'tier-l1' : 'tier-l2',
           tierBadge: `INDEX L${level}`,
-          shortTag: level === 1 ? folderName.slice(0, 4).toUpperCase() : `L${level}`
+          shortTag: level === 1 ? 'IDX' : `L${level}`
         };
       }
 
@@ -1942,6 +1945,12 @@
         .attr('stroke', nodeColor)
         .attr('stroke-width', 1.2);
 
+      node.filter(d => d.isMain).append('circle')
+        .attr('class', 'main-orbit')
+        .attr('r', d => getRadius(d, isOverview) + 11)
+        .attr('fill', 'none').attr('stroke', '#2dd4bf')
+        .attr('stroke-dasharray', '12 8 3 8');
+
       // Core node circle
       node.append('circle')
         .attr('class', 'core')
@@ -2020,8 +2029,8 @@
       // Pin MAIN hub gently near the center initially so branches radiate clearly
       view.forEach(n => {
         if (n.isMain) {
-          n.x = cx;
-          n.y = cy;
+          n.x = n.fx = cx;
+          n.y = n.fy = cy;
         }
       });
 
@@ -2459,6 +2468,14 @@
         edges.flatMap(e => [`${e.source}|${e.target}`, `${e.target}|${e.source}`])
       );
 
+      // Logical depth follows existing parent indexes, not directory depth.
+      for (const n of nodes.filter(n => n.isIndex && !n.isMain)) {
+        const directory = normalizePath(n.id).split('/').slice(0, -1).join('/');
+        const ancestors = nodes.filter(parent => parent.isIndex && !parent.isMain && parent.id !== n.id && directory.startsWith(normalizePath(parent.id).split('/').slice(0, -1).join('/') + '/'));
+        n.indexDepth = ancestors.length + 1;
+        n.tierClass = n.indexDepth === 1 ? 'tier-l1' : 'tier-l2';
+        n.shortTag = n.indexDepth === 1 ? 'IDX' : `L${n.indexDepth}`;
+      }
       const l1Indexes = nodes.filter(n => n.isIndex && !n.isMain && n.indexDepth === 1);
       l1Indexes.forEach(idxNode => {
         const key = `${mainNodeId}|${idxNode.id}`;
