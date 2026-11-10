@@ -1,55 +1,2771 @@
 <!doctype html>
-<html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atlas Pengetahuan</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#0c111b;color:#e5ecf6;font:14px system-ui,sans-serif}button,input,select{font:inherit}button,select{cursor:pointer;background:#192435;border:1px solid #344259;color:#e5ecf6;border-radius:8px;padding:9px 12px}button:hover,button:focus-visible{border-color:#64dac6;background:#24364a}header{height:84px;border-bottom:1px solid #263246;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}h1{font-size:20px;margin:0 0 4px}small,.muted{color:#99a9be}main{display:grid;grid-template-columns:1fr 320px;height:calc(100vh - 84px)}#workspace{position:relative;min-width:0;background:radial-gradient(ellipse at center,#152236 0,#0c111b 75%)}#toolbar{position:absolute;top:18px;left:22px;right:22px;display:flex;gap:8px;flex-wrap:wrap;z-index:2}input{background:#101b2b;border:1px solid #344259;border-radius:8px;padding:10px 12px;color:white;min-width:180px;flex:1}svg{width:100%;height:100%;display:block}.edge{stroke:#91accb;stroke-opacity:.55;stroke-width:1;vector-effect:non-scaling-stroke}.node{cursor:pointer}.node{transition:opacity 260ms ease}.node circle{transition:r 260ms ease,fill 260ms ease,filter 260ms ease,stroke-width 260ms ease}.node text{fill:#dce6f3;font-size:12px;paint-order:stroke;stroke:#101a28;stroke-width:4px;pointer-events:none;opacity:0;transform:translateY(5px);transition:opacity 220ms ease,transform 220ms ease}.node text.visible{opacity:1;transform:translateY(0)}.edge{transition:opacity 260ms ease,stroke 260ms ease,stroke-width 260ms ease}.node.selected circle{filter:drop-shadow(0 0 8px #66d9c4);stroke:#fff;stroke-width:3}.node.related circle{filter:drop-shadow(0 0 5px #79aaff)}.node:focus circle{stroke:white;stroke-width:3}aside{background:#101925;border-left:1px solid #263246;overflow:auto;padding:24px}h2{font-size:18px;line-height:1.5;margin-top:0;overflow-wrap:anywhere}h3{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#99a9be;margin-top:26px}.item{display:block;text-align:left;width:100%;margin:7px 0;overflow-wrap:anywhere}.path{font:11px monospace;overflow-wrap:anywhere;color:#99a9be;line-height:1.8}#status{position:absolute;bottom:20px;left:24px;color:#99a9be;pointer-events:none}.badge{display:inline-block;border:1px solid #344259;border-radius:20px;padding:5px 9px;margin:3px;color:#a6e8dc}#query{width:100%;min-width:0;margin-top:12px}.empty{line-height:1.8;color:#99a9be}@media(max-width:760px){main{grid-template-columns:1fr;height:auto}#workspace{height:65vh}aside{border-left:0;border-top:1px solid #263246;max-height:45vh}header{padding:16px}#toolbar{left:12px;right:12px}header small{display:none}}
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Atlas Pengetahuan — Knowledge Graph</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="./graph-data.js"></script>
+  <style>
+    :root {
+      --bg-void: #07090e;
+      --bg-canvas: #090c12;
+      --bg-surface: rgba(15, 19, 28, 0.85);
+      --bg-elevated: #141923;
+      --bg-hover: #1c2331;
+      --bg-active: #232c3d;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-default: rgba(255, 255, 255, 0.1);
+      --border-focus: #38bdf8;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-teal: #2dd4bf;
+      --accent-blue: #38bdf8;
+      --accent-amber: #fbbf24;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
 
-.icon-button{position:relative;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:9px;flex:none}.icon-button svg{width:20px;height:20px;display:block}.icon-button[aria-pressed="true"]{color:#66d9c4;border-color:#66d9c4;background:#203b40}.icon-button::after{content:attr(data-tip);position:absolute;top:calc(100% + 9px);left:50%;transform:translate(-50%,-4px);background:#243449;color:#eef5ff;border:1px solid #465a74;border-radius:6px;padding:6px 9px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 150ms,transform 150ms;z-index:30}.icon-button:hover::after,.icon-button:focus-visible::after{opacity:1;transform:translate(-50%,0)}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-<header><div><h1>Atlas Pengetahuan</h1><small>Jelajahi topik, temukan hubungan, buka konteks.</small></div><span id="total" class="badge"></span></header>
-<main><section id="workspace" aria-label="Visualisasi hubungan"><div id="toolbar"><button id="home" class="icon-button" aria-label="Semua hubungan" data-tip="Semua hubungan"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></button><input id="search" aria-label="Cari pengetahuan" placeholder="Cari judul atau path…"><select id="type" aria-label="Filter tipe"><option value="">Semua tipe</option></select><button id="fit" class="icon-button" aria-label="Pas-kan ke layar" data-tip="Pas-kan ke layar"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button><button id="unlock" class="icon-button" aria-label="Lepaskan posisi" data-tip="Lepaskan posisi" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7z"/></svg></button><button id="reset" class="icon-button" aria-label="Reset layout" data-tip="Reset layout"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg></button><button id="isolated" class="icon-button" aria-label="Tampilkan node terisolasi" data-tip="Tampilkan node terisolasi" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="4" r="1"/><circle cx="20" cy="4" r="1"/><circle cx="4" cy="20" r="1"/><circle cx="20" cy="20" r="1"/></svg></button></div><svg role="img" aria-label="Graph pengetahuan"></svg><div id="status" role="status"></div></section><aside><h2 id="title">Pilih sebuah topik</h2><div id="detail" class="empty">Mulai dari kelompok di sebelah kiri. Pilih node untuk melihat koneksi dan sumbernya.</div><h3>Cari jalur</h3><input id="query" aria-label="Perintah graph" placeholder="path A to B / explain A"><button id="run" class="icon-button" aria-label="Jalankan pencarian jalur" data-tip="Jalankan pencarian jalur"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></button><p class="muted">Gulir untuk zoom · tarik untuk geser<br>Enter pada node untuk membuka detail.</p></aside></main>
-<script src="./graph-data.js"></script>
-<script type="module">
-const raw = window.VAULT_GRAPH_DATA;
-if (!raw || !Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) {
-  document.getElementById('detail').textContent = 'Data graph tidak valid atau graph-data.js belum tersedia.';
-  throw new Error('Invalid graph-data.js');
-}
-const $=id=>document.getElementById(id), svg=d3.select('#workspace > svg'), layer=svg.append('g'); // target graph, bukan SVG ikon toolbar
-const endpoint=x=>typeof x==='object'?x.id:x;
-const palette=['#66d9c4','#79aaff','#d5a0fa','#f2c879','#f58e9c','#86ceb7','#9eb8ed'];
-function clean(value){const el=document.createElement('textarea');let s=String(value||'');for(let i=0;i<8;i++){el.innerHTML=s;const next=el.value;if(next===s)break;s=next;}return s.replace(/(?:amp;?){2,}/g,'').replace(/\s+/g,' ').trim();}
-const nodes=raw.nodes.map(n=>({...n,label:clean(n.label||n.id).split(/[\\/]/).pop().replace(/\.md$/i,'').replace(/[-_]/g,' ')}));
-const map=new Map(nodes.map(n=>[n.id,n])), adj=new Map(nodes.map(n=>[n.id,[]]));
-const edges=raw.edges.filter(e=>map.has(endpoint(e.source))&&map.has(endpoint(e.target))).map(e=>({...e,source:endpoint(e.source),target:endpoint(e.target)}));
-for(const e of edges){adj.get(e.source).push(e.target);adj.get(e.target).push(e.source);}
-function topic(n){const parts=n.id.replace(/^.*?\/vault\//,'').split('/');if(n.id.startsWith('trae:'))return 'Trae';if(['sessions','concepts','wiki'].includes(parts[0]))return parts.length>2?parts[1]:parts[0];return n.type||'other';}
-const groups=d3.group(nodes,topic), colors=new Map([...groups.keys()].sort().map((k,i)=>[k,palette[i%palette.length]]));
-function setMotionIcon(active){const b=$('unlock');b.querySelector('svg').innerHTML=active?'<path d="M8 5v14M16 5v14"/>':'<path d="m8 5 11 7-11 7z"/>';b.dataset.tip=active?'Hentikan gerakan':'Lepaskan posisi';b.setAttribute('aria-label',b.dataset.tip);}
-let simulation, current=null, selected=null, showIsolated=false, released=false;
-$('total').textContent=`${nodes.length} node · ${edges.length} relasi`;
-for(const t of [...new Set(nodes.map(n=>n.type||'other'))].sort()){const o=document.createElement('option');o.value=t;o.textContent=t;$('type').append(o);}
-const zoom=d3.zoom().scaleExtent([.12,5]).on('zoom',e=>{layer.attr('transform',e.transform);updateLabels(e.transform.k);});svg.call(zoom);
-function updateLabels(scale){layer.selectAll('.node text').classed('visible',d=>selected===d.id||scale>=2||(scale>=1.25&&(adj.get(d.id)?.length||0)>=5));}
-function fit(){const box=layer.node().getBBox(), rect=svg.node().getBoundingClientRect();if(!box.width)return;const scale=Math.min(1.5,(rect.width-100)/box.width,(rect.height-150)/box.height);svg.transition().duration(350).call(zoom.transform,d3.zoomIdentity.translate(rect.width/2-scale*(box.x+box.width/2),rect.height/2+30-scale*(box.y+box.height/2)).scale(scale));}
-function render(list,links,overview=false){if(simulation)simulation.stop();layer.selectAll('*').remove();const rect=svg.node().getBoundingClientRect();const view=list.map(n=>({...n})), line=layer.append('g').selectAll('line').data(links.map(e=>({...e}))).join('line').attr('class','edge').attr('stroke-dasharray',d=>d.confidence==='INFERRED'?'4 5':null);
-const node=layer.append('g').selectAll('g').data(view).join('g').attr('class','node').attr('tabindex',0).attr('role','button').attr('aria-label',d=>d.label).on('click',(_,d)=>overview?openGroup(d.id):showNode(d.id)).on('keydown',(e,d)=>{if(e.key==='Enter')overview?openGroup(d.id):showNode(d.id);});
-const radius=d=>overview?Math.min(55,22+Math.sqrt(d.count)*2):Math.min(16,5+Math.sqrt(adj.get(d.id)?.length||0));
-node.append('circle').attr('r',radius).attr('fill',d=>colors.get(overview?d.id:topic(d))||palette[0]).attr('fill-opacity',.85).attr('stroke','#bcece5').attr('stroke-opacity',.25);
-node.append('title').text(d=>`${d.label} · ${overview?d.count+' node':(adj.get(d.id)?.length||0)+' koneksi'}`);
-node.append('text').attr('text-anchor','middle').attr('y',d=>radius(d)+20).text(d=>overview?`${d.label} (${d.count})`:d.label.length>30?d.label.slice(0,29)+'…':d.label).classed('visible',d=>d.id===selected);
-node.on('mouseenter',function(){d3.select(this).select('text').classed('visible',true);}).on('mouseleave',function(_,d){updateLabels(d3.zoomTransform(svg.node()).k);});
-simulation=d3.forceSimulation(view).force('link',d3.forceLink(line.data()).id(d=>d.id).distance(110)).force('charge',d3.forceManyBody().strength(overview?-650:-130)).force('center',d3.forceCenter(rect.width/2,rect.height/2+25)).force('collision',d3.forceCollide().radius(d=>radius(d)+(overview?35:14)));
-node.call(d3.drag().on('start',(e,d)=>{d.fx=d.x;d.fy=d.y;simulation.alphaTarget(.12).restart();}).on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;}).on('end',(e,d)=>{simulation.alphaTarget(released?.08:0);if(released){d.fx=null;d.fy=null;}}));
-simulation.stop(); for(let i=0;i<250;i++)simulation.tick();
-simulation.on('tick',()=>{line.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);node.attr('transform',d=>`translate(${d.x},${d.y})`);});line.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);node.attr('transform',d=>`translate(${d.x},${d.y})`);updateLabels(d3.zoomTransform(svg.node()).k);fit();$('status').textContent=overview?`${view.length} topik · pilih kelompok untuk menjelajah`:`${view.length} node · ${links.length} relasi · zoom untuk menampilkan nama`;}
-function button(label,action){const b=document.createElement('button');b.className='item';b.textContent=label;b.onclick=action;return b;}
-function overview(){released=false;$('unlock').setAttribute('aria-pressed','false');setMotionIcon(false);$('status').textContent='Memuat graph…';current=null;selected=null;$('search').value='';$('type').value='';$('title').textContent='Semua hubungan';$('detail').replaceChildren(...[...groups].sort((a,b)=>b[1].length-a[1].length).map(([k,v])=>button(`${k} · ${v.length} node`,()=>openGroup(k))));render(nodes,edges,false);highlight(new Set(nodes.filter(n=>showIsolated||adj.get(n.id).length).map(n=>n.id)));}
-function highlight(ids){layer.selectAll('.node').attr('opacity',d=>ids.has(d.id)?1:.18).attr('pointer-events',d=>ids.has(d.id)?'auto':'none');layer.selectAll('.edge').attr('opacity',d=>ids.has(endpoint(d.source))&&ids.has(endpoint(d.target))?1:.28);layer.selectAll('.node').classed('selected',d=>d.id===selected).classed('related',d=>ids.has(d.id)&&d.id!==selected);layer.selectAll('.node circle').attr('r',d=>Math.min(16,5+Math.sqrt(adj.get(d.id)?.length||0))*(d.id===selected?1.4:1));layer.selectAll('.edge').style('stroke',d=>selected&&(endpoint(d.source)===selected||endpoint(d.target)===selected)?'#66d9c4':null);updateLabels(d3.zoomTransform(svg.node()).k);}
-function openGroup(k){current=k;highlight(new Set(groups.get(k).map(n=>n.id)));$('title').textContent=k;$('detail').textContent='Pilih node untuk melihat sumber dan koneksi. Gunakan pencarian untuk mempersempit hasil.';}
-function filter(){const q=$('search').value.trim().toLowerCase(),t=$('type').value;const list=nodes.filter(n=>(!current||topic(n)===current)&&(!t||(n.type||'other')===t)&&(!q||`${n.label} ${n.id}`.toLowerCase().includes(q)));const ids=new Set(list.filter(n=>q||showIsolated||adj.get(n.id).length).map(n=>n.id));highlight(ids);if(q){$('title').textContent=`${list.length} hasil pencarian`;$('detail').replaceChildren(...list.slice(0,60).map(n=>button(n.label,()=>showNode(n.id))));}}
-function showNode(id){const n=map.get(id);if(!n)return;selected=id;$('title').textContent=n.label;const source=document.createElement('p');source.className='path';source.textContent=n.id;const meta=document.createElement('p');meta.textContent=`${n.type||'other'} · ${adj.get(id).length} koneksi · kelompok ${topic(n)}`;const heading=document.createElement('h3');heading.textContent='Terhubung dengan';$('detail').replaceChildren(meta,source,heading,...adj.get(id).map(x=>button(map.get(x).label,()=>showNode(x))));const ids=new Set([id,...adj.get(id)]);highlight(ids);}
-function find(q){q=q.toLowerCase();return nodes.find(n=>n.id.toLowerCase()===q||n.label.toLowerCase()===q)||nodes.find(n=>`${n.label} ${n.id}`.toLowerCase().includes(q));}
-function run(){const q=$('query').value.trim();if(/^explain /i.test(q)){const n=find(q.slice(8));if(n)showNode(n.id);else $('status').textContent='Node tidak ditemukan';return;}const match=q.match(/^path (.+) to (.+)$/i);if(!match){$('search').value=q;current=null;filter();return;}const a=find(match[1]),b=find(match[2]);if(!a||!b){$('status').textContent='Node awal atau tujuan tidak ditemukan';return;}const queue=[a.id],prev=new Map([[a.id,null]]);for(let i=0;i<queue.length&&!prev.has(b.id);i++)for(const x of adj.get(queue[i]))if(!prev.has(x)){prev.set(x,queue[i]);queue.push(x);}if(!prev.has(b.id)){$('status').textContent='Tidak ada jalur';return;}const path=[];for(let x=b.id;x!==null;x=prev.get(x))path.push(x);path.reverse();const ids=new Set(path);highlight(ids);layer.selectAll('.edge').style('stroke',d=>ids.has(endpoint(d.source))&&ids.has(endpoint(d.target))?'#f2c879':null);$('title').textContent=`Jalur · ${path.length-1} langkah`;$('detail').replaceChildren(...path.map(id=>button(map.get(id).label,()=>showNode(id))));}
-$('unlock').onclick=()=>{released=!released;$('unlock').setAttribute('aria-pressed',String(released));setMotionIcon(released);if(released){simulation.nodes().forEach(n=>{n.fx=null;n.fy=null;});simulation.alphaTarget(.08).alpha(.35).restart();}else{simulation.stop();simulation.alphaTarget(0);simulation.nodes().forEach(n=>{n.fx=n.x;n.fy=n.y;});}};$('reset').onclick=overview;$('isolated').onclick=()=>{showIsolated=!showIsolated;$('isolated').dataset.tip=showIsolated?'Sembunyikan node terisolasi':'Tampilkan node terisolasi';$('isolated').setAttribute('aria-label',$('isolated').dataset.tip);$('isolated').setAttribute('aria-pressed',String(showIsolated));filter();};$('home').onclick=()=>{current=null;selected=null;$('search').value='';$('type').value='';highlight(new Set(nodes.filter(n=>showIsolated||adj.get(n.id).length).map(n=>n.id)));};$('fit').onclick=fit;$('search').oninput=filter;$('type').onchange=filter;$('run').onclick=run;$('query').onkeydown=e=>{if(e.key==='Enter')run();};overview();
-</script></html>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    /* Header Bar */
+    header {
+      height: 52px;
+      background: var(--bg-void);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(56, 189, 248, 0.18));
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-teal);
+    }
+
+    .brand-logo svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .brand-text {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .stat-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      box-shadow: 0 0 8px var(--accent-teal);
+    }
+
+    .btn-upload {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 150ms ease;
+    }
+    .btn-upload:hover {
+      color: var(--text-primary);
+      border-color: var(--border-default);
+      background: var(--bg-hover);
+    }
+
+    /* Main Workspace Layout */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      min-height: 0;
+      position: relative;
+    }
+
+    /* Graph Canvas Area */
+    #workspace {
+      position: relative;
+      min-width: 0;
+      background-color: var(--bg-canvas);
+      background-image:
+        radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.3) 0%, transparent 70%),
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px;
+      overflow: hidden;
+    }
+
+    /* Floating Top HUD Toolbar */
+    #toolbar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 25;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hud-panel {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-default);
+      padding: 5px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 280px;
+    }
+
+    .search-wrapper svg.search-icon {
+      position: absolute;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      background: rgba(7, 9, 14, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 6px 34px 6px 30px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      outline: none;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    #search:focus {
+      background: var(--bg-void);
+      border-color: var(--border-focus);
+    }
+
+    #search::placeholder {
+      color: var(--text-muted);
+    }
+
+    .kbd-hint {
+      position: absolute;
+      right: 7px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1px 5px;
+      pointer-events: none;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 20px;
+      background: var(--border-subtle);
+      margin: 0 2px;
+    }
+
+    select#type {
+      background: rgba(7, 9, 14, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 6px 26px 6px 10px;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      transition: all 150ms ease;
+    }
+
+    select#type:hover, select#type:focus {
+      color: var(--text-primary);
+      border-color: var(--border-default);
+      background-color: var(--bg-elevated);
+    }
+
+    .icon-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 140ms ease;
+      flex: none;
+    }
+
+    .icon-button svg {
+      width: 15px;
+      height: 15px;
+      display: block;
+    }
+
+    .icon-button:hover, .icon-button:focus-visible {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+      border-color: var(--border-subtle);
+      outline: none;
+    }
+
+    .icon-button[aria-pressed="true"] {
+      color: var(--accent-teal);
+      background: rgba(45, 212, 191, 0.12);
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+
+    /* Tooltips */
+    .icon-button::after {
+      content: attr(data-tip);
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translate(-50%, -4px);
+      background: #18202c;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: 4px 8px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 140ms ease, transform 140ms ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      z-index: 40;
+    }
+
+    .icon-button:hover::after, .icon-button:focus-visible::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Fix tooltip alignment for left-most and right-most buttons */
+    #home::after {
+      left: 0;
+      transform: translate(0, -4px);
+    }
+    #home:hover::after, #home:focus-visible::after {
+      transform: translate(0, 0);
+    }
+    #isolated::after, #settings-btn::after, #run::after {
+      left: auto;
+      right: 0;
+      transform: translate(0, -4px);
+    }
+    #isolated:hover::after, #isolated:focus-visible::after,
+    #settings-btn:hover::after, #settings-btn:focus-visible::after,
+    #run:hover::after, #run:focus-visible::after {
+      transform: translate(0, 0);
+    }
+
+    /* Settings Popover Panel */
+    #settings-panel {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 310px;
+      background: rgba(13, 17, 26, 0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 20px 44px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.5);
+      z-index: 60;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.98);
+      transform-origin: top right;
+      transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1), visibility 160ms;
+      pointer-events: none;
+    }
+
+    #settings-panel.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .sp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sp-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sp-title svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent-teal);
+    }
+
+    .sp-reset {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 5px;
+      padding: 2px 7px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .sp-reset:hover {
+      color: var(--accent-teal);
+      border-color: rgba(45, 212, 191, 0.4);
+      background: rgba(45, 212, 191, 0.1);
+    }
+
+    .sp-section-title {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-teal);
+      margin: 12px 0 8px;
+    }
+
+    .sp-section-title:first-of-type {
+      margin-top: 2px;
+    }
+
+    .sp-row {
+      margin-bottom: 10px;
+    }
+
+    .sp-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .sp-val {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .sp-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .sp-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      border: 2px solid #07090e;
+      box-shadow: 0 0 8px rgba(45, 212, 191, 0.6);
+      cursor: pointer;
+      transition: transform 120ms ease, background-color 120ms ease;
+    }
+
+    .sp-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+      background: #5eead4;
+    }
+
+    .sp-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 0;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+    }
+
+    .sp-switch {
+      position: relative;
+      width: 32px;
+      height: 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 150ms ease;
+      flex-shrink: 0;
+    }
+
+    .sp-switch::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      transition: all 150ms ease;
+    }
+
+    .sp-switch[aria-checked="true"] {
+      background: rgba(45, 212, 191, 0.22);
+      border-color: var(--accent-teal);
+    }
+
+    .sp-switch[aria-checked="true"]::after {
+      left: 16px;
+      background: var(--accent-teal);
+      box-shadow: 0 0 6px var(--accent-teal);
+    }
+
+    /* Custom Floating Node Hover Card */
+    #node-tooltip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+      transform: translate(-50%, calc(-100% - 14px)) scale(0.96);
+      transition: opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+      background: rgba(13, 17, 26, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 9px 12px;
+      box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(0, 0, 0, 0.4);
+      min-width: 190px;
+      max-width: 310px;
+    }
+
+    #node-tooltip.visible {
+      opacity: 1;
+      transform: translate(-50%, calc(-100% - 18px)) scale(1);
+    }
+
+    .nt-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 5px;
+    }
+
+    .nt-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .nt-title {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nt-tier-tag {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .nt-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-secondary);
+      padding-top: 5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nt-badge {
+      color: var(--accent-teal);
+      background: rgba(45, 212, 191, 0.12);
+      border: 1px solid rgba(45, 212, 191, 0.28);
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    /* SVG Graph Elements */
+    #workspace > svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+
+    #workspace > svg:active {
+      cursor: grabbing;
+    }
+
+    .edge {
+      stroke: #64748b;
+      vector-effect: non-scaling-stroke;
+      transition: opacity 220ms ease, stroke 220ms ease, stroke-width 180ms ease;
+    }
+
+    .edge.main-backbone {
+      stroke: #2dd4bf;
+      stroke-dasharray: 5 4;
+    }
+
+    .node {
+      cursor: pointer;
+      transition: opacity 220ms ease;
+      outline: none;
+    }
+
+    .node circle.core {
+      transition: r 220ms cubic-bezier(0.22, 1, 0.36, 1), fill 220ms ease, stroke 220ms ease, stroke-width 220ms ease, filter 220ms ease;
+    }
+
+    .node circle.halo {
+      fill: none;
+      stroke-width: 1.5px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease, r 220ms ease;
+    }
+
+    .node circle.index-ring {
+      fill: none;
+      pointer-events: none;
+      stroke-dasharray: 3 2;
+      opacity: 0.55;
+      transition: opacity 220ms ease, r 220ms ease;
+    }
+
+    /* Special styling for MAIN Root Hub & Index nodes */
+    .node.tier-main circle.core {
+      filter: drop-shadow(0 0 16px rgba(45, 212, 191, 0.65));
+      stroke: #ffffff;
+      stroke-opacity: 0.95;
+      stroke-width: 2.5px;
+    }
+
+    .node.tier-main circle.halo {
+      opacity: 0.85;
+      stroke-width: 2px;
+      stroke-dasharray: 4 3;
+      animation: pulse-ring 6s linear infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .node.tier-l1 circle.core {
+      stroke: #ffffff;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    }
+
+    .node.tier-l2 circle.core {
+      stroke: #ffffff;
+      stroke-opacity: 0.5;
+      stroke-width: 1.5px;
+    }
+
+    .node:hover circle.halo,
+    .node.selected circle.halo {
+      opacity: 0.75;
+    }
+
+    .node.selected circle.core {
+      stroke: #ffffff !important;
+      stroke-opacity: 1 !important;
+      stroke-width: 3px !important;
+      filter: drop-shadow(0 0 14px rgba(45, 212, 191, 0.85));
+    }
+
+    .node.related circle.core {
+      stroke: #e2e8f0;
+      stroke-opacity: 0.85;
+      stroke-width: 1.6px;
+    }
+
+    .node text.node-label {
+      fill: #e2e8f0;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      paint-order: stroke;
+      stroke: var(--bg-canvas);
+      stroke-width: 3.5px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(3px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .node.tier-main text.node-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      fill: #ffffff;
+    }
+
+    .node.tier-l1 text.node-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      fill: #f8fafc;
+    }
+
+    .node text.node-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Inner Badge Text inside MAIN & L1 Index Circles */
+    .node text.inner-tag {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      fill: #061017;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.03em;
+    }
+
+    /* Bottom Status & Legend Bar */
+    .canvas-footer {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--bg-surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 12px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .hierarchy-legend {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-secondary);
+      background: var(--bg-surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 12px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .h-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .h-circle {
+      display: inline-block;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      border: 1.5px solid #fff;
+    }
+
+    /* Floating Bottom-Right Zoom Dock */
+    .zoom-dock {
+      position: absolute;
+      right: 16px;
+      bottom: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 6px;
+      background: rgba(12, 16, 24, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.65);
+      z-index: 12;
+      user-select: none;
+    }
+
+    .zoom-pct {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      padding: 3px 8px;
+      min-width: 44px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .zoom-pct:hover {
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+    }
+
+    .zoom-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .zoom-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .zoom-btn:hover, .zoom-btn:focus-visible {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: scale(1.04);
+      outline: none;
+    }
+
+    .zoom-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Sidebar Inspector */
+    aside {
+      background: var(--bg-void);
+      border-left: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+      z-index: 15;
+    }
+
+    .inspector-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .inspector-eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .eyebrow-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    .btn-back-overview {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 140ms ease;
+    }
+
+    .btn-back-overview:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    h2#title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      overflow-wrap: anywhere;
+    }
+
+    /* Scrollable Detail Container */
+    #detail {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+    }
+
+    .empty-state {
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      line-height: 1.6;
+      padding: 12px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+    }
+
+    /* Group / Node List Buttons */
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      text-align: left;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 9px 12px;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 140ms ease;
+      gap: 10px;
+    }
+
+    .item.main-hub-btn {
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.14), rgba(56, 189, 248, 0.08));
+      border-color: rgba(45, 212, 191, 0.4);
+      margin-bottom: 12px;
+    }
+
+    .item:hover, .item:focus-visible {
+      background: var(--bg-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateX(2px);
+      outline: none;
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .item-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .item-label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 7px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    /* Node Metadata Inside Inspector */
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .meta-chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .meta-chip.highlight-chip {
+      color: var(--accent-teal);
+      border-color: rgba(45, 212, 191, 0.35);
+      background: rgba(45, 212, 191, 0.1);
+    }
+
+    .path-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #05070b;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      margin-bottom: 16px;
+    }
+
+    .path {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      overflow-wrap: anywhere;
+      line-height: 1.4;
+    }
+
+    .btn-copy {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 4px 6px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 140ms ease;
+    }
+
+    .btn-copy:hover {
+      color: var(--text-primary);
+      border-color: var(--border-default);
+    }
+
+    .section-heading {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 18px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .headings-list {
+      list-style: none;
+      border-left: 1px solid var(--border-default);
+      margin-left: 6px;
+      padding-left: 12px;
+      margin-bottom: 16px;
+    }
+
+    .headings-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 3px 0;
+      position: relative;
+    }
+
+    .headings-list li::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 10px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border-default);
+    }
+
+    /* Path Query Footer inside Sidebar */
+    .inspector-footer {
+      padding: 14px 20px 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(10, 13, 20, 0.9);
+      flex-shrink: 0;
+    }
+
+    .query-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .query-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    #query {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 7px 10px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      outline: none;
+      transition: border-color 150ms ease;
+    }
+
+    #query:focus {
+      border-color: var(--accent-teal);
+      background: var(--bg-void);
+    }
+
+    #query::placeholder {
+      color: var(--text-muted);
+    }
+
+    #run {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+      width: 32px;
+      height: 32px;
+    }
+
+    #run:hover {
+      background: var(--accent-teal);
+      border-color: var(--accent-teal);
+      color: #042f2e;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 860px) {
+      body {
+        overflow: auto;
+        height: auto;
+      }
+      main {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      #workspace {
+        height: 62vh;
+      }
+      aside {
+        border-left: 0;
+        border-top: 1px solid var(--border-subtle);
+        height: auto;
+        max-height: none;
+      }
+      .subtitle, .hierarchy-legend {
+        display: none;
+      }
+      .search-wrapper {
+        width: 180px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Atlas Pengetahuan</h1>
+        <span class="subtitle">Eksplorasi hierarki MAIN, indeks cabang, dan relasi dokumen</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <label class="btn-upload" title="Muat file graph.json secara manual">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span>Muat JSON</span>
+        <input type="file" id="file-input" accept=".json,application/json" style="display:none">
+      </label>
+      <div class="stat-pill">
+        <span class="dot"></span>
+        <span id="total">Memuat...</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="workspace" aria-label="Visualisasi hubungan">
+      <div id="toolbar">
+        <div class="hud-panel">
+          <button id="home" class="icon-button" aria-label="Beranda" data-tip="Beranda">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+            </svg>
+          </button>
+          <button id="focus-main" class="icon-button" aria-label="Pusat MAIN" data-tip="Fokus ke Pusat MAIN">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </button>
+          <div class="divider-v"></div>
+          <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input id="search" aria-label="Cari pengetahuan" placeholder="Cari judul atau path…">
+            <span class="kbd-hint">/</span>
+          </div>
+          <select id="type" aria-label="Filter tipe">
+            <option value="">Semua tipe</option>
+          </select>
+        </div>
+
+        <div class="hud-panel">
+          <button id="fit" class="icon-button" aria-label="Pas-kan ke layar" data-tip="Pas-kan ke layar (F)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>
+            </svg>
+          </button>
+          <button id="unlock" class="icon-button" aria-label="Lepaskan posisi" data-tip="Simulasi fisika" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m8 5 11 7-11 7z"/>
+            </svg>
+          </button>
+          <button id="reset" class="icon-button" aria-label="Reset layout" data-tip="Reset layout">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/>
+            </svg>
+          </button>
+          <button id="isolated" class="icon-button" aria-label="Tampilkan node terisolasi" data-tip="Tampilkan node terisolasi" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <circle cx="4" cy="4" r="1.5"/>
+              <circle cx="20" cy="4" r="1.5"/>
+              <circle cx="4" cy="20" r="1.5"/>
+              <circle cx="20" cy="20" r="1.5"/>
+            </svg>
+          </button>
+          <div class="divider-v"></div>
+          <button id="settings-btn" class="icon-button" aria-label="Pengaturan Tampilan" data-tip="Pengaturan Tampilan" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+              <line x1="1" y1="14" x2="7" y2="14"/>
+              <line x1="9" y1="8" x2="15" y2="8"/>
+              <line x1="17" y1="16" x2="23" y2="16"/>
+            </svg>
+          </button>
+
+          <!-- Floating Settings Popover -->
+          <div id="settings-panel" role="dialog" aria-label="Pengaturan Visualisasi Graph">
+            <div class="sp-header">
+              <div class="sp-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>Pengaturan Graph</span>
+              </div>
+              <button type="button" id="sp-reset-btn" class="sp-reset">Reset Default</button>
+            </div>
+
+            <div class="sp-section-title">Garis &amp; Koneksi</div>
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Ketebalan Garis</span>
+                <span class="sp-val" id="val-edge-width">1.2 px</span>
+              </div>
+              <input type="range" id="cfg-edge-width" class="sp-slider" min="0.4" max="4" step="0.1" value="1.2">
+            </div>
+
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Transparansi Garis</span>
+                <span class="sp-val" id="val-edge-opacity">45%</span>
+              </div>
+              <input type="range" id="cfg-edge-opacity" class="sp-slider" min="0.1" max="1" step="0.05" value="0.45">
+            </div>
+
+            <div class="sp-section-title">Ukuran Titik &amp; Hierarki</div>
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Skala Ukuran Node</span>
+                <span class="sp-val" id="val-node-scale">1.0x</span>
+              </div>
+              <input type="range" id="cfg-node-scale" class="sp-slider" min="0.5" max="2.2" step="0.1" value="1.0">
+            </div>
+
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Kontras Ukuran MAIN/Index</span>
+                <span class="sp-val" id="val-hierarchy-boost">1.0x</span>
+              </div>
+              <input type="range" id="cfg-hierarchy-boost" class="sp-slider" min="0.4" max="2.0" step="0.1" value="1.0">
+            </div>
+
+            <div class="sp-section-title">Fisika &amp; Tata Letak</div>
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Jarak Antar Node</span>
+                <span class="sp-val" id="val-link-dist">95 px</span>
+              </div>
+              <input type="range" id="cfg-link-dist" class="sp-slider" min="40" max="220" step="5" value="95">
+            </div>
+
+            <div class="sp-row">
+              <div class="sp-label-row">
+                <span>Gaya Tolak (Repel)</span>
+                <span class="sp-val" id="val-charge">130</span>
+              </div>
+              <input type="range" id="cfg-charge" class="sp-slider" min="40" max="360" step="10" value="130">
+            </div>
+
+            <div class="sp-section-title">Label &amp; Visual</div>
+            <div class="sp-toggle-row">
+              <span>Tampilkan Semua Nama</span>
+              <button type="button" id="cfg-all-labels" class="sp-switch" role="switch" aria-checked="false"></button>
+            </div>
+            <div class="sp-toggle-row">
+              <span>Garis Cabang MAIN Terang</span>
+              <button type="button" id="cfg-main-lines" class="sp-switch" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <svg role="img" aria-label="Graph pengetahuan"></svg>
+
+      <!-- Custom Floating Node Tooltip Card -->
+      <div id="node-tooltip" role="tooltip" aria-hidden="true">
+        <div class="nt-header">
+          <span class="nt-dot" id="nt-dot"></span>
+          <span class="nt-title" id="nt-title"></span>
+          <span class="nt-tier-tag" id="nt-tier"></span>
+        </div>
+        <div class="nt-meta">
+          <span id="nt-group"></span>
+          <span class="nt-badge" id="nt-conn"></span>
+        </div>
+      </div>
+
+      <!-- Floating Bottom-Right Zoom Controls -->
+      <div class="zoom-dock" aria-label="Kontrol Zoom">
+        <button id="zoom-pct" class="zoom-pct">100%</button>
+        <button id="zoom-center" class="zoom-btn" aria-label="Fokus ke tengah">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="7"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+          </svg>
+        </button>
+        <button id="zoom-in" class="zoom-btn" aria-label="Perbesar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="6" x2="12" y2="18"/>
+            <line x1="6" y1="12" x2="18" y2="12"/>
+          </svg>
+        </button>
+        <button id="zoom-out" class="zoom-btn" aria-label="Perkecil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="6" y1="12" x2="18" y2="12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="canvas-footer">
+        <div id="status" role="status">Memuat graph…</div>
+        <div class="hierarchy-legend" aria-label="Legenda Hierarki Ukuran Node">
+          <span class="h-item"><span class="h-circle" style="width:13px;height:13px;background:#2dd4bf"></span> MAIN Hub</span>
+          <span class="h-item"><span class="h-circle" style="width:10px;height:10px;background:#38bdf8"></span> Index L1</span>
+          <span class="h-item"><span class="h-circle" style="width:8px;height:8px;background:#818cf8"></span> Sub-Index L2+</span>
+          <span class="h-item"><span class="h-circle" style="width:5px;height:5px;border:none;background:#94a3b8"></span> Dokumen</span>
+        </div>
+      </div>
+    </section>
+
+    <aside>
+      <div class="inspector-header">
+        <div class="inspector-eyebrow">
+          <span class="eyebrow-tag" id="inspector-mode">Eksplorasi Klaster</span>
+          <button class="btn-back-overview" id="back-btn" style="display:none">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Semua topik
+          </button>
+        </div>
+        <h2 id="title">Pilih sebuah topik</h2>
+      </div>
+
+      <div id="detail">
+        <div class="empty-state">Mulai dari titik pusat <strong>MAIN</strong> atau pilih kelompok di bawah untuk menelusuri cabang sistem.</div>
+      </div>
+
+      <div class="inspector-footer">
+        <div class="query-label">
+          <span>Pencarian Jalur &amp; Komando</span>
+          <span style="opacity: 0.6">BFS Router</span>
+        </div>
+        <div class="query-bar">
+          <input id="query" aria-label="Perintah graph" placeholder="path MAIN to docker  atau  explain MAIN">
+          <button id="run" class="icon-button" aria-label="Jalankan pencarian jalur" data-tip="Jalankan perintah (Enter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 12 14 0m-6-6 6 6-6 6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module">
+    // Fallback sample data dari vault jika ./graph.json tidak ditemukan di environment preview
+    const FALLBACK_GRAPH = {
+      "nodes": [
+        { "id": "index.md", "label": "MAIN — Vault Knowledge Base", "type": "other", "headings": ["Vault — Knowledge Base Index", "Sessions by Category", "Hermes"], "size": 8.39 },
+        { "id": "README.md", "label": "Hermes Vault", "type": "other", "headings": ["Hermes Vault", "Struktur", "Cara Akses", "Pipeline Otomatis", "Vault Knowledge Graph"], "size": 14.7 },
+        { "id": "wiki/vault-system.md", "label": "Vault System", "type": "other", "headings": ["Vault System", "Apa itu Vault?", "Lokasi", "Flow", "Shared Memory", "Struktur wiki Vault"], "size": 30 },
+        { "id": "wiki/hermes-setup.md", "label": "Hermes Setup", "type": "other", "headings": ["Hermes Setup", "Info Server", "Sistem Aktif", "Skill System", "Konfigurasi Penting"], "size": 30 },
+        { "id": "wiki/index.md", "label": "Wiki: indeks topik", "type": "other", "headings": ["Wiki: indeks topik"], "size": 8.19 },
+        { "id": "wiki/docker/overview.md", "label": "Docker Overview", "type": "other", "headings": ["Docker Overview", "Kenapa Docker?", "Konsep Inti", "Alur Kerja Dasar"], "size": 30 },
+        { "id": "wiki/docker/compose.md", "label": "Docker Compose", "type": "other", "headings": ["Docker Compose", "Struktur Dasar", "Command Penting", "Networks & Volumes"], "size": 30 },
+        { "id": "wiki/docker/containers.md", "label": "Docker Containers", "type": "other", "headings": ["Docker Containers", "Container Lifecycle", "Port Mapping", "Resource Limits"], "size": 30 },
+        { "id": "wiki/docker/index.md", "label": "docker", "type": "other", "headings": ["docker"], "size": 4.85 },
+        { "id": "wiki/lxc/overview.md", "label": "LXC Overview", "type": "other", "headings": ["LXC Overview", "Apa Itu LXC?", "Komponen LXC"], "size": 30 },
+        { "id": "wiki/lxc/vs-docker.md", "label": "LXC vs Docker vs VM", "type": "other", "headings": ["LXC vs Docker vs VM", "Kapan Pakai LXC?", "Kapan Pakai Docker?"], "size": 30 },
+        { "id": "wiki/lxc/index.md", "label": "lxc", "type": "other", "headings": ["lxc"], "size": 2.65 },
+        { "id": "wiki/systemd/overview.md", "label": "Systemd Overview", "type": "other", "headings": ["Systemd Overview", "Konsep Inti", "Komponen Systemd"], "size": 29 },
+        { "id": "wiki/systemd/service-files.md", "label": "Systemd Service Files", "type": "other", "headings": ["Systemd Service Files", "Template Service Minimal", "Lifecycle Commands"], "size": 30 },
+        { "id": "wiki/systemd/index.md", "label": "systemd", "type": "other", "headings": ["systemd"], "size": 2.05 },
+        { "id": "minecraft/index.md", "label": "Minecraft — Daftar Referensi", "type": "minecraft", "headings": ["Minecraft — Daftar Referensi", "Tools & Utilities", "Server Setup", "Plugin & Scripting"], "size": 17.88 },
+        { "id": "minecraft/server/minecraft-docker.md", "label": "Minecraft Docker Server — itzg", "type": "minecraft", "headings": ["Docker Compose Paper", "Docker Compose Fabric", "Velocity + Paper"], "size": 30 },
+        { "id": "minecraft/server/purpur-config.md", "label": "Purpur Config — Kustomisasi Server", "type": "minecraft", "headings": ["Apa Itu Purpur?", "Edit spigot.yml", "Kustomisasi Entity"], "size": 30 },
+        { "id": "minecraft/tools/chunky.md", "label": "Chunky — Chunk Pre-Generator", "type": "minecraft", "headings": ["Kenapa Pakai Chunky?", "Command Penting", "WorldBorder + Chunky"], "size": 30 },
+        { "id": "minecraft/plugin/luckperms.md", "label": "LuckPerms — Permission Management", "type": "minecraft", "headings": ["Struktur Group Dasar", "Command Penting", "Inheritance"], "size": 18.6 },
+        { "id": "wiki/minecraft-plugins.md", "label": "Minecraft Plugins", "type": "other", "headings": ["Hunger Games Plugin", "HeartLife", "PlotSquared", "Datapack TaCZ"], "size": 30 },
+        { "id": "wiki/minecraft-servers.md", "label": "Minecraft Servers", "type": "other", "headings": ["Server List", "Backup", "Docker Console"], "size": 8.9 },
+        { "id": "discord/index.md", "label": "Discord — Daftar Referensi", "type": "discord", "headings": ["Bot Development", "Webhook", "Related Sessions"], "size": 3.81 },
+        { "id": "discord/bot/discordjs-bot.md", "label": "Discord.js — Bot Development", "type": "discord", "headings": ["Setup Project", "Welcome Bot", "Slash Command"], "size": 30 },
+        { "id": "discord/webhook/webhook-basics.md", "label": "Discord Webhook", "type": "discord", "headings": ["Kemampuan Webhook", "Storage via Webhook", "Webhook vs Bot"], "size": 30 },
+        { "id": "wiki/discord-bots.md", "label": "Discord Bots", "type": "other", "headings": ["AI Chat Bot", "Moderation Dashboard", "Arsitektur bot AI Discord"], "size": 30 },
+        { "id": "wiki/ncdu/overview.md", "label": "Ncdu — NCurses Disk Usage", "type": "other", "headings": ["Apa Itu?", "Kenapa ncdu?", "Versi 2.x (Zig)"], "size": 28.4 },
+        { "id": "wiki/ncdu/commands.md", "label": "Ncdu — Commands & Keybindings", "type": "other", "headings": ["Semua Flag CLI", "Navigasi", "Sorting"], "size": 30 },
+        { "id": "wiki/ncdu/index.md", "label": "ncdu", "type": "other", "headings": ["ncdu"], "size": 2.77 },
+        { "id": "linux/index.md", "label": "Linux & DevOps", "type": "linux", "headings": ["Network & Security", "Docker", "System"], "size": 3.83 },
+        { "id": "linux/network/server-security.md", "label": "Linux — Server Security & SSH", "type": "linux", "headings": ["SSH Hardening", "Fail2Ban", "UFW Firewall", "Coolify"], "size": 30 },
+        { "id": "webdev/database/index.md", "label": "Database — WebDev Vault", "type": "other", "headings": ["Isi Vault", "Topik Terkait"], "size": 4.51 },
+        { "id": "webdev/database/supabase.md", "label": "Supabase", "type": "other", "headings": ["Database Migrations", "Multiple URLs Setup", "Arsitektur Aman"], "size": 30 },
+        { "id": "webdev/database/mongodb-setup.md", "label": "MongoDB Setup dan Operasi Dasar", "type": "other", "headings": ["Setup MongoDB dengan Docker", "Operasi Dasar", "Aggregation"], "size": 30 },
+        { "id": "sessions/hermes/index.md", "label": "Hermes — Sessions", "type": "session", "headings": ["Hermes — Sessions"], "size": 29.04 },
+        { "id": "sessions/hermes/kamu-hermes-kamu-tidak-bisa.md", "label": "RTK - Rust Token Killer di Hermes", "type": "session", "headings": ["Ringkasan", "Percakapan", "Commands"], "size": 29.69 },
+        { "id": "concepts/hermes/index.md", "label": "Hermes — Concepts", "type": "concept", "headings": ["Hermes — Concepts"], "size": 27.35 },
+        { "id": "trae:project:-home-the-meh-desktop-projak-plugin-mc-servermanager", "label": "Trae: MC ServerManager", "type": "trae-project", "headings": ["Hard Constraints", "Engineering Conventions", "Tech Stack"], "size": 19.02 },
+        { "id": "trae:user-profile", "label": "Trae User Profile", "type": "trae-profile", "headings": ["User Preferences", "Background", "Tech Stack"], "size": 4.06 }
+      ],
+      "edges": [
+        { "source": "index.md", "target": "wiki/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "index.md", "target": "webdev/database/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "webdev/database/index.md", "target": "webdev/database/supabase.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "webdev/database/index.md", "target": "webdev/database/mongodb-setup.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/vault-system.md", "target": "wiki/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/vault-system.md", "target": "wiki/hermes-setup.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/vault-system.md", "target": "README.md", "relation": "heading-mention", "confidence": "INFERRED" },
+        { "source": "wiki/index.md", "target": "wiki/hermes-setup.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/index.md", "target": "wiki/docker/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/index.md", "target": "wiki/lxc/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/index.md", "target": "wiki/ncdu/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/index.md", "target": "wiki/systemd/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/index.md", "target": "wiki/discord-bots.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/index.md", "target": "wiki/docker/overview.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/index.md", "target": "wiki/docker/compose.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/index.md", "target": "wiki/docker/containers.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/overview.md", "target": "wiki/docker/compose.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/overview.md", "target": "wiki/docker/containers.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/docker/overview.md", "target": "wiki/lxc/vs-docker.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/lxc/index.md", "target": "wiki/lxc/overview.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/lxc/vs-docker.md", "target": "wiki/lxc/overview.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/systemd/index.md", "target": "wiki/systemd/overview.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/systemd/index.md", "target": "wiki/systemd/service-files.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/systemd/overview.md", "target": "wiki/systemd/service-files.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "minecraft/server/minecraft-docker.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "minecraft/server/purpur-config.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "minecraft/tools/chunky.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "minecraft/plugin/luckperms.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "wiki/minecraft-plugins.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/index.md", "target": "wiki/minecraft-servers.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "minecraft/server/minecraft-docker.md", "target": "wiki/docker/compose.md", "relation": "heading-mention", "confidence": "INFERRED" },
+        { "source": "minecraft/server/minecraft-docker.md", "target": "minecraft/tools/chunky.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/minecraft-plugins.md", "target": "wiki/minecraft-servers.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/minecraft-plugins.md", "target": "wiki/index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "discord/index.md", "target": "discord/bot/discordjs-bot.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "discord/index.md", "target": "discord/webhook/webhook-basics.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "discord/index.md", "target": "wiki/discord-bots.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/ncdu/index.md", "target": "wiki/ncdu/overview.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "wiki/ncdu/index.md", "target": "wiki/ncdu/commands.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "linux/index.md", "target": "linux/network/server-security.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "linux/network/server-security.md", "target": "discord/webhook/webhook-basics.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "sessions/hermes/index.md", "target": "sessions/hermes/kamu-hermes-kamu-tidak-bisa.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "sessions/hermes/index.md", "target": "index.md", "relation": "wiki-link", "confidence": "EXTRACTED" },
+        { "source": "sessions/hermes/kamu-hermes-kamu-tidak-bisa.md", "target": "concepts/hermes/index.md", "relation": "heading-mention", "confidence": "INFERRED" },
+        { "source": "trae:project:-home-the-meh-desktop-projak-plugin-mc-servermanager", "target": "trae:user-profile", "relation": "user-interested-in", "confidence": "INFERRED" },
+        { "source": "trae:project:-home-the-meh-desktop-projak-plugin-mc-servermanager", "target": "minecraft/index.md", "relation": "mentions-topic", "confidence": "INFERRED" }
+      ]
+    };
+
+    const $ = id => document.getElementById(id);
+    const svg = d3.select('#workspace > svg');
+    const layer = svg.append('g');
+    const endpoint = x => typeof x === 'object' ? x.id : x;
+
+    // Default & Persistent Settings State
+    const DEFAULT_SETTINGS = {
+      edgeWidth: 1.2,
+      edgeOpacity: 0.45,
+      nodeScale: 1.0,
+      hierarchyBoost: 1.0,
+      linkDist: 95,
+      chargeStrength: 130,
+      showAllLabels: false,
+      showMainLines: true
+    };
+
+    let cfg = { ...DEFAULT_SETTINGS };
+    try {
+      const saved = JSON.parse(localStorage.getItem('atlas_graph_settings') || '{}');
+      cfg = { ...DEFAULT_SETTINGS, ...saved };
+    } catch (_) {}
+
+    function saveSettings() {
+      try {
+        localStorage.setItem('atlas_graph_settings', JSON.stringify(cfg));
+      } catch (_) {}
+    }
+
+    // Curated modern technical color palette
+    const palette = [
+      '#2dd4bf', // Teal
+      '#38bdf8', // Sky Blue
+      '#818cf8', // Indigo
+      '#f59e0b', // Amber
+      '#fb7185', // Rose
+      '#34d399', // Emerald
+      '#a78bfa', // Violet
+      '#f472b6', // Pink
+      '#60a5fa', // Blue
+      '#a3e635'  // Lime
+    ];
+
+    function clean(value) {
+      const el = document.createElement('textarea');
+      let s = String(value || '');
+      for (let i = 0; i < 8; i++) {
+        el.innerHTML = s;
+        const next = el.value;
+        if (next === s) break;
+        s = next;
+      }
+      return s.replace(/(?:amp;?){2,}/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function normalizePath(id) {
+      return String(id || '').replace(/^.*?\/vault\//, '').replace(/^\/+/, '');
+    }
+
+    function topic(n) {
+      if (n.isMain) return 'MAIN';
+      const parts = normalizePath(n.id).split('/');
+      if (n.id.startsWith('trae:')) return 'Trae';
+      if (['sessions', 'concepts', 'wiki'].includes(parts[0])) return parts.length > 2 ? parts[1] : parts[0];
+      return n.type || 'other';
+    }
+
+    /**
+     * Deteksi level hierarki node:
+     * - MAIN (Root Hub): index.md atau README.md di root (depth 1)
+     * - Index L1: folder/index.md atau folder/README.md (depth 2, misal: wiki/index.md, minecraft/index.md)
+     * - Sub-Index L2+: folder/subfolder/index.md (depth >= 3, misal: wiki/docker/index.md)
+     * - Dokumen Biasa: file .md selain index/readme
+     */
+    function computeNodeHierarchy(n) {
+      const norm = normalizePath(n.id);
+      const parts = norm.split('/').filter(Boolean);
+      const file = (parts[parts.length - 1] || '').toLowerCase();
+      const isIndexFile = file === 'index.md' || file === 'readme.md';
+      const depth = parts.length; // 1 = root, 2 = L1 folder, 3 = L2 subfolder, dst.
+
+      if (n.isMain || norm === 'index.md') {
+        return {
+          isMain: true,
+          isIndex: true,
+          indexDepth: 0,
+          tierClass: 'tier-main',
+          tierBadge: 'MAIN HUB',
+          shortTag: 'MAIN'
+        };
+      }
+
+      if (isIndexFile) {
+        const level = Math.max(1, depth - 1); // L1, L2, L3...
+        const folderName = parts.length >= 2 ? parts[parts.length - 2] : parts[0];
+        return {
+          isMain: false,
+          isIndex: true,
+          indexDepth: level,
+          tierClass: level === 1 ? 'tier-l1' : 'tier-l2',
+          tierBadge: `INDEX L${level}`,
+          shortTag: level === 1 ? folderName.slice(0, 4).toUpperCase() : `L${level}`
+        };
+      }
+
+      return {
+        isMain: false,
+        isIndex: false,
+        indexDepth: null,
+        tierClass: 'tier-doc',
+        tierBadge: 'DOKUMEN',
+        shortTag: ''
+      };
+    }
+
+    let nodes = [], map = new Map(), adj = new Map(), subIndexCount = new Map(), edges = [], groups = new Map(), colors = new Map();
+    let mainNodeId = 'index.md';
+    let simulation, current = null, selected = null, showIsolated = false, released = false;
+    let activeHighlightSet = new Set();
+
+    const zoom = d3.zoom()
+      .scaleExtent([0.12, 5])
+      .on('zoom', e => {
+        layer.attr('transform', e.transform);
+        updateLabels(e.transform.k);
+        $('zoom-pct').textContent = `${Math.round(e.transform.k * 100)}%`;
+      });
+    svg.call(zoom);
+
+    function setMotionIcon(active) {
+      const b = $('unlock');
+      b.querySelector('svg').innerHTML = active
+        ? '<path d="M8 5v14M16 5v14"/>'
+        : '<path d="m8 5 11 7-11 7z"/>';
+      b.dataset.tip = active ? 'Hentikan gerakan' : 'Lepaskan posisi';
+      b.setAttribute('aria-label', b.dataset.tip);
+    }
+
+    // Hitung ukuran radius bulat berdasarkan level MAIN -> Index L1 -> Sub-Index L2+ -> Dokumen + Settings
+    function getRadius(d, isOverview = false) {
+      if (isOverview) {
+        return Math.min(55, 22 + Math.sqrt(d.count) * 2) * cfg.nodeScale;
+      }
+      const conn = adj.get(d.id)?.length || 0;
+      const childIdx = subIndexCount.get(d.id) || 0;
+      const docBase = Math.min(11, 4.2 + Math.sqrt(conn) * 0.9);
+
+      if (d.isMain) {
+        const rawMain = 28 + Math.min(8, Math.sqrt(conn) * 1.1);
+        const boosted = docBase + (rawMain - docBase) * cfg.hierarchyBoost;
+        return boosted * cfg.nodeScale;
+      }
+      if (d.isIndex) {
+        const baseByLevel = Math.max(10, 20 - (d.indexDepth - 1) * 3.5);
+        const bonusFromSubIndex = Math.min(7, childIdx * 1.3);
+        const bonusFromConn = Math.min(5, Math.sqrt(conn) * 0.8);
+        const rawIdx = baseByLevel + bonusFromSubIndex + bonusFromConn;
+        const boosted = docBase + (rawIdx - docBase) * cfg.hierarchyBoost;
+        return boosted * cfg.nodeScale;
+      }
+      return docBase * cfg.nodeScale;
+    }
+
+    function updateLabels(scale) {
+      layer.selectAll('.node text.node-label').classed('visible', d =>
+        cfg.showAllLabels ||
+        d.isMain ||
+        (d.isIndex && d.indexDepth === 1) ||
+        (d.isIndex && scale >= 0.85) ||
+        selected === d.id ||
+        scale >= 1.85 ||
+        (scale >= 1.15 && (adj.get(d.id)?.length || 0) >= 5)
+      );
+    }
+
+    function applyVisualSettings() {
+      // Update radii for core, halo, index-ring, and label offsets
+      layer.selectAll('.node circle.core')
+        .attr('r', d => getRadius(d, false) * (d.id === selected ? 1.28 : 1));
+
+      layer.selectAll('.node circle.halo')
+        .attr('r', d => getRadius(d, false) + (d.isMain ? 7 : 4));
+
+      layer.selectAll('.node circle.index-ring')
+        .attr('r', d => getRadius(d, false) + 3.5);
+
+      layer.selectAll('.node text.node-label')
+        .attr('y', d => getRadius(d, false) + (d.isMain ? 18 : 14));
+
+      layer.selectAll('.node text.inner-tag')
+        .attr('font-size', d => {
+          const r = getRadius(d, false);
+          return d.isMain ? `${Math.max(8, Math.min(13, r * 0.36))}px` : `${Math.max(6, Math.min(10, r * 0.38))}px`;
+        });
+
+      // Update edge width & opacity while respecting active selection highlights
+      layer.selectAll('.edge')
+        .attr('stroke-width', d => {
+          if (selected && (endpoint(d.source) === selected || endpoint(d.target) === selected)) {
+            return cfg.edgeWidth * 1.75;
+          }
+          if (d.relation === 'main-hub' && cfg.showMainLines) {
+            return cfg.edgeWidth * 1.35;
+          }
+          return cfg.edgeWidth;
+        })
+        .attr('opacity', d => {
+          if (d.relation === 'main-hub' && !cfg.showMainLines && !selected) {
+            return 0.08;
+          }
+          const inSet = activeHighlightSet.has(endpoint(d.source)) && activeHighlightSet.has(endpoint(d.target));
+          if (!inSet) return 0.06;
+          if (selected && (endpoint(d.source) === selected || endpoint(d.target) === selected)) {
+            return Math.min(1, cfg.edgeOpacity + 0.4);
+          }
+          return cfg.edgeOpacity;
+        });
+
+      updateLabels(d3.zoomTransform(svg.node()).k);
+    }
+
+    function applyPhysicsSettings() {
+      if (!simulation) return;
+      const linkForce = simulation.force('link');
+      if (linkForce) {
+        linkForce.distance(d => d.relation === 'main-hub' ? cfg.linkDist * 1.5 : cfg.linkDist);
+      }
+      const chargeForce = simulation.force('charge');
+      if (chargeForce) {
+        chargeForce.strength(d => {
+          if (d.isMain) return -cfg.chargeStrength * 3.2;
+          if (d.isIndex) return -cfg.chargeStrength * 1.75;
+          return -cfg.chargeStrength;
+        });
+      }
+      const collideForce = simulation.force('collision');
+      if (collideForce) {
+        collideForce.radius(d => getRadius(d, false) + (d.isMain ? 24 : 13));
+      }
+
+      if (released) {
+        simulation.alpha(0.45).restart();
+      } else {
+        // Run a quick local layout relaxation and update DOM coordinates smoothly
+        simulation.nodes().forEach(n => { n.fx = null; n.fy = null; });
+        simulation.alpha(0.35);
+        for (let i = 0; i < 45; i++) simulation.tick();
+        layer.selectAll('.edge')
+          .attr('x1', d => d.source.x)
+          .attr('y1', d => d.source.y)
+          .attr('x2', d => d.target.x)
+          .attr('y2', d => d.target.y);
+        layer.selectAll('.node')
+          .attr('transform', d => `translate(${d.x},${d.y})`);
+      }
+    }
+
+    function fit() {
+      const box = layer.node().getBBox();
+      const rect = svg.node().getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const scale = Math.min(1.5, (rect.width - 120) / box.width, (rect.height - 150) / box.height);
+      svg.transition().duration(400).ease(d3.easeCubicOut).call(
+        zoom.transform,
+        d3.zoomIdentity
+          .translate(
+            rect.width / 2 - scale * (box.x + box.width / 2),
+            rect.height / 2 + 15 - scale * (box.y + box.height / 2)
+          )
+          .scale(scale)
+      );
+    }
+
+    function render(list, links, isOverview = false) {
+      if (simulation) simulation.stop();
+      layer.selectAll('*').remove();
+
+      const rect = svg.node().getBoundingClientRect();
+      const view = list.map(n => ({ ...n }));
+      const linkData = links.map(e => ({ ...e }));
+
+      const line = layer.append('g')
+        .selectAll('line')
+        .data(linkData)
+        .join('line')
+        .attr('class', d => `edge ${d.relation === 'main-hub' ? 'main-backbone' : ''}`)
+        .attr('stroke-width', d => d.relation === 'main-hub' ? cfg.edgeWidth * 1.35 : cfg.edgeWidth)
+        .attr('stroke-dasharray', d => d.relation === 'main-hub' ? '6 4' : (d.confidence === 'INFERRED' ? '3 4' : null));
+
+      const node = layer.append('g')
+        .selectAll('g')
+        .data(view)
+        .join('g')
+        .attr('class', d => `node ${d.tierClass || ''}`)
+        .attr('tabindex', 0)
+        .attr('role', 'button')
+        .attr('aria-label', d => d.label)
+        .on('click', (e, d) => {
+          e.stopPropagation();
+          isOverview ? openGroup(d.id) : showNode(d.id);
+        })
+        .on('keydown', (e, d) => {
+          if (e.key === 'Enter') isOverview ? openGroup(d.id) : showNode(d.id);
+        });
+
+      const nodeColor = d => {
+        if (d.isMain) return '#2dd4bf';
+        return colors.get(isOverview ? d.id : topic(d)) || palette[0];
+      };
+
+      // Outer halo ring
+      node.append('circle')
+        .attr('class', 'halo')
+        .attr('r', d => getRadius(d, isOverview) + (d.isMain ? 7 : 4))
+        .attr('stroke', nodeColor);
+
+      // Extra dashed orbit ring for Index nodes that contain sub-indexes
+      node.filter(d => d.isIndex && !d.isMain)
+        .append('circle')
+        .attr('class', 'index-ring')
+        .attr('r', d => getRadius(d, isOverview) + 3.5)
+        .attr('stroke', nodeColor)
+        .attr('stroke-width', 1.2);
+
+      // Core node circle
+      node.append('circle')
+        .attr('class', 'core')
+        .attr('r', d => getRadius(d, isOverview))
+        .attr('fill', nodeColor)
+        .attr('fill-opacity', d => d.isMain ? 1 : (d.isIndex ? 0.95 : 0.85))
+        .attr('stroke', '#ffffff')
+        .attr('stroke-opacity', d => d.isMain ? 0.95 : (d.isIndex ? 0.6 : 0.2))
+        .attr('stroke-width', d => d.isMain ? 2.5 : (d.isIndex ? 1.8 : 1));
+
+      // Teks di dalam bulatan untuk MAIN dan Index Utama
+      node.filter(d => d.isMain || (d.isIndex && d.indexDepth === 1))
+        .append('text')
+        .attr('class', 'inner-tag')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'central')
+        .attr('font-size', d => d.isMain ? '10px' : '7.5px')
+        .text(d => d.isMain ? 'MAIN' : 'IDX');
+
+      // Label nama di bawah bulatan
+      node.append('text')
+        .attr('class', 'node-label')
+        .attr('text-anchor', 'middle')
+        .attr('y', d => getRadius(d, isOverview) + (d.isMain ? 18 : 14))
+        .text(d => {
+          if (isOverview) return `${d.label} (${d.count})`;
+          if (d.isMain) return `★ ${d.label}`;
+          return d.label.length > 32 ? d.label.slice(0, 31) + '…' : d.label;
+        })
+        .classed('visible', d => cfg.showAllLabels || d.isMain || (d.isIndex && d.indexDepth === 1) || d.id === selected);
+
+      const tooltipEl = $('node-tooltip');
+      const positionTooltip = (event) => {
+        const x = Math.max(115, Math.min(window.innerWidth - 115, event.clientX));
+        const y = Math.max(75, event.clientY);
+        tooltipEl.style.left = `${x}px`;
+        tooltipEl.style.top = `${y}px`;
+      };
+
+      node
+        .on('mouseenter', function (event, d) {
+          const c = nodeColor(d);
+          const connCount = isOverview ? `${d.count} node` : `${adj.get(d.id)?.length || 0} koneksi`;
+          const subIdx = subIndexCount.get(d.id) || 0;
+          const clusterName = d.isMain
+            ? `Pusat Sistem · ${subIdx} Indeks Cabang`
+            : (d.isIndex && subIdx > 0 ? `Klaster: ${topic(d)} · ${subIdx} sub-index` : `Klaster: ${topic(d)}`);
+
+          $('nt-dot').style.backgroundColor = c;
+          $('nt-dot').style.boxShadow = `0 0 8px ${c}`;
+          $('nt-title').textContent = d.label;
+
+          const tierEl = $('nt-tier');
+          tierEl.textContent = d.tierBadge || 'NODE';
+          tierEl.style.background = `${c}22`;
+          tierEl.style.color = c;
+          tierEl.style.border = `1px solid ${c}55`;
+
+          $('nt-group').textContent = clusterName;
+          $('nt-conn').textContent = connCount;
+
+          positionTooltip(event);
+          tooltipEl.classList.add('visible');
+        })
+        .on('mousemove', function (event) {
+          positionTooltip(event);
+        })
+        .on('mouseleave', function () {
+          tooltipEl.classList.remove('visible');
+          updateLabels(d3.zoomTransform(svg.node()).k);
+        });
+
+      const cx = rect.width / 2;
+      const cy = rect.height / 2 + 10;
+
+      // Pin MAIN hub gently near the center initially so branches radiate clearly
+      view.forEach(n => {
+        if (n.isMain) {
+          n.x = cx;
+          n.y = cy;
+        }
+      });
+
+      simulation = d3.forceSimulation(view)
+        .force('link', d3.forceLink(line.data()).id(d => d.id).distance(d => {
+          if (d.relation === 'main-hub') return cfg.linkDist * 1.5;
+          return cfg.linkDist;
+        }))
+        .force('charge', d3.forceManyBody().strength(d => {
+          if (isOverview) return -650;
+          if (d.isMain) return -cfg.chargeStrength * 3.2;
+          if (d.isIndex) return -cfg.chargeStrength * 1.75;
+          return -cfg.chargeStrength;
+        }))
+        .force('center', d3.forceCenter(cx, cy))
+        .force('x', d3.forceX(cx).strength(d => d.isMain ? 0.25 : 0.02))
+        .force('y', d3.forceY(cy).strength(d => d.isMain ? 0.25 : 0.02))
+        .force('collision', d3.forceCollide().radius(d => getRadius(d, isOverview) + (isOverview ? 35 : (d.isMain ? 24 : 13))));
+
+      node.call(
+        d3.drag()
+          .on('start', (e, d) => {
+            d.fx = d.x;
+            d.fy = d.y;
+            simulation.alphaTarget(0.12).restart();
+          })
+          .on('drag', (e, d) => {
+            d.fx = e.x;
+            d.fy = e.y;
+          })
+          .on('end', (e, d) => {
+            simulation.alphaTarget(released ? 0.08 : 0);
+            if (released) {
+              d.fx = null;
+              d.fy = null;
+            }
+          })
+      );
+
+      simulation.stop();
+      for (let i = 0; i < 260; i++) simulation.tick();
+
+      const updatePositions = () => {
+        line
+          .attr('x1', d => d.source.x)
+          .attr('y1', d => d.source.y)
+          .attr('x2', d => d.target.x)
+          .attr('y2', d => d.target.y);
+        node.attr('transform', d => `translate(${d.x},${d.y})`);
+      };
+
+      simulation.on('tick', updatePositions);
+      updatePositions();
+      updateLabels(d3.zoomTransform(svg.node()).k);
+      fit();
+
+      $('status').textContent = isOverview
+        ? `${view.length} topik · pilih kelompok untuk menjelajah`
+        : `${view.length} node · ${links.length} relasi · MAIN terhubung ke semua indeks cabang`;
+    }
+
+    function createItemButton(label, badgeText, dotColor, action, extraClass = '') {
+      const b = document.createElement('button');
+      b.className = `item ${extraClass}`.trim();
+
+      const left = document.createElement('div');
+      left.className = 'item-left';
+
+      if (dotColor) {
+        const dot = document.createElement('span');
+        dot.className = 'item-dot';
+        dot.style.backgroundColor = dotColor;
+        dot.style.boxShadow = `0 0 8px ${dotColor}66`;
+        left.appendChild(dot);
+      }
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'item-label';
+      textSpan.textContent = label;
+      left.appendChild(textSpan);
+      b.appendChild(left);
+
+      if (badgeText !== null && badgeText !== undefined) {
+        const countSpan = document.createElement('span');
+        countSpan.className = 'item-count';
+        countSpan.textContent = badgeText;
+        b.appendChild(countSpan);
+      }
+
+      b.onclick = action;
+      return b;
+    }
+
+    function highlight(ids) {
+      activeHighlightSet = ids;
+      layer.selectAll('.node')
+        .attr('opacity', d => ids.has(d.id) ? 1 : 0.12)
+        .attr('pointer-events', d => ids.has(d.id) ? 'auto' : 'none')
+        .classed('selected', d => d.id === selected)
+        .classed('related', d => ids.has(d.id) && d.id !== selected);
+
+      layer.selectAll('.edge')
+        .style('stroke', d => selected && (endpoint(d.source) === selected || endpoint(d.target) === selected) ? '#2dd4bf' : null);
+
+      applyVisualSettings();
+    }
+
+    function overview() {
+      released = false;
+      $('unlock').setAttribute('aria-pressed', 'false');
+      setMotionIcon(false);
+      $('status').textContent = 'Memuat graph…';
+      current = null;
+      selected = null;
+      $('search').value = '';
+      $('type').value = '';
+      $('inspector-mode').textContent = 'Eksplorasi Klaster';
+      $('back-btn').style.display = 'none';
+      $('title').textContent = 'Semua hubungan';
+
+      const mainNode = map.get(mainNodeId);
+      const listItems = [];
+
+      if (mainNode) {
+        const mainBranches = adj.get(mainNodeId)?.length || 0;
+        listItems.push(
+          createItemButton(
+            `★ PUSAT MAIN (${mainNode.label})`,
+            `${mainBranches} cabang`,
+            '#2dd4bf',
+            () => showNode(mainNodeId),
+            'main-hub-btn'
+          )
+        );
+      }
+
+      const sortedGroups = [...groups]
+        .filter(([k]) => k !== 'MAIN')
+        .sort((a, b) => b[1].length - a[1].length);
+
+      sortedGroups.forEach(([k, v]) => {
+        const idxCount = v.filter(n => n.isIndex).length;
+        const badge = idxCount > 0 ? `${v.length} node · ${idxCount} idx` : `${v.length} node`;
+        listItems.push(createItemButton(k, badge, colors.get(k), () => openGroup(k)));
+      });
+
+      $('detail').replaceChildren(...listItems);
+      render(nodes, edges, false);
+      highlight(new Set(nodes.filter(n => showIsolated || n.isMain || adj.get(n.id).length).map(n => n.id)));
+    }
+
+    function openGroup(k) {
+      current = k;
+      selected = null;
+      const groupNodes = groups.get(k) || [];
+      highlight(new Set(groupNodes.map(n => n.id)));
+
+      $('inspector-mode').textContent = 'Kelompok Topik';
+      $('back-btn').style.display = 'inline-flex';
+      $('title').textContent = k;
+
+      const idxInGroup = groupNodes.filter(n => n.isIndex).length;
+      const info = document.createElement('div');
+      info.className = 'empty-state';
+      info.textContent = `${groupNodes.length} dokumen (${idxInGroup} file indeks) dalam klaster "${k}". Node indeks ditampilkan lebih besar sesuai tingkat kedalamannya.`;
+
+      const sortedNodes = [...groupNodes].sort((a, b) => {
+        if (a.isIndex !== b.isIndex) return a.isIndex ? -1 : 1;
+        if (a.isIndex && b.isIndex && a.indexDepth !== b.indexDepth) return a.indexDepth - b.indexDepth;
+        return (adj.get(b.id)?.length || 0) - (adj.get(a.id)?.length || 0);
+      });
+
+      const items = sortedNodes.map(n => {
+        const prefix = n.isIndex ? `[${n.tierBadge}] ` : '';
+        return createItemButton(
+          `${prefix}${n.label}`,
+          `${adj.get(n.id)?.length || 0}`,
+          colors.get(topic(n)),
+          () => showNode(n.id)
+        );
+      });
+
+      $('detail').replaceChildren(info, ...items);
+    }
+
+    function filter() {
+      const q = $('search').value.trim().toLowerCase();
+      const t = $('type').value;
+      const list = nodes.filter(n =>
+        (!current || topic(n) === current) &&
+        (!t || (n.type || 'other') === t) &&
+        (!q || `${n.label} ${n.id} ${n.tierBadge || ''}`.toLowerCase().includes(q))
+      );
+      const ids = new Set(list.filter(n => q || showIsolated || n.isMain || adj.get(n.id).length).map(n => n.id));
+      highlight(ids);
+
+      if (q || t) {
+        $('inspector-mode').textContent = 'Filter Aktif';
+        $('back-btn').style.display = 'inline-flex';
+        $('title').textContent = `${list.length} hasil ditemukan`;
+        $('detail').replaceChildren(
+          ...list.slice(0, 80).map(n =>
+            createItemButton(
+              n.isIndex ? `[${n.tierBadge}] ${n.label}` : n.label,
+              topic(n),
+              colors.get(topic(n)),
+              () => showNode(n.id)
+            )
+          )
+        );
+      } else if (!selected && !current) {
+        overview();
+      }
+    }
+
+    function showNode(id) {
+      const n = map.get(id);
+      if (!n) return;
+      selected = id;
+
+      $('inspector-mode').textContent = `${n.tierBadge || 'Node'} · ${topic(n)}`;
+      $('back-btn').style.display = 'inline-flex';
+      $('title').textContent = n.isMain ? `★ ${n.label}` : n.label;
+
+      // Metadata Chips
+      const metaGrid = document.createElement('div');
+      metaGrid.className = 'meta-grid';
+
+      const neighbors = adj.get(id) || [];
+      const childIdx = subIndexCount.get(id) || 0;
+
+      const chips = [
+        { text: n.tierBadge || 'DOKUMEN', highlight: n.isIndex || n.isMain },
+        { text: `${neighbors.length} koneksi` },
+        { text: `Klaster: ${topic(n)}`, color: n.isMain ? '#2dd4bf' : colors.get(topic(n)) }
+      ];
+      if (childIdx > 0) {
+        chips.push({ text: `${childIdx} sub-index terhubung`, highlight: true });
+      }
+      if (n.size) chips.push({ text: `${n.size} KB` });
+
+      chips.forEach(c => {
+        const chip = document.createElement('span');
+        chip.className = `meta-chip ${c.highlight ? 'highlight-chip' : ''}`.trim();
+        if (c.color) {
+          const dot = document.createElement('span');
+          dot.className = 'item-dot';
+          dot.style.backgroundColor = c.color;
+          chip.appendChild(dot);
+        }
+        chip.appendChild(document.createTextNode(c.text));
+        metaGrid.appendChild(chip);
+      });
+
+      // Path Box with Copy button
+      const pathBox = document.createElement('div');
+      pathBox.className = 'path-box';
+      const source = document.createElement('span');
+      source.className = 'path';
+      source.textContent = n.id;
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'btn-copy';
+      copyBtn.textContent = 'Salin';
+      copyBtn.onclick = () => {
+        navigator.clipboard?.writeText(n.id);
+        copyBtn.textContent = 'Tersalin!';
+        setTimeout(() => { copyBtn.textContent = 'Salin'; }, 1500);
+      };
+      pathBox.append(source, copyBtn);
+
+      const elements = [metaGrid, pathBox];
+
+      // Headings Outline if available in JSON
+      if (Array.isArray(n.headings) && n.headings.length > 0) {
+        const hTitle = document.createElement('div');
+        hTitle.className = 'section-heading';
+        hTitle.innerHTML = `<span>Struktur Dokumen</span><span>${n.headings.length} bagian</span>`;
+        const ul = document.createElement('ul');
+        ul.className = 'headings-list';
+        n.headings.slice(0, 12).forEach(h => {
+          const li = document.createElement('li');
+          li.textContent = h;
+          ul.appendChild(li);
+        });
+        elements.push(hTitle, ul);
+      }
+
+      // Sort neighbors so Index hubs appear first
+      const sortedNeighbors = [...neighbors].sort((a, b) => {
+        const na = map.get(a), nb = map.get(b);
+        if (na.isMain !== nb.isMain) return na.isMain ? -1 : 1;
+        if (na.isIndex !== nb.isIndex) return na.isIndex ? -1 : 1;
+        return (adj.get(b)?.length || 0) - (adj.get(a)?.length || 0);
+      });
+
+      const connHeading = document.createElement('div');
+      connHeading.className = 'section-heading';
+      connHeading.innerHTML = `<span>Terhubung Ke Sistem (${neighbors.length})</span><span>Klik untuk lompat</span>`;
+      elements.push(connHeading);
+
+      const connButtons = sortedNeighbors.map(x => {
+        const targetNode = map.get(x);
+        const prefix = targetNode.isMain ? '★ ' : (targetNode.isIndex ? `[${targetNode.tierBadge}] ` : '');
+        return createItemButton(
+          `${prefix}${targetNode.label}`,
+          topic(targetNode),
+          targetNode.isMain ? '#2dd4bf' : colors.get(topic(targetNode)),
+          () => showNode(x)
+        );
+      });
+
+      $('detail').replaceChildren(...elements, ...connButtons);
+      const ids = new Set([id, ...neighbors]);
+      highlight(ids);
+    }
+
+    function find(q) {
+      q = q.toLowerCase();
+      if (q === 'main' || q === 'root' || q === 'home') return map.get(mainNodeId);
+      return (
+        nodes.find(n => n.id.toLowerCase() === q || n.label.toLowerCase() === q) ||
+        nodes.find(n => `${n.label} ${n.id}`.toLowerCase().includes(q))
+      );
+    }
+
+    function run() {
+      const q = $('query').value.trim();
+      if (!q) return;
+
+      if (/^explain /i.test(q)) {
+        const n = find(q.slice(8).trim());
+        if (n) showNode(n.id);
+        else $('status').textContent = 'Node tidak ditemukan';
+        return;
+      }
+
+      const match = q.match(/^path (.+) to (.+)$/i);
+      if (!match) {
+        $('search').value = q;
+        current = null;
+        filter();
+        return;
+      }
+
+      const a = find(match[1].trim());
+      const b = find(match[2].trim());
+      if (!a || !b) {
+        $('status').textContent = 'Node awal atau tujuan tidak ditemukan';
+        return;
+      }
+
+      const queue = [a.id];
+      const prev = new Map([[a.id, null]]);
+      for (let i = 0; i < queue.length && !prev.has(b.id); i++) {
+        for (const x of adj.get(queue[i])) {
+          if (!prev.has(x)) {
+            prev.set(x, queue[i]);
+            queue.push(x);
+          }
+        }
+      }
+
+      if (!prev.has(b.id)) {
+        $('status').textContent = 'Tidak ada jalur penghubung antara kedua node';
+        return;
+      }
+
+      const path = [];
+      for (let x = b.id; x !== null; x = prev.get(x)) path.push(x);
+      path.reverse();
+
+      const ids = new Set(path);
+      highlight(ids);
+      layer.selectAll('.edge')
+        .style('stroke', d => ids.has(endpoint(d.source)) && ids.has(endpoint(d.target)) ? '#fbbf24' : null)
+        .attr('stroke-width', d => ids.has(endpoint(d.source)) && ids.has(endpoint(d.target)) ? cfg.edgeWidth * 2 : cfg.edgeWidth);
+
+      $('inspector-mode').textContent = 'Rute Terpendek';
+      $('back-btn').style.display = 'inline-flex';
+      $('title').textContent = `Jalur · ${path.length - 1} langkah`;
+      $('detail').replaceChildren(
+        ...path.map((id, idx) =>
+          createItemButton(`${idx + 1}. ${map.get(id).label}`, topic(map.get(id)), '#fbbf24', () => showNode(id))
+        )
+      );
+    }
+
+    function initializeGraphData(raw, isFallback = false) {
+      let rawNodes = raw.nodes.map(n => {
+        const cleanedLabel = clean(n.label || n.id)
+          .split(/[\\/]/)
+          .pop()
+          .replace(/\.md$/i, '')
+          .replace(/[-_]/g, ' ');
+        return {
+          ...n,
+          label: cleanedLabel
+        };
+      });
+
+      let rootNode = rawNodes.find(n => normalizePath(n.id) === 'index.md') ||
+                     rawNodes.find(n => normalizePath(n.id).toLowerCase() === 'readme.md');
+
+      if (!rootNode) {
+        rootNode = {
+          id: 'MAIN_HUB',
+          label: 'MAIN — Pusat Sistem Pengetahuan',
+          type: 'main',
+          headings: ['Pusat Sistem', 'Indeks Klaster Utama'],
+          isMain: true
+        };
+        rawNodes.unshift(rootNode);
+      } else {
+        rootNode.isMain = true;
+        if (!/main/i.test(rootNode.label)) {
+          rootNode.label = `MAIN — ${rootNode.label}`;
+        }
+      }
+      mainNodeId = rootNode.id;
+
+      nodes = rawNodes.map(n => ({
+        ...n,
+        ...computeNodeHierarchy(n)
+      }));
+
+      map = new Map(nodes.map(n => [n.id, n]));
+      adj = new Map(nodes.map(n => [n.id, []]));
+      subIndexCount = new Map(nodes.map(n => [n.id, 0]));
+
+      edges = raw.edges
+        .filter(e => map.has(endpoint(e.source)) && map.has(endpoint(e.target)))
+        .map(e => ({ ...e, source: endpoint(e.source), target: endpoint(e.target) }));
+
+      const existingPairs = new Set(
+        edges.flatMap(e => [`${e.source}|${e.target}`, `${e.target}|${e.source}`])
+      );
+
+      const l1Indexes = nodes.filter(n => n.isIndex && !n.isMain && n.indexDepth === 1);
+      l1Indexes.forEach(idxNode => {
+        const key = `${mainNodeId}|${idxNode.id}`;
+        if (!existingPairs.has(key) && mainNodeId !== idxNode.id) {
+          edges.push({
+            source: mainNodeId,
+            target: idxNode.id,
+            relation: 'main-hub',
+            confidence: 'EXTRACTED'
+          });
+          existingPairs.add(key);
+        }
+      });
+
+      const deeperIndexes = nodes.filter(n => n.isIndex && !n.isMain && n.indexDepth >= 2);
+      deeperIndexes.forEach(subNode => {
+        const parts = normalizePath(subNode.id).split('/').filter(Boolean);
+        for (let d = parts.length - 2; d >= 1; d--) {
+          const parentPrefix = parts.slice(0, d).join('/');
+          const parentCandidate = nodes.find(
+            cand => cand.isIndex && (
+              normalizePath(cand.id) === `${parentPrefix}/index.md` ||
+              normalizePath(cand.id).toLowerCase() === `${parentPrefix}/readme.md`
+            )
+          );
+          if (parentCandidate && parentCandidate.id !== subNode.id) {
+            const key = `${parentCandidate.id}|${subNode.id}`;
+            if (!existingPairs.has(key)) {
+              edges.push({
+                source: parentCandidate.id,
+                target: subNode.id,
+                relation: 'sub-index-link',
+                confidence: 'EXTRACTED'
+              });
+              existingPairs.add(key);
+            }
+            break;
+          }
+        }
+      });
+
+      for (const e of edges) {
+        if (!adj.get(e.source).includes(e.target)) adj.get(e.source).push(e.target);
+        if (!adj.get(e.target).includes(e.source)) adj.get(e.target).push(e.source);
+      }
+
+      for (const n of nodes) {
+        const neighbors = adj.get(n.id) || [];
+        const countIdx = neighbors.filter(nid => map.get(nid)?.isIndex && nid !== mainNodeId).length;
+        subIndexCount.set(n.id, countIdx);
+      }
+
+      groups = d3.group(nodes, topic);
+      colors = new Map([...groups.keys()].sort().map((k, i) => [k, palette[i % palette.length]]));
+      colors.set('MAIN', '#2dd4bf');
+
+      const totalIndexes = nodes.filter(n => n.isIndex).length;
+      $('total').textContent = `${nodes.length} node · ${totalIndexes} index · ${edges.length} relasi${isFallback ? ' (Pratinjau)' : ''}`;
+
+      const typeSelect = $('type');
+      typeSelect.innerHTML = '<option value="">Semua tipe</option>';
+      for (const t of [...new Set(nodes.map(n => n.type || 'other'))].sort()) {
+        const o = document.createElement('option');
+        o.value = t;
+        o.textContent = t;
+        typeSelect.append(o);
+      }
+
+      overview();
+    }
+
+    // Sync Settings UI Controls with cfg object
+    function syncSettingsUI() {
+      $('cfg-edge-width').value = cfg.edgeWidth;
+      $('val-edge-width').textContent = `${Number(cfg.edgeWidth).toFixed(1)} px`;
+
+      $('cfg-edge-opacity').value = cfg.edgeOpacity;
+      $('val-edge-opacity').textContent = `${Math.round(cfg.edgeOpacity * 100)}%`;
+
+      $('cfg-node-scale').value = cfg.nodeScale;
+      $('val-node-scale').textContent = `${Number(cfg.nodeScale).toFixed(1)}x`;
+
+      $('cfg-hierarchy-boost').value = cfg.hierarchyBoost;
+      $('val-hierarchy-boost').textContent = `${Number(cfg.hierarchyBoost).toFixed(1)}x`;
+
+      $('cfg-link-dist').value = cfg.linkDist;
+      $('val-link-dist').textContent = `${cfg.linkDist} px`;
+
+      $('cfg-charge').value = cfg.chargeStrength;
+      $('val-charge').textContent = `${cfg.chargeStrength}`;
+
+      $('cfg-all-labels').setAttribute('aria-checked', String(cfg.showAllLabels));
+      $('cfg-main-lines').setAttribute('aria-checked', String(cfg.showMainLines));
+    }
+
+    syncSettingsUI();
+
+    // Settings Panel Event Listeners
+    const settingsBtn = $('settings-btn');
+    const settingsPanel = $('settings-panel');
+
+    settingsBtn.onclick = e => {
+      e.stopPropagation();
+      const isOpen = settingsPanel.classList.toggle('open');
+      settingsBtn.setAttribute('aria-pressed', String(isOpen));
+    };
+
+    settingsPanel.onclick = e => e.stopPropagation();
+
+    document.addEventListener('click', () => {
+      if (settingsPanel.classList.contains('open')) {
+        settingsPanel.classList.remove('open');
+        settingsBtn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    $('cfg-edge-width').oninput = e => {
+      cfg.edgeWidth = parseFloat(e.target.value);
+      $('val-edge-width').textContent = `${cfg.edgeWidth.toFixed(1)} px`;
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('cfg-edge-opacity').oninput = e => {
+      cfg.edgeOpacity = parseFloat(e.target.value);
+      $('val-edge-opacity').textContent = `${Math.round(cfg.edgeOpacity * 100)}%`;
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('cfg-node-scale').oninput = e => {
+      cfg.nodeScale = parseFloat(e.target.value);
+      $('val-node-scale').textContent = `${cfg.nodeScale.toFixed(1)}x`;
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('cfg-hierarchy-boost').oninput = e => {
+      cfg.hierarchyBoost = parseFloat(e.target.value);
+      $('val-hierarchy-boost').textContent = `${cfg.hierarchyBoost.toFixed(1)}x`;
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('cfg-link-dist').oninput = e => {
+      cfg.linkDist = parseInt(e.target.value, 10);
+      $('val-link-dist').textContent = `${cfg.linkDist} px`;
+      saveSettings();
+      applyPhysicsSettings();
+    };
+
+    $('cfg-charge').oninput = e => {
+      cfg.chargeStrength = parseInt(e.target.value, 10);
+      $('val-charge').textContent = `${cfg.chargeStrength}`;
+      saveSettings();
+      applyPhysicsSettings();
+    };
+
+    $('cfg-all-labels').onclick = () => {
+      cfg.showAllLabels = !cfg.showAllLabels;
+      $('cfg-all-labels').setAttribute('aria-checked', String(cfg.showAllLabels));
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('cfg-main-lines').onclick = () => {
+      cfg.showMainLines = !cfg.showMainLines;
+      $('cfg-main-lines').setAttribute('aria-checked', String(cfg.showMainLines));
+      saveSettings();
+      applyVisualSettings();
+    };
+
+    $('sp-reset-btn').onclick = () => {
+      cfg = { ...DEFAULT_SETTINGS };
+      saveSettings();
+      syncSettingsUI();
+      applyVisualSettings();
+      applyPhysicsSettings();
+    };
+
+    // Load ./graph.json or gracefully use fallback preview data
+    async function boot() {
+      try {
+        let raw = window.VAULT_GRAPH_DATA;
+        if (!raw) {
+          const response = await fetch('./graph.json');
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          raw = await response.json();
+        }
+        if (!Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) {
+          throw new Error('Format graph.json tidak valid');
+        }
+        initializeGraphData(raw, false);
+      } catch (error) {
+        initializeGraphData(FALLBACK_GRAPH, true);
+        $('status').textContent = `Mode pratinjau aktif · Buka dari server lokal atau klik "Muat JSON" di kanan atas`;
+      }
+    }
+
+    // Toolbar Event Listeners
+    $('unlock').onclick = () => {
+      released = !released;
+      $('unlock').setAttribute('aria-pressed', String(released));
+      setMotionIcon(released);
+      if (released) {
+        simulation.nodes().forEach(n => { n.fx = null; n.fy = null; });
+        simulation.alphaTarget(0.08).alpha(0.35).restart();
+      } else {
+        simulation.stop();
+        simulation.alphaTarget(0);
+        simulation.nodes().forEach(n => { n.fx = n.x; n.fy = n.y; });
+      }
+    };
+
+    $('reset').onclick = overview;
+
+    $('isolated').onclick = () => {
+      showIsolated = !showIsolated;
+      $('isolated').dataset.tip = showIsolated ? 'Sembunyikan node terisolasi' : 'Tampilkan node terisolasi';
+      $('isolated').setAttribute('aria-label', $('isolated').dataset.tip);
+      $('isolated').setAttribute('aria-pressed', String(showIsolated));
+      filter();
+    };
+
+    const resetSelection = () => {
+      current = null;
+      selected = null;
+      $('search').value = '';
+      $('type').value = '';
+      overview();
+    };
+
+    $('home').onclick = resetSelection;
+    $('back-btn').onclick = resetSelection;
+
+    $('focus-main').onclick = () => {
+      if (map.has(mainNodeId)) {
+        showNode(mainNodeId);
+      }
+    };
+
+    $('fit').onclick = fit;
+    $('zoom-center').onclick = fit;
+    $('zoom-in').onclick = () => svg.transition().duration(220).ease(d3.easeCubicOut).call(zoom.scaleBy, 1.3);
+    $('zoom-out').onclick = () => svg.transition().duration(220).ease(d3.easeCubicOut).call(zoom.scaleBy, 1 / 1.3);
+    $('zoom-pct').onclick = () => {
+      const rect = svg.node().getBoundingClientRect();
+      const box = layer.node().getBBox();
+      if (!box.width) return;
+      svg.transition().duration(320).ease(d3.easeCubicOut).call(
+        zoom.transform,
+        d3.zoomIdentity.translate(
+          rect.width / 2 - (box.x + box.width / 2),
+          rect.height / 2 - (box.y + box.height / 2)
+        ).scale(1)
+      );
+    };
+    $('search').oninput = filter;
+    $('type').onchange = filter;
+    $('run').onclick = run;
+    $('query').onkeydown = e => { if (e.key === 'Enter') run(); };
+
+    // Clicking empty canvas resets selection
+    svg.on('click', () => {
+      if (selected || current) resetSelection();
+    });
+
+    // Keyboard shortcuts (/ for search, f for fit, Escape to reset)
+    window.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+        if (e.key === 'Escape') e.target.blur();
+        return;
+      }
+      if (e.key === '/') {
+        e.preventDefault();
+        $('search').focus();
+      } else if (e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        fit();
+      } else if (e.key === 'Escape') {
+        if (settingsPanel.classList.contains('open')) {
+          settingsPanel.classList.remove('open');
+          settingsBtn.setAttribute('aria-pressed', 'false');
+        } else {
+          resetSelection();
+        }
+      }
+    });
+
+    // Manual JSON File Loader
+    $('file-input').addEventListener('change', async e => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        if (!Array.isArray(json.nodes) || !Array.isArray(json.edges)) {
+          throw new Error('Struktur JSON harus memiliki array nodes dan edges');
+        }
+        initializeGraphData(json, false);
+        $('status').textContent = `Berhasil memuat ${file.name} (${json.nodes.length} node)`;
+      } catch (err) {
+        $('status').textContent = `Gagal membaca JSON: ${err.message}`;
+      }
+    });
+
+    boot();
+  </script>
+</body>
+</html>
