@@ -116,7 +116,11 @@ def main():
     p_watch.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
 
     sub.add_parser("serve", help="Start MCP server")
+    p_view = sub.add_parser("view", help="Build and open local graph preview")
+    p_view.add_argument("--no-build", action="store_true", help="Use existing SQLite snapshot")
     sub.add_parser("install", help="Register skill with Hermes + Trae")
+    p_view.add_argument("--port", type=int, default=0, help="Port lokal; 0 = otomatis")
+    p_view.add_argument("--no-open", action="store_true", help="Jangan buka browser otomatis")
 
     args = parser.parse_args()
 
@@ -137,6 +141,18 @@ def main():
         elif args.action == "set":
             print("Usage: vault-graph config show  (edit file manually)")
             print(f"       File: {CONFIG_PATH}")
+        return
+
+    if args.command == "view":
+        vault, out_dir = resolve_vault_out()
+        if not args.no_build:
+            print(f"config: vault={vault}")
+            _rebuild(vault, out_dir)
+        graph_path = out_dir / "graph.db"
+        if not graph_path.exists():
+            sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
+        from vault_graph.viewer import serve_preview
+        serve_preview(out_dir, port=args.port, open_browser=not args.no_open)
         return
 
     if args.command == "install":

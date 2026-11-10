@@ -8,16 +8,12 @@
 </style>
 <header><div><h1>Atlas Pengetahuan</h1><small>Jelajahi topik, temukan hubungan, buka konteks.</small></div><span id="total" class="badge"></span></header>
 <main><section id="workspace" aria-label="Visualisasi hubungan"><div id="toolbar"><button id="home" class="icon-button" aria-label="Semua hubungan" data-tip="Semua hubungan"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></button><input id="search" aria-label="Cari pengetahuan" placeholder="Cari judul atau path…"><select id="type" aria-label="Filter tipe"><option value="">Semua tipe</option></select><button id="fit" class="icon-button" aria-label="Pas-kan ke layar" data-tip="Pas-kan ke layar"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button><button id="unlock" class="icon-button" aria-label="Lepaskan posisi" data-tip="Lepaskan posisi" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7z"/></svg></button><button id="reset" class="icon-button" aria-label="Reset layout" data-tip="Reset layout"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg></button><button id="isolated" class="icon-button" aria-label="Tampilkan node terisolasi" data-tip="Tampilkan node terisolasi" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="4" r="1"/><circle cx="20" cy="4" r="1"/><circle cx="4" cy="20" r="1"/><circle cx="20" cy="20" r="1"/></svg></button></div><svg role="img" aria-label="Graph pengetahuan"></svg><div id="status" role="status"></div></section><aside><h2 id="title">Pilih sebuah topik</h2><div id="detail" class="empty">Mulai dari kelompok di sebelah kiri. Pilih node untuk melihat koneksi dan sumbernya.</div><h3>Cari jalur</h3><input id="query" aria-label="Perintah graph" placeholder="path A to B / explain A"><button id="run" class="icon-button" aria-label="Jalankan pencarian jalur" data-tip="Jalankan pencarian jalur"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></button><p class="muted">Gulir untuk zoom · tarik untuk geser<br>Enter pada node untuk membuka detail.</p></aside></main>
+<script src="./graph-data.js"></script>
 <script type="module">
-let raw;
-try {
-  const response = await fetch('./graph.json');
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  raw = await response.json();
-  if (!Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) throw new Error('Format graph.json tidak valid');
-} catch (error) {
-  document.getElementById('detail').textContent = `Data gagal dimuat: ${error.message}. Buka melalui server lokal: python3 -m http.server 8765 --bind 127.0.0.1 --directory /home/the-meh/Documents/vault-graph/vault-out`;
-  throw error;
+const raw = window.VAULT_GRAPH_DATA;
+if (!raw || !Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) {
+  document.getElementById('detail').textContent = 'Data graph tidak valid atau graph-data.js belum tersedia.';
+  throw new Error('Invalid graph-data.js');
 }
 const $=id=>document.getElementById(id), svg=d3.select('#workspace > svg'), layer=svg.append('g'); // target graph, bukan SVG ikon toolbar
 const endpoint=x=>typeof x==='object'?x.id:x;

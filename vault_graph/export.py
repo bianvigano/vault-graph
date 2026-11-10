@@ -35,7 +35,12 @@ def _export_json(G: nx.Graph, out_dir: Path):
             for u, v in G.edges()
         ],
     }
-    (out_dir / "graph.json").write_text(json.dumps(graph_data, indent=2, ensure_ascii=False))
+    serialized = json.dumps(graph_data, indent=2, ensure_ascii=False)
+    (out_dir / "graph.json").write_text(serialized)
+    (out_dir / "graph-data.js").write_text(
+        "window.VAULT_GRAPH_DATA = " + serialized + ";\n",
+        encoding="utf-8",
+    )
 
 
 def _export_html(G: nx.Graph, out_dir: Path):
