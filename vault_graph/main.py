@@ -87,6 +87,7 @@ def main():
 
     p_build = sub.add_parser("build", help="Build knowledge graph")
     p_build.add_argument("vault_path", nargs="?", help="Vault path (default: from config)")
+    p_build.add_argument("--model", choices=("small", "base", "large"), help="Model embedding; default otomatis")
 
     sub.add_parser("god", help="Top 15 most-connected nodes")
     sub.add_parser("communities", help="Community summary")
@@ -122,6 +123,7 @@ def main():
     sub.add_parser("serve", help="Start MCP server")
     p_view = sub.add_parser("view", help="Build and open local graph preview")
     p_view.add_argument("--no-build", action="store_true", help="Use existing SQLite snapshot")
+    p_view.add_argument("--model", choices=("small", "base", "large"), help="Model embedding")
     sub.add_parser("install", help="Register skill with Hermes + Trae")
     p_view.add_argument("--port", type=int, default=0, help="Port lokal; 0 = otomatis")
     p_view.add_argument("--no-open", action="store_true", help="Jangan buka browser otomatis")
@@ -151,7 +153,7 @@ def main():
         vault, out_dir = resolve_vault_out()
         if not args.no_build:
             print(f"config: vault={vault}")
-            _rebuild(vault, out_dir)
+            _rebuild(vault, out_dir, args.model)
         graph_path = out_dir / "graph.db"
         if not graph_path.exists():
             sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
@@ -162,7 +164,7 @@ def main():
     if args.command == "retrieve":
         if args.semantic:
             from vault_graph.semantic import retrieve_semantic
-            result = retrieve_semantic(resolve_graph_path(), args.question)
+            result = retrieve_semantic(resolve_graph_path(), args.question, requested=args.model)
         else:
             from vault_graph.retrieval import retrieve
             result = retrieve(resolve_graph_path(), args.question)
@@ -193,7 +195,7 @@ def main():
         cfg["out"] = cfg.get("out", "vault-out")
         save_config(cfg)
         print(f"config: vault={vault}")
-        _rebuild(vault, out_dir)
+        _rebuild(vault, out_dir, args.model)
         return
 
     if args.command == "watch":
@@ -236,7 +238,7 @@ def main():
         run_query_cmd(G, "query", [args.question])
 
 
-def _rebuild(vault: Path, out_dir: Path):
+def _rebuild(vault: Path, out_dir: Path, model=None):
     from vault_graph.detect import collect_files
     from vault_graph.extract import extract
     from vault_graph.cache import load_cache, save_cache, split_files
@@ -328,7 +330,7 @@ def _rebuild(vault: Path, out_dir: Path):
     indexed = index_documents(out_dir / "graph.db", vault, files)
     print(f"  documents: {indexed} Markdown files indexed")
     from vault_graph.semantic import index_embeddings
-    print(f"  embeddings: {index_embeddings(out_dir / 'graph.db')} documents indexed")
+    print(f"  embeddings: {index_embeddings(out_dir / 'graph.db', model)} documents indexed")
 
     # ponytail: fastembed model stays local; switch to a remote provider only when semantic quality needs tuning.
 

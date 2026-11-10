@@ -1,9 +1,11 @@
-"""Multilingual semantic retrieval with automatic model selection."""
+"""Multilingual semantic retrieval with resource-aware model selection and chunks."""
 from __future__ import annotations
-import json, math, sqlite3
+import json, sqlite3
 from pathlib import Path
 
 MODELS = {'small': 'intfloat/multilingual-e5-small', 'base': 'intfloat/multilingual-e5-base', 'large': 'intfloat/multilingual-e5-large'}
+CHUNK_SIZE = 1200
+CHUNK_OVERLAP = 180
 
 def available_memory_gb() -> float:
     try:
@@ -11,61 +13,87 @@ def available_memory_gb() -> float:
     except (FileNotFoundError, IndexError, ValueError):
         return 4.0
 
+def has_cuda() -> bool:
+    try:
+        import torch
+        return bool(torch.cuda.is_available())
+    except ImportError:
+        return False
+
 def choose_model(database: Path, requested: str | None = None) -> tuple[str, str]:
     if requested and requested not in MODELS:
         raise ValueError('Model harus small, base, atau large')
-    if requested:
-        return requested, 'dipilih manual'
     with sqlite3.connect(database) as db:
-        count, chars = db.execute('SELECT count(*), coalesce(sum(length(content)),0) FROM documents').fetchone()
+        count = db.execute('SELECT count(*) FROM documents').fetchone()[0]
     ram = available_memory_gb()
-    # ponytail: automatic mode favors completion on CPU; large remains manual.
-    if ram >= 8:
-        return 'small', f'RAM {ram:.1f} GB; {count} dokumen; mode otomatis CPU'
-    return 'small', f'RAM {ram:.1f} GB; {count} dokumen'
+    cuda = has_cuda()
+    if requested:
+        return requested, f'dipilih manual; RAM {ram:.1f} GB; CUDA {cuda}'
+    if cuda and ram >= 16 and count <= 5000:
+        return 'large', f'CUDA tersedia; RAM {ram:.1f} GB; {count} dokumen'
+    if ram >= 16 and count <= 5000:
+        return 'base', f'RAM {ram:.1f} GB; {count} dokumen; CPU'
+    return 'small', f'RAM {ram:.1f} GB; {count} dokumen; mode hemat'
 
 def _model(name: str):
     from sentence_transformers import SentenceTransformer
     import torch
-    torch.set_num_threads(4)
-    encoder = SentenceTransformer(MODELS[name], device='cpu')
-    class Encoder:
-        def embed(self, texts):
-            return iter(encoder.encode(texts, batch_size=4, normalize_embeddings=True))
-    return Encoder()
+    torch.set_num_threads(min(4, torch.get_num_threads()))
+    return SentenceTransformer(MODELS[name], device='cuda' if has_cuda() else 'cpu')
+
+def _chunks(text: str):
+    text = text.strip()
+    for start in range(0, max(1, len(text)), CHUNK_SIZE - CHUNK_OVERLAP):
+        part = text[start:start + CHUNK_SIZE].strip()
+        if part:
+            yield part
+        if start + CHUNK_SIZE >= len(text):
+            break
 
 def index_embeddings(database: Path, requested: str | None = None) -> dict:
     selected, reason = choose_model(database, requested)
     with sqlite3.connect(database) as db:
-        db.execute('CREATE TABLE IF NOT EXISTS document_embeddings (path TEXT PRIMARY KEY, vector TEXT NOT NULL, model TEXT NOT NULL)')
-        rows = db.execute('SELECT path, title || char(10) || content FROM documents').fetchall()
-        current = db.execute('SELECT DISTINCT model FROM document_embeddings').fetchall()
-        if current and current != [(MODELS[selected],)]:
-            db.execute('DELETE FROM document_embeddings')
-        if not rows:
-            return {'count': 0, 'model': selected, 'reason': reason}
-        model = _model(selected)
-        for start in range(0, len(rows), 16):
-            batch = rows[start:start + 16]
-            vectors = model.embed(['passage: ' + text for _, text in batch])
-            db.executemany('INSERT OR REPLACE INTO document_embeddings VALUES (?, ?, ?)', ((path, json.dumps(vector.tolist()), MODELS[selected]) for (path, _), vector in zip(batch, vectors)))
-    return {'count': len(rows), 'model': selected, 'reason': reason}
+        db.execute('CREATE TABLE IF NOT EXISTS document_chunks (id INTEGER PRIMARY KEY, path TEXT NOT NULL, title TEXT NOT NULL, content TEXT NOT NULL, UNIQUE(path, id))')
+        db.execute('CREATE TABLE IF NOT EXISTS chunk_embeddings (chunk_id INTEGER PRIMARY KEY, vector TEXT NOT NULL, model TEXT NOT NULL)')
+        db.execute('DELETE FROM document_chunks'); db.execute('DELETE FROM chunk_embeddings')
+        docs = db.execute('SELECT path,title,content FROM documents').fetchall()
+        chunks = [(path, title, part) for path, title, content in docs for part in _chunks(content)]
+        db.executemany('INSERT INTO document_chunks(path,title,content) VALUES (?,?,?)', chunks)
+        if not chunks:
+            return {'documents': len(docs), 'chunks': 0, 'model': selected, 'reason': reason}
+        encoder = _model(selected)
+        for start in range(0, len(chunks), 16):
+            ids = db.execute('SELECT id FROM document_chunks ORDER BY id LIMIT ? OFFSET ?', (len(chunks[start:start+16]), start)).fetchall()
+            vectors = encoder.encode(['passage: ' + text for _, _, text in chunks[start:start+16]], batch_size=4, normalize_embeddings=True)
+            db.executemany('INSERT INTO chunk_embeddings VALUES (?,?,?)', ((row[0], json.dumps(vector.tolist()), MODELS[selected]) for row, vector in zip(ids, vectors)))
+    return {'documents': len(docs), 'chunks': len(chunks), 'model': selected, 'reason': reason}
 
-def retrieve_semantic(database: Path, query: str, limit: int = 5) -> dict:
-    if not query.strip():
-        raise ValueError('Query kosong')
+def retrieve_semantic(database: Path, query: str, limit: int = 5, requested: str | None = None) -> dict:
+    if not isinstance(query, str) or not query.strip() or len(query) > 2000:
+        raise ValueError('Query harus berisi 1–2000 karakter')
+    if type(limit) is not int or not 1 <= limit <= 10:
+        raise ValueError('Limit harus 1–10')
+    if requested is not None and requested not in MODELS:
+        raise ValueError('Model harus small, base, atau large')
+    if not database.is_file():
+        raise ValueError('Database belum tersedia')
+    if requested is not None:
+        with sqlite3.connect(database.resolve().as_uri() + '?mode=ro', uri=True) as db:
+            stored = db.execute('SELECT DISTINCT model FROM chunk_embeddings').fetchall()
+        if stored != [(MODELS[requested],)]:
+            raise ValueError(f'Jalankan build --model {requested} dahulu; query tidak mengubah indeks')
+    # Chunk input is untrusted reference data, never executable instructions.
     with sqlite3.connect(database.resolve().as_uri() + '?mode=ro', uri=True) as db:
-        rows = db.execute('SELECT e.path,e.vector,e.model,d.title,d.content FROM document_embeddings e JOIN documents d ON d.path=e.path').fetchall()
-    if not rows:
-        return {'query': query, 'results': [], 'mode': 'semantic'}
-    model_name = next(iter(rows))[2].split('/')[-1]
-    name = {'multilingual-e5-small': 'small', 'multilingual-e5-base': 'base', 'multilingual-e5-large': 'large'}[model_name]
-    q = next(_model(name).embed(['query: ' + query]))
-    qnorm = math.sqrt(sum(x*x for x in q)) or 1
+        rows = db.execute('SELECT c.path,c.title,c.content,e.vector,e.model FROM document_chunks c JOIN chunk_embeddings e ON e.chunk_id=c.id').fetchall()
+    if not rows: return {'query': query, 'results': [], 'mode': 'semantic'}
+    model_name = rows[0][4].split('/')[-1]
+    name = next((key for key, value in MODELS.items() if value.endswith(model_name)), None)
+    if requested and requested != name: raise ValueError(f'Index memakai model {name}; jalankan build ulang dengan --model {requested}')
+    import numpy as np
+    q = _model(name).encode(['query: ' + query], normalize_embeddings=True)[0]
     scored = []
-    for path, raw, _, title, content in rows:
-        vector = json.loads(raw)
-        norm = math.sqrt(sum(x*x for x in vector)) or 1
-        scored.append((sum(a*b for a,b in zip(q, vector)) / (qnorm * norm), path, title, ' '.join(content.split())[:700]))
+    for path, title, content, raw, _ in rows:
+        score = float(np.dot(q, np.asarray(json.loads(raw), dtype='float32')))
+        scored.append((score, path, title, content))
     scored.sort(reverse=True)
-    return {'query': query, 'mode': 'semantic', 'model': model_name, 'results': [{'source': p, 'citation': f'[vault: {p}]', 'title': t, 'excerpt': e, 'score': round(float(s), 5)} for s, p, t, e in scored[:limit]], 'notice': 'Hasil semantic multilingual; tetap verifikasi sumber.'}
+    return {'query': query, 'mode': 'semantic', 'model': model_name, 'chunks': len(rows), 'results': [{'source': p, 'citation': f'[vault: {p}]', 'title': t, 'excerpt': e, 'score': round(s, 5)} for s, p, t, e in scored[:limit]], 'notice': 'Hasil semantic multilingual; tetap verifikasi sumber.'}
