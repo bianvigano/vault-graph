@@ -43,8 +43,16 @@ vault-graph search Hermes --interactive
 vault-graph retrieve "pengaturan server Minecraft"
 vault-graph retrieve --semantic "bagaimana mengatur server Minecraft"
 
-# Preview graph lokal; Ctrl+C untuk berhenti
+# Buka preview dari output yang sudah ada; tidak build ulang
+vault-graph view
+
+# Build ulang lalu buka preview
+vault-graph view --build
+
+# Alias lama, tetap didukung
 vault-graph view --no-build
+
+# Ctrl+C untuk berhenti setelah preview terbuka.
 ```
 
 Build ulang diperlukan setelah sumber Markdown berubah. `watch` tersedia untuk rebuild otomatis, tetapi bisa mahal karena melibatkan indexing embedding.

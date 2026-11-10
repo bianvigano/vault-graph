@@ -126,7 +126,8 @@ def main():
 
     sub.add_parser("serve", help="Start MCP server")
     p_view = sub.add_parser("view", help="Build and open local graph preview")
-    p_view.add_argument("--no-build", action="store_true", help="Use existing SQLite snapshot")
+    p_view.add_argument("--build", action="store_true", help="Build ulang sebelum membuka preview")
+    p_view.add_argument("--no-build", action="store_true", help=argparse.SUPPRESS)
     p_view.add_argument("--model", choices=("small", "base", "large"), help="Model embedding")
     sub.add_parser("install", help="Register skill with Hermes + Trae")
     p_view.add_argument("--port", type=int, default=0, help="Port lokal; 0 = otomatis")
@@ -155,7 +156,9 @@ def main():
 
     if args.command == "view":
         vault, out_dir = resolve_vault_out()
-        if not args.no_build:
+        if args.build and args.no_build:
+            parser.error("Pilih --build atau --no-build, bukan keduanya")
+        if args.build:
             print(f"config: vault={vault}")
             _rebuild(vault, out_dir, args.model)
         graph_path = out_dir / "graph.db"
