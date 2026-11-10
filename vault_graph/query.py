@@ -217,7 +217,7 @@ def _communities(G: nx.Graph):
         print(f"  comm {cid:<4} size={count:<5} {label[:60]}")
 
 
-def _search(G: nx.Graph, term: str):
+def _search(G: nx.Graph, term: str, page=1, page_size=15, show_all=False):
     q = term.lower()
     found = []
     for n in G.nodes():
@@ -228,12 +228,22 @@ def _search(G: nx.Graph, term: str):
             )
 
     found.sort(key=lambda x: x[3], reverse=True)
-    print(f"Search: '{term}' — {len(found)} results")
-    for nid, label, ntype, deg in found[:30]:
+    if not show_all:
+        page_size = max(1, min(int(page_size), 100))
+    else:
+        page_size = len(found) or 1
+    pages = max(1, (len(found) + page_size - 1) // page_size)
+    page = max(1, min(int(page), pages))
+    start = (page - 1) * page_size
+    print(f"Search: '{term}' — {len(found)} results | halaman {page}/{pages}")
+    for nid, label, ntype, deg in found[start:start + page_size]:
         print(f"  deg={deg:<5} [{ntype:10s}] {label[:60]}")
-
-    if len(found) > 30:
-        print(f"  ... and {len(found) - 30} more")
+    if pages > 1:
+        nav = []
+        if page > 1: nav.append(f"sebelumnya: --page {page - 1}")
+        if page < pages: nav.append(f"berikutnya: --page {page + 1}")
+        print("  Navigasi: " + " | ".join(nav))
+        print("  Semua hasil: --all")
 
 
 def _isolated(G: nx.Graph):

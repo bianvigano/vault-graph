@@ -99,7 +99,11 @@ def main():
     p_retrieve.add_argument("--model", choices=("small", "base", "large"), help="Pilih model embedding")
 
     p_search = sub.add_parser("search", help="Search nodes by name")
-    p_search.add_argument("term", help="Search term")
+    p_search.add_argument("term", help="Kata pencarian")
+    p_search.add_argument("--page", type=int, default=1, help="Nomor halaman")
+    p_search.add_argument("--page-size", type=int, default=15, help="Hasil per halaman")
+    p_search.add_argument("--all", action="store_true", help="Tampilkan semua hasil")
+    p_search.add_argument("--interactive", action="store_true", help="Navigasi n/p/q")
 
     p_explain = sub.add_parser("explain", help="Explain a node")
     p_explain.add_argument("node", help="Node name or label")
@@ -229,7 +233,8 @@ def main():
     elif cmd == "stats":
         run_query_cmd(G, "stats", [])
     elif cmd == "search":
-        run_query_cmd(G, "search", [args.term])
+        from vault_graph.query import _search
+        _search(G, args.term, args.page, args.page_size, args.all)
     elif cmd == "explain":
         run_query_cmd(G, "explain", [args.node])
     elif cmd == "path":
