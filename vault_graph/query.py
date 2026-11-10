@@ -244,6 +244,7 @@ def _search(G: nx.Graph, term: str, page=1, page_size=15, show_all=False):
         if page < pages: nav.append(f"berikutnya: --page {page + 1}")
         print("  Navigasi: " + " | ".join(nav))
         print("  Semua hasil: --all")
+    return page, pages
 
 
 def _isolated(G: nx.Graph):
