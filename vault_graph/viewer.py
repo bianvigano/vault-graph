@@ -36,10 +36,11 @@ class PreviewHandler(http.server.SimpleHTTPRequestHandler):
             if not 0 < length <= 6_000_000:
                 raise ValueError("ukuran permintaan tidak valid")
             payload = json.loads(self.rfile.read(length))
-            relative = Path(str(payload["path"]))
+            requested = Path(str(payload["path"]))
+            relative = self._vault_relative(requested)
             content = payload["content"]
             target = (self.vault_dir / relative).resolve()
-            if relative.is_absolute() or target.parent != self.vault_dir.resolve() and self.vault_dir.resolve() not in target.parents:
+            if self.vault_dir.resolve() not in target.parents:
                 raise ValueError("path di luar Vault")
             if target.suffix.lower() != ".md":
                 raise ValueError("hanya file Markdown yang boleh disimpan")
@@ -65,9 +66,13 @@ class PreviewHandler(http.server.SimpleHTTPRequestHandler):
         except Exception as exc:
             self._json({"ok": False, "error": str(exc)}, 409 if "berubah" in str(exc) else 400)
 
+    def _vault_relative(self, requested):
+        target = (self.vault_dir / requested).resolve()
+        return target.relative_to(self.vault_dir.resolve())
+
     def _send_file(self, query):
         try:
-            relative = Path(urllib.parse.parse_qs(query)["path"][0])
+            relative = self._vault_relative(Path(urllib.parse.parse_qs(query)["path"][0]))
             target = (self.vault_dir / relative).resolve()
             if relative.is_absolute() or self.vault_dir.resolve() not in target.parents or target.suffix.lower() != ".md":
                 raise ValueError("path Markdown tidak valid")

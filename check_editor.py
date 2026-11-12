@@ -29,6 +29,9 @@ with tempfile.TemporaryDirectory() as folder:
     try:
         status, data = request('GET', '/api/file?path=test.md')
         assert status == 200 and data['content'] == '# Awal'
+        from urllib.parse import quote
+        assert request('GET', '/api/file?path=' + quote(str(doc)))[0] == 200
+        assert request('GET', '/api/file?path=/etc/passwd')[0] == 404
         payload = {'path': 'test.md', 'content': '# Baru', 'mtime_ns': data['mtime_ns']}
         assert request('PUT', '/api/file', payload)[0] == 200
         assert doc.read_text() == '# Baru'
