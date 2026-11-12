@@ -165,7 +165,7 @@ def main():
         if not graph_path.exists():
             sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
         from vault_graph.viewer import serve_preview
-        serve_preview(out_dir, port=args.port, open_browser=not args.no_open)
+        serve_preview(out_dir, vault_dir=vault, port=args.port, open_browser=not args.no_open)
         return
 
     if args.command == "retrieve":

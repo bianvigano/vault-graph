@@ -2246,6 +2246,60 @@
       }
     }
 
+    async function openEditor(path) {
+      const dialog = document.createElement('dialog');
+      dialog.style.cssText = 'width:min(900px,90vw);background:#111827;color:#eee;border:1px solid #475569;border-radius:12px;padding:20px';
+      const title = document.createElement('h2');
+      title.textContent = path;
+      const area = document.createElement('textarea');
+      area.setAttribute('aria-label', 'Isi Markdown');
+      area.style.cssText = 'width:100%;height:55vh;box-sizing:border-box;background:#080e19;color:#eee;font:14px monospace;padding:12px';
+      area.readOnly = true;
+      const status = document.createElement('p');
+      status.setAttribute('role', 'status');
+      const edit = document.createElement('button');
+      edit.textContent = 'Edit';
+      const save = document.createElement('button');
+      save.textContent = 'Simpan';
+      save.disabled = true;
+      const close = document.createElement('button');
+      close.textContent = 'Batal / Tutup';
+      let original = '', version, saving = false;
+      const dirty = () => area.value !== original;
+      const beforeUnload = event => { if (dirty()) { event.preventDefault(); event.returnValue = ''; } };
+      const dismiss = () => { if (!saving && (!dirty() || confirm('Buang perubahan yang belum disimpan?'))) dialog.close(); };
+      close.onclick = dismiss;
+      dialog.oncancel = event => { event.preventDefault(); dismiss(); };
+      dialog.onclose = () => { window.removeEventListener('beforeunload', beforeUnload); dialog.remove(); };
+      edit.onclick = () => { area.readOnly = false; area.focus(); };
+      area.oninput = () => { save.disabled = !dirty(); status.textContent = dirty() ? 'Belum disimpan' : ''; };
+      save.onclick = async () => {
+        saving = true;
+        save.disabled = true;
+        area.readOnly = true;
+        try {
+          const response = await fetch('/api/file', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({path, content: area.value, mtime_ns: version})});
+          const result = await response.json();
+          if (!response.ok) throw Error(result.error);
+          original = area.value;
+          version = result.mtime_ns;
+          status.textContent = 'Tersimpan. Indeks belum diperbarui; jalankan vault-graph view --build setelah selesai mengedit.';
+        } catch (error) { status.textContent = 'Gagal menyimpan: ' + error.message; }
+        finally { saving = false; area.readOnly = false; save.disabled = !dirty(); }
+      };
+      dialog.append(title, area, status, edit, save, close);
+      document.body.append(dialog);
+      dialog.showModal();
+      window.addEventListener('beforeunload', beforeUnload);
+      try {
+        const response = await fetch('/api/file?path=' + encodeURIComponent(path));
+        const result = await response.json();
+        if (!response.ok) throw Error(result.error);
+        original = area.value = result.content;
+        version = result.mtime_ns;
+      } catch (error) { status.textContent = 'Gagal membaca: ' + error.message; edit.disabled = true; }
+    }
+
     function showNode(id) {
       const n = map.get(id);
       if (!n) return;
@@ -2302,6 +2356,12 @@
       pathBox.append(source, copyBtn);
 
       const elements = [metaGrid, pathBox];
+      if (location.protocol === "http:" && n.id.endsWith(".md")) {
+        const edit = document.createElement("button");
+        edit.textContent = "Baca / Edit Markdown";
+        edit.onclick = () => openEditor(n.id);
+        elements.push(edit);
+      }
 
       // Headings Outline if available in JSON
       if (Array.isArray(n.headings) && n.headings.length > 0) {
