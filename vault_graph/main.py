@@ -164,6 +164,9 @@ def main():
         graph_path = out_dir / "graph.db"
         if not graph_path.exists():
             sys.exit(f"Graph not found: {graph_path}\nRun: vault-graph build")
+        # Refresh only the UI; never rebuild the knowledge index implicitly.
+        from vault_graph.export import _build_d3_html
+        (out_dir / "graph.html").write_text(_build_d3_html("", ""), encoding="utf-8")
         from vault_graph.viewer import serve_preview
         serve_preview(out_dir, vault_dir=vault, port=args.port, open_browser=not args.no_open)
         return
