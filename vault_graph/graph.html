@@ -1266,6 +1266,22 @@
         animation: none !important;
       }
     }
+    .markdown-dialog { position:fixed; inset:0; margin:auto; width:min(960px,94vw); max-height:90dvh; box-sizing:border-box; padding:20px; background:#111827; color:#e2e8f0; border:1px solid #475569; border-radius:14px; overflow:auto; box-shadow:0 24px 80px #0009; }
+    .markdown-open { display:block; width:100%; min-height:42px; padding:10px 16px; margin:12px 0; border:1px solid #14b8a6; border-radius:8px; background:#134e4a; color:#f0fdfa; font:inherit; font-size:13px; font-weight:600; cursor:pointer; }
+    .markdown-open:hover { background:#0f766e; }
+    .markdown-open:focus-visible { outline:2px solid #5eead4; outline-offset:3px; }
+    .markdown-dialog::backdrop { background:#020617b3; }
+    .markdown-dialog > h2 { font-size:15px; line-height:1.5; overflow-wrap:anywhere; margin:0 0 14px; }
+    .markdown-toolbar { display:flex; flex-wrap:wrap; gap:8px; position:sticky; top:-20px; z-index:2; background:#111827; padding:12px 0; margin-bottom:10px; border-bottom:1px solid #334155; }
+    .markdown-toolbar button { min-height:38px; padding:8px 16px; border:1px solid #475569; border-radius:8px; background:#1e293b; color:#f1f5f9; font:inherit; font-size:13px; cursor:pointer; }
+    .markdown-toolbar button:hover:not(:disabled) { background:#334155; border-color:#5eead4; }
+    .markdown-toolbar button:focus-visible { outline:2px solid #5eead4; outline-offset:3px; }
+    .markdown-toolbar button:disabled { opacity:.6; color:#cbd5e1; cursor:not-allowed; }
+    .markdown-toolbar .markdown-save { background:#0f766e; border-color:#14b8a6; }
+    .markdown-toolbar .markdown-save:disabled { background:#334155; border-color:#64748b; }
+    .markdown-toolbar button[aria-pressed="true"] { background:#0f766e; border-color:#5eead4; color:#fff; }
+    .markdown-toolbar .markdown-close { margin-left:auto; }
+    .markdown-dialog > p[role="status"] { font-size:13px; line-height:1.5; overflow-wrap:anywhere; margin:12px 0 0; color:#cbd5e1; }
     .markdown-preview { display:none; min-height:55vh; max-height:55vh; overflow:auto; background:#080e19; color:#dbeafe; padding:18px; line-height:1.65; border-radius:8px; }
     .markdown-preview h1, .markdown-preview h2, .markdown-preview h3 { color:#5eead4; margin-top:1em; }
     .markdown-preview code { color:#fbbf24; background:#1e293b; padding:2px 5px; border-radius:4px; }
@@ -2257,9 +2273,11 @@
 
     async function openEditor(path) {
       const dialog = document.createElement('dialog');
-      dialog.style.cssText = 'width:min(900px,90vw);background:#111827;color:#eee;border:1px solid #475569;border-radius:12px;padding:20px';
+      dialog.className = 'markdown-dialog';
       const title = document.createElement('h2');
       title.textContent = path;
+      title.id = 'markdown-dialog-title';
+      dialog.setAttribute('aria-labelledby', title.id);
       const area = document.createElement('textarea');
       area.setAttribute('aria-label', 'Isi Markdown');
       const preview = document.createElement('article');
@@ -2277,7 +2295,7 @@
       save.textContent = 'Simpan';
       save.disabled = true;
       const close = document.createElement('button');
-      close.textContent = 'Batal / Tutup';
+      close.textContent = 'Tutup';
       let original = '', version, saving = false;
       const dirty = () => area.value !== original;
       const beforeUnload = event => { if (dirty()) { event.preventDefault(); event.returnValue = ''; } };
@@ -2318,8 +2336,8 @@
         showNode(matches[0]);
         openEditor(matches[0]);
       };
-      const showPreview = () => { preview.innerHTML = renderMarkdown(area.value); area.style.display = 'none'; preview.style.display = 'block'; };
-      edit.onclick = () => { area.style.display = 'block'; preview.style.display = 'none'; area.readOnly = false; area.focus(); };
+      const showPreview = () => { preview.innerHTML = renderMarkdown(area.value); area.style.display = 'none'; preview.style.display = 'block'; read.setAttribute('aria-pressed', 'true'); edit.setAttribute('aria-pressed', 'false'); };
+      edit.onclick = () => { area.style.display = 'block'; preview.style.display = 'none'; area.readOnly = false; read.setAttribute('aria-pressed', 'false'); edit.setAttribute('aria-pressed', 'true'); area.focus(); };
       read.onclick = showPreview;
       area.oninput = () => { save.disabled = !dirty(); status.textContent = dirty() ? 'Belum disimpan' : ''; };
       save.onclick = async () => {
@@ -2336,7 +2354,12 @@
         } catch (error) { status.textContent = 'Gagal menyimpan: ' + error.message; }
         finally { saving = false; area.readOnly = false; save.disabled = !dirty(); }
       };
-      dialog.append(title, area, preview, status, read, edit, save, close);
+      const toolbar = document.createElement('div');
+      toolbar.className = 'markdown-toolbar';
+      save.className = 'markdown-save';
+      close.className = 'markdown-close';
+      toolbar.append(read, edit, save, close);
+      dialog.append(title, toolbar, area, preview, status);
       document.body.append(dialog);
       dialog.showModal();
       window.addEventListener('beforeunload', beforeUnload);
@@ -2409,6 +2432,7 @@
       if (location.protocol === "http:" && n.id.endsWith(".md")) {
         const edit = document.createElement("button");
         edit.textContent = "Baca / Edit Markdown";
+        edit.className = "markdown-open";
         edit.onclick = () => openEditor(n.id);
         elements.push(edit);
       }
