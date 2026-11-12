@@ -1271,6 +1271,8 @@
     .markdown-preview code { color:#fbbf24; background:#1e293b; padding:2px 5px; border-radius:4px; }
     .markdown-preview pre { background:#020617; padding:14px; overflow:auto; border-radius:8px; }
     .markdown-preview li { margin:4px 0; }
+    .markdown-preview a { color:#67e8f9; text-decoration:underline; text-decoration-color:rgba(103,232,249,.45); }
+    .markdown-preview .md-empty-link { color:#f59e0b; font-style:italic; }
     .main-orbit { transform-box: fill-box; transform-origin: center; animation: main-spin 18s linear infinite; pointer-events: none; }
     @keyframes main-spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) { .main-orbit { animation: none; } }
@@ -2285,8 +2287,36 @@
       dialog.onclose = () => { window.removeEventListener('beforeunload', beforeUnload); dialog.remove(); };
       const renderMarkdown = text => {
         if (!window.marked || !window.DOMPurify) return '<p>Renderer Markdown belum tersedia.</p>';
+        const wikilinks = text.replace(/\[\[([^\]|]*)?(?:\|([^\]]*))?\]\]/g, (_, target = '', label = '') => {
+          target = target.trim();
+          label = (label || target).trim();
+          if (!target) return '<span class="md-empty-link">[tautan kosong]</span>';
+          const safeTarget = encodeURIComponent(target).replace(/%2F/g, '/');
+          return `[${label || target}](/graph.html?node=${safeTarget})`;
+        });
         marked.setOptions({gfm: true, breaks: true});
-        return DOMPurify.sanitize(marked.parse(text), {USE_PROFILES: {html: true}});
+        return DOMPurify.sanitize(marked.parse(wikilinks), {USE_PROFILES: {html: true}});
+      };
+      preview.onclick = event => {
+        const link = event.target.closest('a');
+        if (!link) return;
+        const url = new URL(link.href, location.href);
+        const target = url.searchParams.get('node');
+        if (!target || url.origin !== location.origin) return;
+        event.preventDefault();
+        const sourceDir = path.replace(/[^/]*$/, '');
+        const clean = value => value.replace(/\\/g, '/').replace(/\.md$/i, '');
+        const candidates = [target, sourceDir + target];
+        const matches = [...map.keys()].filter(id => candidates.some(candidate => clean(id) === clean(candidate)));
+        if (matches.length !== 1) {
+          status.textContent = matches.length ? 'Tautan ambigu: ' + target : 'Dokumen tidak ditemukan: ' + target;
+          return;
+        }
+        if (dirty() && !confirm('Buang perubahan yang belum disimpan?')) return;
+        if (saving) return;
+        dialog.close();
+        showNode(matches[0]);
+        openEditor(matches[0]);
       };
       const showPreview = () => { preview.innerHTML = renderMarkdown(area.value); area.style.display = 'none'; preview.style.display = 'block'; };
       edit.onclick = () => { area.style.display = 'block'; preview.style.display = 'none'; area.readOnly = false; area.focus(); };
