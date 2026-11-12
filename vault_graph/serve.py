@@ -15,6 +15,9 @@ def serve(graph_path: Path):
     Tools: graph_path, graph_explain, graph_god_nodes, graph_search, graph_communities, graph_stats
     """
     G = _load_graph(graph_path)
+    from vault_graph import memory
+    from vault_graph.main import resolve_vault_out
+    memory_vault = resolve_vault_out()[0]
 
     for line in sys.stdin:
         try:
@@ -37,7 +40,7 @@ def serve(graph_path: Path):
             pass  # Client sent init confirmation — silently ack
 
         elif method == "tools/list":
-            _respond(req_id, {"tools": [
+            _respond(req_id, {"tools": memory.tools() + [
                 {"name": "graph_retrieve_context", "description": "Retrieve ranked knowledge excerpts with source citations", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 10}}, "required": ["query"]}},
                 {"name": "graph_semantic_context", "description": "Retrieve semantically related knowledge excerpts", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 10}}, "required": ["query"]}},
                 {"name": "graph_path", "description": "Find shortest path between two nodes", "inputSchema": {"type": "object", "properties": {"from": {"type": "string"}, "to": {"type": "string"}}, "required": ["from", "to"]}},
@@ -54,7 +57,9 @@ def serve(graph_path: Path):
             args = params.get("arguments", {})
 
             try:
-                if tool_name == "graph_semantic_context":
+                if tool_name in {t["name"] for t in memory.tools()}:
+                    result = memory.call(tool_name, args, memory.DEFAULT_DB, memory_vault, graph_path)
+                elif tool_name == "graph_semantic_context":
                     from vault_graph.semantic import retrieve_semantic
                     result = retrieve_semantic(graph_path, args["query"], args.get("limit", 5))
                 elif tool_name == "graph_retrieve_context":

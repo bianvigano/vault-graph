@@ -28,8 +28,8 @@ CONFIG_DIR = Path.home() / ".config" / "vault-graph"
 CONFIG_PATH = CONFIG_DIR / "config.json"
 
 DEFAULT_CONFIG = {
-    "vault": str(Path.home() / "vault"),
-    "out": "vault-out",
+    "vault": str(Path.home() / "vault" / "catatan"),
+    "out": str(Path.home() / ".cache" / "vault-graph"),
 }
 
 
@@ -93,7 +93,17 @@ def main():
     sub.add_parser("communities", help="Community summary")
     sub.add_parser("isolated", help="Nodes with no connections")
     sub.add_parser("stats", help="Graph statistics")
+    p_memory = sub.add_parser("memory", help="Bangun memory terstruktur dari catatan")
+    p_memory.add_argument("action", nargs="?", choices=["build"], default="build")
+    p_recall = sub.add_parser("recall", help="Cari memory relevan")
+    p_recall.add_argument("question")
+    p_recall.add_argument("--limit", type=int, default=10)
+    p_profile = sub.add_parser("profile", help="Tampilkan profil dari memory")
+    p_profile.add_argument("--limit", type=int, default=50)
+    p_forget = sub.add_parser("forget", help="Soft-forget memory ID")
+    p_forget.add_argument("id")
     p_retrieve = sub.add_parser("retrieve", help="Cari konteks knowledge dari SQLite")
+
     p_retrieve.add_argument("question")
     p_retrieve.add_argument("--semantic", action="store_true", help="Gunakan embedding lokal")
     p_retrieve.add_argument("--model", choices=("small", "base", "large"), help="Pilih model embedding")
@@ -138,6 +148,21 @@ def main():
     if not args.command:
         parser.print_help()
         sys.exit(1)
+
+    if args.command in ("memory", "recall", "profile", "forget"):
+        from vault_graph.memory import build, recall, profile, forget
+        memory_path = Path.home() / ".local" / "share" / "vault-graph" / "memory.db"
+        vault, out = resolve_vault_out()
+        if args.command == "memory":
+            result = {"indexed": build(memory_path, vault)}
+        elif args.command == "recall":
+            result = recall(memory_path, args.question, vault, args.limit, out / "graph.db")
+        elif args.command == "forget":
+            result = forget(memory_path, vault, args.id)
+        else:
+            result = profile(memory_path, vault, args.limit)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
 
     # ---- config ----
     if args.command == "config":
@@ -366,8 +391,8 @@ def _rebuild(vault: Path, out_dir: Path, model=None):
 
     # ponytail: fastembed model stays local; switch to a remote provider only when semantic quality needs tuning.
 
-    from vault_graph.wiki_export import export_wiki
-    export_wiki(G, out_dir, vault)
+    # Graph artifacts stay in the user's cache, never inside the Vault.
+    # ponytail: no Markdown export; rebuild the map from source notes when needed.
 
     from vault_graph.mermaid_export import export_mermaid
     export_mermaid(G, out_dir)

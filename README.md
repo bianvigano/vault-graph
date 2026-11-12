@@ -134,6 +134,16 @@ Lokasi Linux: `~/.config/vault-graph/config.json`.
 
 Path output relatif mengikuti lokasi Vault. Gunakan `vault-graph config path` untuk mengetahui lokasi konfigurasi mesin Anda. Lokasi Vault dapat ditetapkan lewat `build /path/ke/vault`.
 
+## Memory lokal
+
+`vault-graph memory` membangun kandidat fakta deterministik dari Markdown ke `~/.local/share/vault-graph/memory.db`; sumber Markdown tidak diubah. `profile` menampilkan static/dynamic dan history, `recall "kata"` memakai pencarian lexical (bukan semantic), dan `forget <id>` melakukan soft-forget. Format terstruktur yang dapat diperbarui:
+
+```text
+memory: {"subject":"User","key":"editor","value":"vim","date":"2026-01-01","kind":"dynamic","mode":"update"}
+```
+
+Kandidat bahasa alami mempertahankan kalimat/negasi dan provenance baris, tetapi bukan kebenaran terverifikasi. Konflik dan fakta lama disimpan sebagai history; namespace mengikuti root Vault.
+
 ## MCP untuk Hermes
 
 Jalankan dari checkout atau daftarkan command dengan lokasi proyek absolut:
