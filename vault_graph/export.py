@@ -105,7 +105,7 @@ def _export_report(text: str, out_dir: Path):
 
 def _build_d3_html(nodes_json: str, edges_json: str) -> str:
     template = Path(__file__).with_name("graph.html").read_text(encoding="utf-8")
-    return template
+    return template.replace('<script src="./vendor/marked.umd.js"></script>', '<script>' + Path(__file__).with_name('vendor').joinpath('marked.umd.js').read_text() + '</script>').replace('<script src="./vendor/purify.min.js"></script>', '<script>' + Path(__file__).with_name('vendor').joinpath('purify.min.js').read_text() + '</script>')
 # Data stays in graph.json so the HTML remains small and independently editable.
 
 

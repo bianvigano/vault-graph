@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="./graph-data.js"></script>
+  <script src="./vendor/marked.umd.js"></script>
+  <script src="./vendor/purify.min.js"></script>
   <style>
     :root {
       --bg-void: #07090e;
@@ -2282,16 +2284,9 @@
       dialog.oncancel = event => { event.preventDefault(); dismiss(); };
       dialog.onclose = () => { window.removeEventListener('beforeunload', beforeUnload); dialog.remove(); };
       const renderMarkdown = text => {
-        const escape = value => value.replace(/[&<>\"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
-        let html = escape(text).replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-        html = html.split('\n').map(line => {
-          if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`;
-          if (line.startsWith('## ')) return `<h2>${line.slice(3)}</h2>`;
-          if (line.startsWith('# ')) return `<h1>${line.slice(2)}</h1>`;
-          if (/^[-*] /.test(line)) return `<li>${line.slice(2)}</li>`;
-          return line ? `<p>${line}</p>` : '';
-        }).join('').replace(/(<li>.*?<\/li>)+/g, block => `<ul>${block}</ul>`);
-        return html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code>$1</code>');
+        if (!window.marked || !window.DOMPurify) return '<p>Renderer Markdown belum tersedia.</p>';
+        marked.setOptions({gfm: true, breaks: true});
+        return DOMPurify.sanitize(marked.parse(text), {USE_PROFILES: {html: true}});
       };
       const showPreview = () => { preview.innerHTML = renderMarkdown(area.value); area.style.display = 'none'; preview.style.display = 'block'; };
       edit.onclick = () => { area.style.display = 'block'; preview.style.display = 'none'; area.readOnly = false; area.focus(); };
